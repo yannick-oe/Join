@@ -5,6 +5,11 @@ const contactsDom = {
     contactOverlay: "contactOverlay",
     overlayTitle: "overlayTitle",
     overlayAvatar: "overlayAvatar",
+    overlayLeftSub: "overlayLeftSub",
+    overlayBtnCancel: "overlayBtnCancel",
+    overlayBtnCreate: "overlayBtnCreate",
+    overlayBtnDelete: "overlayBtnDelete",
+    overlayBtnSave: "overlayBtnSave",
     contactNameInput: "contactNameInput",
     contactEmailInput: "contactEmailInput",
     contactPhoneInput: "contactPhoneInput",
@@ -95,7 +100,7 @@ function renderContactDetail() {
 }
 // #endregion
 
-// #region Templates (no logic inside templates)
+// #region Templates
 /**
  * Builds full list HTML from letter groups.
  * @param {{letter:string, items:any[]}[]} letterGroups
@@ -115,7 +120,7 @@ function buildContactsListHtml(letterGroups) {
 function getLetterGroupTemplate(group) {
     return `
     <div class="letter-group">
-      <div class="letter-head">${group.letter}</div>
+      <div class="letter-heading">${group.letter}</div>
       ${buildRowsHtml(group.items)}
     </div>
   `;
@@ -141,9 +146,9 @@ function getContactRowTemplate(row) {
     return `
     <div class="contact-row ${row.selectedClass}" onclick="selectContact('${row.id}')">
       <div class="contact-avatar" style="background:${row.color}">${row.initials}</div>
-      <div class="contact-row__meta">
-        <div class="contact-row__name">${row.name}</div>
-        <div class="contact-row__mail">${row.email}</div>
+      <div class="contact-row-meta">
+        <div class="contact-row-name">${row.name}</div>
+        <div class="contact-row-email">${row.email}</div>
       </div>
     </div>
   `;
@@ -153,7 +158,7 @@ function getContactRowTemplate(row) {
  * Returns HTML for empty detail state.
  */
 function getEmptyDetailTemplate() {
-    return `<div class="detail-empty">Select a contact to view details.</div>`;
+    return `<div class="contact-detail-empty">Select a contact to view details.</div>`;
 }
 
 /**
@@ -162,26 +167,26 @@ function getEmptyDetailTemplate() {
  */
 function getContactDetailTemplate(detail) {
     return `
-    <div class="detail-top">
-      <div class="detail-avatar" style="background:${detail.color}">${detail.initials}</div>
+    <div class="contact-detail-top">
+      <div class="contact-detail-avatar" style="background:${detail.color}">${detail.initials}</div>
       <div>
-        <h2 class="detail-name">${detail.name}</h2>
-        <div class="detail-actions">
-          <button class="link-btn" type="button" onclick="openEditContactOverlay('${detail.id}')">Edit</button>
-          <button class="link-btn" type="button" onclick="openDeleteOverlay('${detail.id}')">Delete</button>
+        <h2 class="contact-detail-name">${detail.name}</h2>
+        <div class="contact-detail-actions">
+          <button class="link-button" type="button" onclick="openEditContactOverlay('${detail.id}')">Edit</button>
+          <button class="link-button" type="button" onclick="openDeleteOverlay('${detail.id}')">Delete</button>
         </div>
       </div>
     </div>
 
-    <div class="detail-blockTitle">Contact Information</div>
-    <div class="kv">
-      <div class="kv-row">
-        <div class="k">Email</div>
-        <div class="v">${detail.email}</div>
+    <div class="contact-detail-block-title">Contact Information</div>
+    <div class="contact-info-grid">
+      <div class="contact-info-row">
+        <div class="contact-info-label">Email</div>
+        <div class="contact-info-value">${detail.email}</div>
       </div>
-      <div class="kv-row">
-        <div class="k">Phone</div>
-        <div class="v is-phone">${detail.phone || "—"}</div>
+      <div class="contact-info-row">
+        <div class="contact-info-label">Phone</div>
+        <div class="contact-info-value is-phone">${detail.phone || "—"}</div>
       </div>
     </div>
   `;
@@ -197,9 +202,15 @@ function openAddContactOverlay() {
     resetFormErrors();
     setOverlayTitle("Add contact");
     fillForm({ name: "", email: "", phone: "" });
-    setOverlayAvatar("AA", "#29abe2");
+    setOverlayAvatar("", "", true);
+    setVisible(contactsDom.overlayLeftSub, true);
+    setVisible(contactsDom.overlayBtnCancel, true);
+    setVisible(contactsDom.overlayBtnCreate, true);
+    setVisible(contactsDom.overlayBtnDelete, false);
+    setVisible(contactsDom.overlayBtnSave, false);
+    setText(contactsDom.overlayBtnCreate, "Create contact ✓");
     setVisible(contactsDom.contactOverlay, true);
-}
+} 
 
 /**
  * Opens overlay in "edit" mode and fills the form with contact data.
@@ -214,6 +225,12 @@ function openEditContactOverlay(contactId) {
     setOverlayTitle("Edit contact");
     fillForm(contact);
     setOverlayAvatar(getInitials(contact.name), contact.color || pickColorForName(contact.name));
+    setVisible(contactsDom.overlayLeftSub, false);
+    setVisible(contactsDom.overlayBtnCancel, false);
+    setVisible(contactsDom.overlayBtnCreate, false);
+    setVisible(contactsDom.overlayBtnDelete, true);
+    setVisible(contactsDom.overlayBtnSave, true);
+    setText(contactsDom.overlayBtnSave, "Save ✓");
     setVisible(contactsDom.contactOverlay, true);
 }
 
@@ -237,21 +254,31 @@ function setOverlayTitle(title) {
  * @param {string} name
  */
 function updateOverlayAvatarFromName(name) {
-    const initials = getInitials(name) || "AA";
-    const color = pickColorForName(name);
-    setOverlayAvatar(initials, color);
+    if (!name || name.trim().length === 0) {
+        setOverlayAvatar("", "", true);
+    } else {
+        const initials = getInitials(name) || "AA";
+        const color = pickColorForName(name);
+        setOverlayAvatar(initials, color, false);
+    }
 }
 
 /**
- * Sets overlay avatar initials and background.
+ * Sets overlay avatar initials and background, or shows empty state icon.
  * @param {string} initials
  * @param {string} color
+ * @param {boolean} isEmpty
  */
-function setOverlayAvatar(initials, color) {
+function setOverlayAvatar(initials, color, isEmpty) {
     const avatarElement = document.getElementById(contactsDom.overlayAvatar);
     if (!avatarElement) return;
-    avatarElement.innerText = initials || "AA";
-    avatarElement.style.background = color || "#29abe2";
+    if (isEmpty) {
+        avatarElement.innerHTML = '<img src="../assets/img/icons/avatar.svg" alt="Avatar" style="width: 120px; height: 120px;" />';
+        avatarElement.style.background = "#d1d1d1";
+    } else {
+        avatarElement.innerText = initials || "AA";
+        avatarElement.style.background = color || "#29abe2";
+    }
 }
 // #endregion
 

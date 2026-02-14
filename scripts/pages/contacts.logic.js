@@ -23,7 +23,7 @@ async function initContacts() {
  */
 function ensureDemoContacts() {
     if (contactsState.contacts && contactsState.contacts.length) return;
-
+    
     contactsState.contacts = [
         { id: createId(), name: "Anton Mayer", email: "anton@gmail.com", phone: "+49 1111 111 11 11", color: "#FF7A00" },
         { id: createId(), name: "Anja Schulz", email: "schulz@hotmail.com", phone: "+49 2222 222 22 22", color: "#9327FF" },
@@ -231,7 +231,7 @@ function isValidEmail(email) {
 }
 
 /**
- * Checks if phone contains only allowed characters (optional field).
+ * Checks if phone contains only allowed characters
  * @param {string} phone
  */
 function isValidPhone(phone) {
@@ -316,15 +316,5 @@ function hashString(text) {
     let hash = 0;
     for (let index = 0; index < text.length; index++) hash = (hash * 31 + text.charCodeAt(index)) >>> 0;
     return hash;
-}
-// #endregion
-
-// #region Integration stub
-/**
- * Removes a deleted contact from tasks (placeholder for later task integration).
- * @param {string} contactId
- */
-function removeContactFromTasks(contactId) {
-    return contactId;
 }
 // #endregion

@@ -94,7 +94,7 @@ header {
     padding: 10px 65px;
 }
 
-.circle {
+.header-user-circle {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -125,7 +125,7 @@ header {
     padding-bottom: 10px;
 }
 
-.help-icon {
+.header-help-icon {
     width: 24px;
     height: 24px;
     display: block;
@@ -150,14 +150,14 @@ header {
     flex-direction: column;
 }
 
-.contacts-left__top {
+.contacts-left-top {
     padding: 22px 24px;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #f0f0f0;
 }
 
-.contacts-add-btn {
+.contacts-add-button {
     width: 100%;
     height: 44px;
     border-radius: 10px;
@@ -169,7 +169,7 @@ header {
     font-size: 16px;
 }
 
-.contacts-add-btn:hover {
+.contacts-add-button:hover {
     transform: translateY(-1px);
     filter: brightness(1.02);
 }
@@ -184,7 +184,7 @@ header {
     padding: 10px 0;
 }
 
-.letter-head {
+.letter-heading {
     padding: 10px 24px;
     color: #000;
     font-weight: 700;
@@ -211,8 +211,8 @@ header {
     background: #2a3647;
 }
 
-.contact-row.is-selected .contact-row__name,
-.contact-row.is-selected .contact-row__mail {
+.contact-row.is-selected .contact-row-name,
+.contact-row.is-selected .contact-row-email {
     color: #ffffff;
 }
 
@@ -229,18 +229,18 @@ header {
     flex: 0 0 42px;
 }
 
-.contact-row__meta {
+.contact-row-meta {
     min-width: 0;
 }
 
-.contact-row__name {
+.contact-row-name {
     font-weight: 600;
     color: #000;
     font-size: 16px;
     line-height: 1.2;
 }
 
-.contact-row__mail {
+.contact-row-email {
     color: #007cee;
     font-size: 14px;
     line-height: 1.2;
@@ -291,14 +291,14 @@ header {
     background: transparent;
 }
 
-.detail-empty {
+.contact-detail-empty {
     color: #2a3647;
     font-size: 18px;
     opacity: 0.7;
     margin-top: 70px;
 }
 
-.detail-top {
+.contact-detail-top {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -306,7 +306,7 @@ header {
     margin-bottom: 18px;
 }
 
-.detail-avatar {
+.contact-detail-avatar {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -318,20 +318,20 @@ header {
     font-size: 40px;
 }
 
-.detail-name {
+.contact-detail-name {
     font-size: 44px;
     font-weight: 700;
     margin: 0;
     line-height: 1.1;
 }
 
-.detail-actions {
+.contact-detail-actions {
     display: flex;
     gap: 14px;
     margin-top: 10px;
 }
 
-.link-btn {
+.link-button {
     background: transparent;
     border: none;
     color: #2a3647;
@@ -341,37 +341,37 @@ header {
     transition: background 100ms ease, transform 100ms ease;
 }
 
-.link-btn:hover {
+.link-button:hover {
     background: #f6f7f8;
     transform: translateY(-1px);
 }
 
-.detail-blockTitle {
+.contact-detail-block-title {
     margin-top: 28px;
     margin-bottom: 10px;
     font-weight: 700;
     color: #2a3647;
 }
 
-.kv {
+.contact-info-grid {
     display: grid;
     gap: 14px;
     max-width: 520px;
 }
 
-.kv-row .k {
+.contact-info-row .contact-info-label {
     font-weight: 700;
     color: #2a3647;
     font-size: 14px;
     margin-bottom: 6px;
 }
 
-.kv-row .v {
+.contact-info-row .contact-info-value {
     color: #007cee;
     font-size: 16px;
 }
 
-.kv-row .v.is-phone {
+.contact-info-row .contact-info-value.is-phone {
     color: #2a3647;
 }
 
@@ -390,7 +390,7 @@ header {
     display: none !important;
 }
 
-.overlay__panel {
+.overlay-panel {
     width: min(1120px, 100%);
     min-height: 520px;
     background: #ffffff;
@@ -402,7 +402,7 @@ header {
     position: relative;
 }
 
-.overlay__left {
+.overlay-left {
     background: #2a3647;
     color: #ffffff;
     padding: 56px 46px;
@@ -412,26 +412,26 @@ header {
     gap: 14px;
 }
 
-.overlay__logo {
+.overlay-logo {
     width: 54px;
     height: 66px;
     object-fit: contain;
 }
 
-.overlay__leftTitle {
+.overlay-left-title {
     margin: 0;
     font-size: 52px;
     font-weight: 700;
     letter-spacing: -0.02em;
 }
 
-.overlay__leftSub {
+.overlay-left-subtitle {
     margin: 0;
     font-size: 18px;
     opacity: 0.9;
 }
 
-.overlay__leftLine {
+.overlay-left-line {
     width: 92px;
     height: 3px;
     background: #29abe2;
@@ -439,7 +439,7 @@ header {
     margin-top: 8px;
 }
 
-.overlay__close {
+.overlay-close-button {
     position: absolute;
     right: 20px;
     top: 16px;
@@ -454,17 +454,17 @@ header {
     border-radius: 10px;
 }
 
-.overlay__close:hover {
+.overlay-close-button:hover {
     background: #f6f7f8;
 }
 
-.overlay__right {
+.overlay-right {
     display: flex;
     align-items: center;
     padding: 46px 56px;
 }
 
-.overlay__content {
+.overlay-content {
     width: 100%;
     display: grid;
     grid-template-columns: 160px 1fr;
@@ -472,7 +472,7 @@ header {
     align-items: start;
 }
 
-.overlay__avatar {
+.overlay-avatar {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -486,7 +486,7 @@ header {
     margin-top: 18px;
 }
 
-.overlay__form {
+.overlay-form {
     width: 100%;
     max-width: 520px;
 }
@@ -495,7 +495,7 @@ header {
     margin-bottom: 14px;
 }
 
-.field__wrap {
+.field-wrapper {
     position: relative;
 }
 
@@ -514,7 +514,7 @@ header {
     border-color: #29abe2;
 }
 
-.field__icon {
+.field-icon {
     position: absolute;
     right: 16px;
     top: 50%;
@@ -525,14 +525,14 @@ header {
     pointer-events: none;
 }
 
-.field__error {
+.field-error-message {
     min-height: 18px;
     font-size: 12px;
     color: #d61c1c;
     margin-top: 6px;
 }
 
-.overlay__actions {
+.overlay-actions {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
@@ -540,8 +540,8 @@ header {
     flex-wrap: wrap;
 }
 
-.btn-primary,
-.btn-ghost {
+.button-primary,
+.button-ghost {
     height: 44px;
     border-radius: 10px;
     padding: 0 16px;
@@ -550,24 +550,24 @@ header {
     font-size: 16px;
 }
 
-.btn-primary {
+.button-primary {
     background: #2a3647;
     color: #ffffff;
     border: none;
 }
 
-.btn-primary:hover {
+.button-primary:hover {
     transform: translateY(-1px);
     filter: brightness(1.06);
 }
 
-.btn-ghost {
+.button-ghost {
     background: #ffffff;
     border: 1px solid #d1d1d1;
     color: #2a3647;
 }
 
-.btn-ghost:hover {
+.button-ghost:hover {
     transform: translateY(-1px);
     filter: brightness(1.02);
 }
