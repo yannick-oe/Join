@@ -23,7 +23,7 @@ async function initContacts() {
  */
 function ensureDemoContacts() {
     if (contactsState.contacts && contactsState.contacts.length) return;
-    
+
     contactsState.contacts = [
         { id: createId(), name: "Anton Mayer", email: "anton@gmail.com", phone: "+49 1111 111 11 11", color: "#FF7A00" },
         { id: createId(), name: "Anja Schulz", email: "schulz@hotmail.com", phone: "+49 2222 222 22 22", color: "#9327FF" },
@@ -58,22 +58,25 @@ async function submitContact() {
     const contactData = readForm();
     const validation = validateContact(contactData);
     if (validation.hasError) return showFormErrors(validation);
+    const isNewContact = !contactsState.editContactId;
     if (contactsState.editContactId) updateContactInState(contactsState.editContactId, contactData);
     else addContactToState(contactData);
     await saveContacts(contactsState.contacts);
     closeContactOverlay();
     renderContactsPage();
+    if (isNewContact) showSuccessToast();
+    else showEditToast();
 }
 
 /**
- * Opens confirmation and deletes a contact.
+ * Confirms and deletes a contact.
  * @param {string} contactId
  */
-function openDeleteOverlay(contactId) {
+async function confirmAndDeleteContact(contactId) {
     const confirmed = window.confirm("Delete this contact?");
     if (!confirmed) return;
-    contactsState.editContactId = contactId;
-    deleteActiveContact();
+    if (contactId) contactsState.editContactId = contactId;
+    await deleteActiveContact();
 }
 
 /**
@@ -83,12 +86,32 @@ async function deleteActiveContact() {
     const contactId = contactsState.editContactId || contactsState.activeContactId;
     if (!contactId) return;
     contactsState.contacts = contactsState.contacts.filter((contact) => contact.id !== contactId);
-    if (contactsState.activeContactId === contactId) contactsState.activeContactId = null;
-    if (contactsState.editContactId === contactId) contactsState.editContactId = null;
-    removeContactFromTasks(contactId);
+    if (contactsState.editContactId) {
+        contactsState.activeContactId = null;
+        contactsState.editContactId = null;
+    } else if (contactsState.activeContactId === contactId) {
+        contactsState.activeContactId = null;
+    }
+    tryRemoveContactFromTasks(contactId);
     await saveContacts(contactsState.contacts);
     closeContactOverlay();
     renderContactsPage();
+    showDeleteToast();
+}
+
+/**
+ * Tries to remove a deleted contact from task assignments if task logic is available.
+ * This must never block contact persistence or UI feedback.
+ * @param {string} contactId
+ */
+function tryRemoveContactFromTasks(contactId) {
+    const globalRemove = window.removeContactFromTasks;
+    if (typeof globalRemove !== "function") return;
+    try {
+        globalRemove(contactId);
+    } catch (error) {
+        console.error("Failed to remove contact from tasks:", error);
+    }
 }
 // #endregion
 
@@ -130,7 +153,7 @@ function updateContactInState(contactId, contactData) {
 // #region List helpers
 /**
  * Returns a sorted copy of contacts (by name).
- * @param {any[]} contacts
+ * @param {{id:string,name:string,email:string,phone?:string,color?:string}[]} contacts
  */
 function getSortedContacts(contacts) {
     const copy = (contacts || []).slice();
@@ -140,7 +163,7 @@ function getSortedContacts(contacts) {
 
 /**
  * Builds groups by first letter: [{letter, items[]}].
- * @param {any[]} contacts
+ * @param {{id:string,name:string,email:string,phone?:string,color?:string}[]} contacts
  */
 function buildLetterGroups(contacts) {
     const groups = [];
@@ -155,7 +178,7 @@ function buildLetterGroups(contacts) {
 
 /**
  * Finds the index of a group by letter.
- * @param {{letter:string}[]} groups
+ * @param {{letter:string,items:{id:string,name:string,email:string,phone?:string,color?:string}[]}[]} groups
  * @param {string} letter
  */
 function findGroupIndex(groups, letter) {

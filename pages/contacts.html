@@ -154,7 +154,7 @@
                                 <button id="overlayBtnCreate" class="button-primary" type="button"
                                     onclick="submitContact()">Create contact ✓</button>
                                 <button id="overlayBtnDelete" class="button-ghost hidden" type="button"
-                                    onclick="openDeleteOverlay(contactsState.editContactId)">Delete</button>
+                                    onclick="confirmAndDeleteContact()">Delete</button>
                                 <button id="overlayBtnSave" class="button-primary hidden" type="button"
                                     onclick="submitContact()">Save ✓</button>
                             </div>
@@ -164,6 +164,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div id="successToast" class="success-toast hidden">
+            <p class="success-toast-text">Contact successfully created</p>
+        </div>
+        <div id="editToast" class="success-toast hidden">
+            <p class="success-toast-text">Contact successfully updated</p>
+        </div>
+        <div id="deleteToast" class="success-toast hidden">
+            <p class="success-toast-text">Contact successfully deleted</p>
         </div>
     </main>
 </body>

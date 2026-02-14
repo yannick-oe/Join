@@ -17,6 +17,9 @@ const contactsDom = {
     contactEmailError: "contactEmailError",
     contactPhoneError: "contactPhoneError",
     contactFormNote: "contactFormNote",
+    successToast: "successToast",
+    editToast: "editToast",
+    deleteToast: "deleteToast",
 };
 // #endregion
 
@@ -103,7 +106,7 @@ function renderContactDetail() {
 // #region Templates
 /**
  * Builds full list HTML from letter groups.
- * @param {{letter:string, items:any[]}[]} letterGroups
+ * @param {{letter:string,items:{id:string,name:string,email:string,phone?:string,color?:string}[]}[]} letterGroups
  */
 function buildContactsListHtml(letterGroups) {
     let html = "";
@@ -115,7 +118,7 @@ function buildContactsListHtml(letterGroups) {
 
 /**
  * Builds HTML for a single group.
- * @param {{letter:string, items:any[]}} group
+ * @param {{letter:string,items:{id:string,name:string,email:string,phone?:string,color?:string}[]}} group
  */
 function getLetterGroupTemplate(group) {
     return `
@@ -128,7 +131,7 @@ function getLetterGroupTemplate(group) {
 
 /**
  * Builds contact rows HTML.
- * @param {any[]} contacts
+ * @param {{id:string,name:string,email:string,phone?:string,color?:string}[]} contacts
  */
 function buildRowsHtml(contacts) {
     let html = "";
@@ -173,7 +176,7 @@ function getContactDetailTemplate(detail) {
         <h2 class="contact-detail-name">${detail.name}</h2>
         <div class="contact-detail-actions">
           <button class="link-button" type="button" onclick="openEditContactOverlay('${detail.id}')">Edit</button>
-          <button class="link-button" type="button" onclick="openDeleteOverlay('${detail.id}')">Delete</button>
+          <button class="link-button" type="button" onclick="confirmAndDeleteContact('${detail.id}')">Delete</button>
         </div>
       </div>
     </div>
@@ -273,7 +276,7 @@ function setOverlayAvatar(initials, color, isEmpty) {
     const avatarElement = document.getElementById(contactsDom.overlayAvatar);
     if (!avatarElement) return;
     if (isEmpty) {
-        avatarElement.innerHTML = '<img src="../assets/img/icons/avatar.svg" alt="Avatar" style="width: 120px; height: 120px;" />';
+        avatarElement.innerHTML = '<img src="../assets/img/icons/avatar.svg" alt="Avatar" class="overlay-avatar-icon" />';
         avatarElement.style.background = "#d1d1d1";
     } else {
         avatarElement.innerText = initials || "AA";
@@ -331,5 +334,50 @@ function resetFormErrors() {
  */
 function setFormNote(note) {
     setText(contactsDom.contactFormNote, note || "");
+}
+
+/**
+ * Shows success toast notification.
+ */
+function showSuccessToast() {
+    setVisible(contactsDom.successToast, true);
+    setTimeout(() => hideSuccessToast(), 2500);
+}
+
+/**
+ * Hides success toast notification.
+ */
+function hideSuccessToast() {
+    setVisible(contactsDom.successToast, false);
+}
+
+/**
+ * Shows edit toast notification.
+ */
+function showEditToast() {
+    setVisible(contactsDom.editToast, true);
+    setTimeout(() => hideEditToast(), 2500);
+}
+
+/**
+ * Hides edit toast notification.
+ */
+function hideEditToast() {
+    setVisible(contactsDom.editToast, false);
+}
+
+/**
+ * Shows delete toast notification.
+ */
+function showDeleteToast() {
+    setVisible(contactsDom.deleteToast, true);
+    setTimeout(() => hideDeleteToast(), 2500);
+}
+
+/**
+ * Hides delete toast notification.
+ */
+function hideDeleteToast() {
+    setVisible(contactsDom.deleteToast, false);
 }
 // #endregion
