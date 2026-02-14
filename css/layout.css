@@ -1,0 +1,125 @@
+aside {
+	background-color: #2a3647;
+	position: fixed;
+	width: 230px;
+	height: 100vh;
+	font-weight: 400;
+	top: 0;
+	left: 0;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	height: 100px;
+	background-color: white;
+	align-items: center;
+	padding-left: 250px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-top {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: #cdcdcd;
+	font-size: 16px;
+	padding-bottom: 80px;
+}
+
+.sidebar-bottom {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 28px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+}
+
+.sidebar-bottom a {
+	text-decoration: none;
+	color: #a8a8a8;
+	font-size: 14px;
+	font-family: "Inter", sans-serif;
+	transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-bottom a:hover {
+	color: white;
+	transform: translateX(3px);
+}
+
+.sidebar-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.logo-icon {
+	padding: 70px 64px;
+	height: 120px;
+	width: 100px;
+}
+
+.icon {
+	height: 24px;
+	width: 24px;
+	padding-right: 5px;
+}
+
+.menu {
+	width: 100%;
+}
+
+.menu a:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+	transform: translateX(3px);
+}
+
+.menu td a,
+.menu a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: #cdcdcd;
+	padding: 10px 65px;
+}
+
+.header-user-circle {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border-color: black;
+	background-color: rgb(255, 255, 255);
+	color: #29abe2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid black;
+	margin: 0;
+}
+
+.header-right {
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	padding-right: 35px;
+	gap: 15px;
+}
+
+.header-line {
+	font-size: 20px;
+	padding-left: 120px;
+}
+
+.menu-bottom td {
+	padding-bottom: 10px;
+}
+
+.header-help-icon {
+	width: 24px;
+	height: 24px;
+	display: block;
+}

@@ -276,7 +276,7 @@ function setOverlayAvatar(initials, color, isEmpty) {
     const avatarElement = document.getElementById(contactsDom.overlayAvatar);
     if (!avatarElement) return;
     if (isEmpty) {
-        avatarElement.innerHTML = '<img src="../assets/img/icons/avatar.svg" alt="Avatar" class="overlay-avatar-icon" />';
+        avatarElement.innerHTML = '<img src="../assets/icon/avatar.svg" alt="Avatar" class="overlay-avatar-icon" />';
         avatarElement.style.background = "#d1d1d1";
     } else {
         avatarElement.innerText = initials || "AA";

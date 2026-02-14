@@ -1,0 +1,46 @@
+.link-button {
+	background: transparent;
+	border: none;
+	color: #2a3647;
+	cursor: pointer;
+	padding: 8px 10px;
+	border-radius: 8px;
+	transition: background 100ms ease, transform 100ms ease;
+}
+
+.link-button:hover {
+	background: #f6f7f8;
+	transform: translateY(-1px);
+}
+
+.button-primary,
+.button-ghost {
+	height: 44px;
+	border-radius: 10px;
+	padding: 0 16px;
+	cursor: pointer;
+	transition: transform 100ms ease, filter 100ms ease, background 100ms ease;
+	font-size: 16px;
+}
+
+.button-primary {
+	background: #2a3647;
+	color: #ffffff;
+	border: none;
+}
+
+.button-primary:hover {
+	transform: translateY(-1px);
+	filter: brightness(1.06);
+}
+
+.button-ghost {
+	background: #ffffff;
+	border: 1px solid #d1d1d1;
+	color: #2a3647;
+}
+
+.button-ghost:hover {
+	transform: translateY(-1px);
+	filter: brightness(1.02);
+}
