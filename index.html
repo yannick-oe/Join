@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/global.css">
     <link rel="shortcut icon" href="./assets/icon/Capa 1.svg" type="image/x-icon">
+    <script src="./js/signup.js" defer></script>
 
 </head>
 
@@ -18,42 +19,41 @@
         <header>
             <div class="header_content">
                 <div>
-                    <img class="join_logo" src="./assets/icon/Capa 1.svg" alt="Join Logo">
+                    <img id="headerLogo" class="join_logo" src="./assets/icon/Capa 1.svg" alt="Join Logo">
                 </div>
                 <div class="header_right">
                     <p class="no_user">Not a Join user?</p>
-                    <button class="Sign_btn btn" onclick="signUp">Sign up</button>
+                    <button class="Sign_btn btn" onclick="signUp()">Sign up</button>
                 </div>
             </div>
         </header>
 
-        <div class="content_wrapper">
-            <main>
-                <section class="login">
+        <main class="content_wrapper">
+            <section class="login">
 
-                    <h1>Log in</h1>
+                <h1>Log in</h1>
+                <div class="underline"></div>
 
-                    <form class="login_form">
-                        <div class="field">
-                            <input type="text" name="email" placeholder="EMail" required>
-                            <img class="input_icon" src="./assets/icon/mail.svg" alt="Mail Logo">
-                        </div>
+                <form class="login_form">
+                    <div class="field">
+                        <input type="text" name="email" placeholder="EMail" required>
+                        <img class="input_icon" src="./assets/icon/mail.svg" alt="Mail Logo">
+                    </div>
 
-                        <div class="field">
-                            <input type="text" name="passwort" placeholder="Password" required>
-                            <img class="input_icon" src="./assets/icon/lock.svg" alt="Password Logo">
-                        </div>
+                    <div class="field">
+                        <input type="text" name="passwort" placeholder="Password" required>
+                        <img class="input_icon" src="./assets/icon/lock.svg" alt="Password Logo">
+                    </div>
 
-                        <div class="btn_group">
-                            <button class="btn login_btn" onclick="logIn">Log in</button>
-                            <button class="guest_btn" onclick="guestLogIn">Guest Log in</button>
-                        </div>
+                    <div class="btn_group">
+                        <button class="btn login_btn" onclick="logIn">Log in</button>
+                        <button class="guest_btn" onclick="guestLogIn">Guest Log in</button>
+                    </div>
 
-                    </form>
-                </section>
-            </main>
-        </div>
+                </form>
+            </section>
     </div>
+    </main>
     <footer>
         <div class="footer_content">
             <a class="left" href="#">Privacy Policy</a>
