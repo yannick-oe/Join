@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Task</title>
+
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/pages/add-task.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+
+    <script src="../scripts/storage.js" defer></script>
+    <script src="../scripts/pages/add-task.ui.js" defer></script>
+    <script src="../scripts/pages/add-task.logic.js" defer></script>
+</head>
+
+<body onload="initAddTaskPage()">
+    <header>
+        <div>
+            <p class="header-line">Kanban Project Management Tool</p>
+        </div>
+        <div class="header-right">
+            <a href="./help.html">
+                <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
+            </a>
+            <p class="header-user-circle">SM</p>
+        </div>
+    </header>
+
+    <aside>
+        <div>
+            <img class="logo-icon" src="../assets/icon/Join logo vector.svg" alt="Logo" />
+        </div>
+
+        <section class="sidebar-top">
+            <table class="sidebar-top">
+                <tr class="menu">
+                    <td>
+                        <a href="./summary.html">
+                            <img src="../assets/icon/Icons.svg" class="summary-icon icon" alt="Summary-Icon" />
+                            <span>Summary</span>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="menu">
+                    <td>
+                        <a href="./add-task.html" class="is-active">
+                            <img src="../assets/icon/edit_square.svg" class="task-icon icon" alt="Task-Icon" />
+                            <span>Add Task</span>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="menu">
+                    <td>
+                        <a href="./board.html">
+                            <img src="../assets/icon/vectors.svg" class="board-icon icon" alt="Board-Icon" />
+                            <span>Board</span>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="menu">
+                    <td>
+                        <a href="./contacts.html">
+                            <img src="../assets/icon/perm_contact_calendar.svg" class="contacts-icon icon"
+                                alt="Contacts-Icon" />
+                            <span>Contacts</span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="sidebar-bottom">
+            <table>
+                <tr class="menu-bottom padding-bottom">
+                    <td><a href="./privacy-policy.html"><span>Privacy Policy</span></a></td>
+                </tr>
+                <tr class="menu-bottom">
+                    <td><a href="./legal-notice.html"><span>Legal Notice</span></a></td>
+                </tr>
+            </table>
+        </section>
+    </aside>
+
+    <main class="add-task-main" onclick="handlePageClick(event)">
+        <section class="add-task-content content-limit">
+            <h1 class="add-task-title">Add Task</h1>
+
+            <form class="task-form" onsubmit="submitTaskForm(event)">
+                <div class="task-form-grid">
+                    <section class="task-form-left">
+                        <label class="task-label" for="taskTitle">Title<span id="taskTitleRequiredStar" class="required-star">*</span></label>
+                        <input id="taskTitle" class="task-input" type="text" placeholder="Enter a title"
+                            oninput="handleTitleInput()" />
+                        <p id="taskTitleError" class="task-error hidden">This field is required</p>
+
+                        <label class="task-label" for="taskDescription">Description</label>
+                        <textarea id="taskDescription" class="task-textarea"
+                            placeholder="Enter a Description"></textarea>
+
+                        <label class="task-label" for="taskDate">Due date<span id="taskDateRequiredStar" class="required-star">*</span></label>
+                        <input id="taskDate" class="task-input" type="date" oninput="handleDateInput()" />
+                        <p id="taskDateError" class="task-error hidden">This field is required</p>
+                    </section>
+
+                    <section class="task-form-right">
+                        <label class="task-label">Priority</label>
+                        <div class="priority-row">
+                            <button id="priorityUrgent" class="priority-button" type="button"
+                                onclick="setPriority('urgent')">Urgent <img class="priority-icon" src="../assets/icon/high-prio.svg" alt=""></button>
+                            <button id="priorityMedium" class="priority-button is-selected" type="button"
+                                onclick="setPriority('medium')">Medium <img class="priority-icon" src="../assets/icon/medium-prio.svg" alt=""></button>
+                            <button id="priorityLow" class="priority-button" type="button"
+                                onclick="setPriority('low')">Low <img class="priority-icon" src="../assets/icon/low-prio.svg" alt=""></button>
+                        </div>
+
+                        <label class="task-label" for="teamMemberToggle">Assigned to</label>
+                        <div class="dropdown-shell" id="teamMemberDropdownShell">
+                            <button id="teamMemberToggle" class="task-input task-dropdown-toggle" type="button"
+                                onclick="toggleTeamMemberDropdown()">Select contacts to assign</button>
+                            <div id="teamMemberDropdown" class="dropdown-panel hidden"></div>
+                            <div id="teamMemberBadges" class="team-member-badges"></div>
+                        </div>
+
+                        <label class="task-label" for="categoryToggle">Category<span id="taskCategoryRequiredStar" class="required-star">*</span></label>
+                        <div class="dropdown-shell">
+                            <button id="categoryToggle" class="task-input task-dropdown-toggle" type="button"
+                                onclick="toggleCategoryDropdown()">Select task category</button>
+                            <div id="categoryDropdown" class="dropdown-panel hidden"></div>
+                        </div>
+                        <p id="taskCategoryError" class="task-error hidden">This field is required</p>
+
+                        <label class="task-label" for="subtaskInput">Subtasks</label>
+                        <div class="subtask-input-shell">
+                            <input id="subtaskInput" class="task-input" type="text" placeholder="Add new subtask"
+                                oninput="handleSubtaskInput()" onkeydown="handleSubtaskInputKeydown(event)" />
+                            <div id="subtaskActions" class="subtask-actions hidden">
+                                <button class="subtask-action" type="button" onclick="cancelSubtaskEdit()">×</button>
+                                <button class="subtask-action" type="button" onclick="saveSubtaskDraft()">✓</button>
+                            </div>
+                        </div>
+                        <div id="subtaskList" class="subtask-list"></div>
+                    </section>
+                </div>
+
+                <div class="task-form-footer">
+                    <p class="task-required-note"><span>*</span>This field is required</p>
+                    <div class="task-footer-actions">
+                        <button class="button-ghost task-clear-button" type="button" onclick="clearTaskForm()">Clear
+                            ×</button>
+                        <button class="button-primary task-create-button" type="submit">Create Task ✓</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <div id="taskSuccessToast" class="success-toast hidden">
+            <p class="success-toast-text">Task added to board</p>
+        </div>
+    </main>
+</body>
+
+</html>
