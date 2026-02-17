@@ -2,15 +2,9 @@ const DEMO_EMAIL = "mustermann@gmail.com";
 const DEMO_PASS  = "123456";
 const SESSION_KEY = "joinSession";
 
+
 /**
  * Retrieves required login elements from the DOM.
- *
- * @returns {{
- *   email: HTMLInputElement|null,
- *   pass: HTMLInputElement|null,
- *   msg: HTMLElement|null,
- *   group: HTMLElement|null
- * }}
  */
 function getLoginInputs(){
   return {
@@ -21,24 +15,19 @@ function getLoginInputs(){
   };
 }
 
+
 /**
- * Clears login input fields (prevents browser from keeping old values).
- *
- * @param {HTMLInputElement|null} emailInput
- * @param {HTMLInputElement|null} passInput
- * @returns {void}
+ * Clears login input fields.
  */
 function clearLoginFields(emailInput, passInput){
   if(emailInput) emailInput.value = "";
   if(passInput)  passInput.value  = "";
 }
 
+
 /**
- * Inserts demo credentials into the login form.
- *
- * @param {HTMLInputElement|null} emailInput
- * @param {HTMLInputElement|null} passInput
- * @returns {boolean}
+ * Inserts demo display values into the login form.
+ * Does NOT expose real demo credentials in UI.
  */
 function fillDemoFields(emailInput, passInput){
   if(!emailInput || !passInput) return false;
@@ -53,11 +42,9 @@ function fillDemoFields(emailInput, passInput){
 }
 
 
-
 /**
  * Stores demo user session in localStorage.
- *
- * @returns {void}
+ * Session is local-only and not server-based.
  */
 function saveDemoSession(){
   localStorage.setItem(SESSION_KEY, JSON.stringify({
@@ -67,12 +54,9 @@ function saveDemoSession(){
   }));
 }
 
+
 /**
- * Displays success message and adjusts layout.
- *
- * @param {HTMLElement|null} msg
- * @param {HTMLElement|null} group
- * @returns {void}
+ * Displays success message and adjusts layout state.
  */
 function showSuccess(msg, group){
   if(msg){
@@ -84,36 +68,38 @@ function showSuccess(msg, group){
   }
 }
 
+
 /**
  * Redirects user to summary page after delay.
- *
- * @returns {void}
  */
 function redirectToSummary(){
-  setTimeout(function(){
+  setTimeout(() => {
     window.location.href = "../pages/summary.html";
   }, 2500);
 }
 
+
 /**
  * Main demo login handler.
- * - Prevents default form behavior
- * - Fills demo credentials
- * - Saves local session
- * - Shows success message
- * - Redirects user
+ *
+ * Prevent default form behavior
+ * Insert guest display values
+ * Save local session
+ * Show success message
+ * Redirect to summary page
  *
  * @param {Event} [e]
- * @returns {boolean}
  */
 function demoLogin(e){
   if(e) e.preventDefault();
 
-var el = getLoginInputs();
-if(!fillDemoFields(el.email, el.pass)) return false;
+  const el = getLoginInputs();
+  if(!fillDemoFields(el.email, el.pass)) return false;
 
-if(typeof realPassword !== "undefined") realPassword = DEMO_PASS;
-
+  // If smart password masking is active, set internal password
+  if(typeof realPassword !== "undefined"){
+    realPassword = DEMO_PASS;
+  }
 
   saveDemoSession();
   showSuccess(el.msg, el.group);
@@ -122,11 +108,13 @@ if(typeof realPassword !== "undefined") realPassword = DEMO_PASS;
   return true;
 }
 
+
 /**
- * Clears inputs on page load to avoid showing old values after logout/back.
+ * Resets login form state on page load.
+ * Restores original input names and clears values.
  */
 window.onload = function(){
-  var el = getLoginInputs();
+  const el = getLoginInputs();
 
   if(el.email) el.email.setAttribute("name", "email");
   if(el.pass)  el.pass.setAttribute("name", "passwort");

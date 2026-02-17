@@ -1,38 +1,29 @@
-var realPassword = "";
-var maskTimer = null;
+let realPassword = "";
+let maskTimer = null;
 
-function enableSmartPasswordMask(){
-
-  var input = document.getElementById("password");
-  if(!input) return;
-
-  input.addEventListener("input", function(e){
-
-    var currentLength = input.value.length;
-
- 
-    if(currentLength < realPassword.length){
-      realPassword = realPassword.slice(0, currentLength);
-    }
-
-    else{
-      var newChar = input.value.charAt(currentLength - 1);
-      realPassword += newChar;
-    }
-
-    if(realPassword.length > 0){
-      input.value = "*".repeat(realPassword.length - 1) +
-                    realPassword.charAt(realPassword.length - 1);
-    }
-
-    if(maskTimer) clearTimeout(maskTimer);
-
-    maskTimer = setTimeout(function(){
-      input.value = "*".repeat(realPassword.length);
-    }, 1000);
-  });
+/**
+ * Handles password input updates.
+ */
+function handlePasswordInput(){
+  const i = document.getElementById("password");
+  if(!i) return;
+  updatePasswordState(i);
+  maskPassword(i);
 }
 
-window.onload = function(){
-  enableSmartPasswordMask();
-};
+/**
+ * Updates internal password and handles masking.
+ */
+function updatePasswordState(i){
+  const l = i.value.length;
+  realPassword = l < realPassword.length
+    ? realPassword.slice(0,l)
+    : realPassword + i.value.charAt(l-1);
+
+  i.value = realPassword
+    ? "*".repeat(realPassword.length-1) + realPassword.at(-1)
+    : "";
+
+  if(maskTimer) clearTimeout(maskTimer);
+  maskTimer = setTimeout(()=>i.value="*".repeat(realPassword.length),1000);
+}
