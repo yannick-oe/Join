@@ -5,7 +5,6 @@
     height: 100%;
 }
 
-
 h1 {
     font-weight: 700;
     font-size: 50px;
@@ -15,4 +14,28 @@ h1 {
 
 .link {
     color: #1c4d77;
+}
+
+.legal-main {
+    background-color: #f6f7f8;;
+    padding-left: 350px;
+    padding-top: 100px;
+    height: 100vh;
+}
+
+.join {
+    color: rgb(0, 128, 255);
+}
+
+.h-class {
+    margin-block-end: 0;
+    font-size: 20px;
+}
+
+.p-class {
+    margin-block-start: 0;
+}
+
+.font-size20 {
+    font-size: 20px;
 }
