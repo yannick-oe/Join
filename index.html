@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/global.css">
     <link rel="shortcut icon" href="./assets/icon/Capa 1.svg" type="image/x-icon">
     <script src="./js/signup.js" defer></script>
+    <script src="./scripts/pages/demo_user.js" defer></script>
 
 </head>
 
@@ -36,18 +37,20 @@
 
                 <form class="login_form">
                     <div class="field">
-                        <input type="text" name="email" placeholder="EMail" required>
+                        <input id="email" type="email" name="email" placeholder="EMail" required>
                         <img class="input_icon" src="./assets/icon/mail.svg" alt="Mail Logo">
                     </div>
 
                     <div class="field">
-                        <input type="text" name="passwort" placeholder="Password" required>
+                        <input id="password" type="passwort" name="passwort" placeholder="Password" required>
                         <img class="input_icon" src="./assets/icon/lock.svg" alt="Password Logo">
                     </div>
 
-                    <div class="btn_group">
-                        <button class="btn login_btn" onclick="logIn">Log in</button>
-                        <button class="guest_btn" onclick="guestLogIn">Guest Log in</button>
+                    <div id="loginMessage" class="login_message"></div>
+
+                    <div id="btnGroup" class="btn_group">
+                        <button class="btn login_btn" onclick="logIn()">Log in</button>
+                        <button class="guest_btn" onclick="demoLogin(event)">Guest Log in</button>
                     </div>
 
                 </form>
