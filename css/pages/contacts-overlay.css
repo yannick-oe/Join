@@ -165,6 +165,29 @@
     flex-wrap: wrap;
 }
 
+.overlay-actions .button-primary,
+.overlay-actions .button-ghost {
+    transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 120ms ease, box-shadow 140ms ease, filter 140ms ease;
+}
+
+.overlay-actions .button-primary:hover {
+    background: #29abe2;
+    border-color: #29abe2;
+    color: #ffffff;
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(41, 171, 226, 0.28);
+}
+
+.overlay-actions .button-ghost:hover {
+    background: #ffffff;
+    border-color: #29abe2;
+    color: #29abe2;
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(41, 171, 226, 0.24);
+}
+
 .form-note {
     min-height: 18px;
     font-size: 12px;
