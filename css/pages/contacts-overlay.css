@@ -19,6 +19,7 @@
     display: grid;
     grid-template-columns: 420px 1fr;
     position: relative;
+    animation: contacts-overlay-slide-in 380ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .overlay-left {
@@ -183,7 +184,7 @@
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    animation: slide-up 0.3s ease-out;
+    animation: slide-up 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .success-toast-text {
@@ -195,11 +196,23 @@
 @keyframes slide-up {
     from {
         opacity: 0;
-        transform: translateX(-50%) translateY(20px);
+        transform: translateX(-50%) translateY(20px) scale(0.98);
     }
 
     to {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+@keyframes contacts-overlay-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(28px) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
     }
 }

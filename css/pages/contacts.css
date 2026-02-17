@@ -32,12 +32,22 @@ body {
     width: 100%;
     height: 44px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     cursor: pointer;
     transition: transform 100ms ease, filter 100ms ease;
     border: none;
     background: #2a3647;
     color: #ffffff;
     font-size: 16px;
+}
+
+.contacts-add-button img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }
 
 .contacts-add-button:hover {
@@ -162,6 +172,10 @@ body {
     background: transparent;
 }
 
+.contact-detail-content {
+    animation: contacts-slide-in-right 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .contact-detail-empty {
     color: #2a3647;
     font-size: 18px;
@@ -202,6 +216,30 @@ body {
     margin-top: 10px;
 }
 
+.contact-detail-actions .link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 0;
+}
+
+.contact-detail-actions .link-button img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    transition: filter 140ms ease;
+}
+
+.contact-detail-actions .link-button:hover {
+    color: #29abe2;
+    background: transparent;
+    transform: none;
+}
+
+.contact-detail-actions .link-button:hover img {
+    filter: brightness(0) saturate(100%) invert(61%) sepia(74%) saturate(1710%) hue-rotate(165deg) brightness(91%) contrast(89%);
+}
+
 .contact-detail-block-title {
     margin-top: 28px;
     margin-bottom: 10px;
@@ -229,4 +267,16 @@ body {
 
 .contact-info-row .contact-info-value.is-phone {
     color: #2a3647;
+}
+
+@keyframes contacts-slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(18px) scale(0.99);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
 }

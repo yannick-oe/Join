@@ -170,26 +170,34 @@ function getEmptyDetailTemplate() {
  */
 function getContactDetailTemplate(detail) {
     return `
-    <div class="contact-detail-top">
-      <div class="contact-detail-avatar" style="background:${detail.color}">${detail.initials}</div>
-      <div>
-        <h2 class="contact-detail-name">${detail.name}</h2>
-        <div class="contact-detail-actions">
-          <button class="link-button" type="button" onclick="openEditContactOverlay('${detail.id}')">Edit</button>
-          <button class="link-button" type="button" onclick="confirmAndDeleteContact('${detail.id}')">Delete</button>
+        <div class="contact-detail-content">
+            <div class="contact-detail-top">
+                <div class="contact-detail-avatar" style="background:${detail.color}">${detail.initials}</div>
+                <div>
+                    <h2 class="contact-detail-name">${detail.name}</h2>
+                    <div class="contact-detail-actions">
+                        <button class="link-button" type="button" onclick="openEditContactOverlay('${detail.id}')">
+                            <img src="../assets/icon/edit.svg" alt="" aria-hidden="true" />
+                            Edit
+                        </button>
+                        <button class="link-button" type="button" onclick="confirmAndDeleteContact('${detail.id}')">
+                            <img src="../assets/icon/delete.svg" alt="" aria-hidden="true" />
+                            Delete
+                        </button>
+                    </div>
         </div>
       </div>
-    </div>
 
-    <div class="contact-detail-block-title">Contact Information</div>
-    <div class="contact-info-grid">
-      <div class="contact-info-row">
-        <div class="contact-info-label">Email</div>
-        <div class="contact-info-value">${detail.email}</div>
-      </div>
-      <div class="contact-info-row">
-        <div class="contact-info-label">Phone</div>
-        <div class="contact-info-value is-phone">${detail.phone || "—"}</div>
+            <div class="contact-detail-block-title">Contact Information</div>
+            <div class="contact-info-grid">
+                <div class="contact-info-row">
+                    <div class="contact-info-label">Email</div>
+                    <div class="contact-info-value">${detail.email}</div>
+                </div>
+                <div class="contact-info-row">
+                    <div class="contact-info-label">Phone</div>
+                    <div class="contact-info-value is-phone">${detail.phone || "—"}</div>
+                </div>
       </div>
     </div>
   `;
