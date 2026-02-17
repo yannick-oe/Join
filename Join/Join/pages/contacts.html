@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacts</title>
+
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/pages/contacts.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+
+    <script src="../scripts/storage.js" defer></script>
+    <script src="../scripts/pages/contacts.ui.js" defer></script>
+    <script src="../scripts/pages/contacts.logic.js" defer></script>
+</head>
+
+<body onload="initContacts()">
+    <header>
+        <div>
+            <p class="header-line">Kanban Project Management Tool</p>
+        </div>
+        <div class="header-right">
+            <a href="./help.html">
+                <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
+            </a>
+            <p class="header-user-circle">JJ</p>
+        </div>
+    </header>
+
+    <aside>
+        <div>
+            <img class="logo-icon" src="../assets/icon/Join logo vector.svg" alt="Logo" />
+        </div>
+
+        <section class="sidebar-top">
+            <table class="sidebar-top">
+                <tr class="menu">
+                    <td>
+                        <a href="./summary.html">
+                            <img src="../assets/icon/Icons.svg" class="summary-icon icon" alt="Summary-Icon" />
+                            <span>Summary</span>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="menu">
+                    <td>
+                        <a href="./add-task.html">
+                            <img src="../assets/icon/edit_square.svg" class="task-icon icon" alt="Task-Icon" />
+                            <span>Add Task</span>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="menu">
+                    <td>
+                        <a href="./board.html">
+                            <img src="../assets/icon/vectors.svg" class="board-icon icon" alt="Board-Icon" />
+                            <span>Board</span>
+                        </a>
+                    </td>
+                </tr>
+                <tr class="menu">
+                    <td>
+                        <a href="./contacts.html" class="is-active">
+                            <img src="../assets/icon/perm_contact_calendar.svg" class="contacts-icon icon"
+                                alt="Contacts-Icon" />
+                            <span>Contacts</span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="sidebar-bottom">
+            <table>
+                <tr class="menu-bottom padding-bottom">
+                    <td><a href="./privacy-policy.html"><span>Privacy Policy</span></a></td>
+                </tr>
+                <tr class="menu-bottom">
+                    <td><a href="./legal-notice.html"><span>Legal Notice</span></a></td>
+                </tr>
+            </table>
+        </section>
+    </aside>
+
+    <main class="contacts-main">
+        <section class="contacts-shell content-limit">
+            <div class="contacts-left">
+                <div class="contacts-left-top">
+                    <button class="button-primary contacts-add-button" type="button"
+                        onclick="openAddContactOverlay()">Add new
+                        contact</button>
+                </div>
+
+                <div class="contacts-list" id="contactsList"></div>
+            </div>
+
+            <div class="contacts-right">
+                <div class="contacts-head">
+                    <h1 class="contacts-title">Contacts</h1>
+                    <div class="contacts-subtitle">Better with a team</div>
+                </div>
+
+                <div class="contact-detail" id="contactDetail"></div>
+            </div>
+        </section>
+
+        <div id="contactOverlay" class="overlay hidden" onclick="closeContactOverlay()">
+            <div class="overlay-panel" onclick="event.stopPropagation()">
+                <div class="overlay-left">
+                    <img class="overlay-logo" src="../assets/icon/Join logo vector.svg" alt="Join" />
+                    <h2 class="overlay-left-title" id="overlayTitle">Add contact</h2>
+                    <p id="overlayLeftSub" class="overlay-left-subtitle">Tasks are better with a team!</p>
+                    <div class="overlay-left-line"></div>
+                </div>
+
+                <button class="overlay-close-button" type="button" onclick="closeContactOverlay()">×</button>
+
+                <div class="overlay-right">
+                    <div class="overlay-content">
+                        <div class="overlay-avatar" id="overlayAvatar">A</div>
+
+                        <form class="overlay-form" onsubmit="return false">
+                            <div class="field">
+                                <div class="field-wrapper">
+                                    <input id="contactNameInput" type="text" placeholder="Name" />
+                                    <img class="field-icon" src="../assets/icon/person.svg" alt="" />
+                                </div>
+                                <div class="field-error-message" id="contactNameError"></div>
+                            </div>
+
+                            <div class="field">
+                                <div class="field-wrapper">
+                                    <input id="contactEmailInput" type="email" placeholder="Email" />
+                                    <img class="field-icon" src="../assets/icon/mail.svg" alt="" />
+                                </div>
+                                <div class="field-error-message" id="contactEmailError"></div>
+                            </div>
+
+                            <div class="field">
+                                <div class="field-wrapper">
+                                    <input id="contactPhoneInput" type="text" placeholder="Phone" />
+                                    <img class="field-icon" src="../assets/icon/call.svg" alt="" />
+                                </div>
+                                <div class="field-error-message" id="contactPhoneError"></div>
+                            </div>
+
+                            <div class="overlay-actions">
+                                <button id="overlayBtnCancel" class="button-ghost" type="button"
+                                    onclick="closeContactOverlay()">Cancel</button>
+                                <button id="overlayBtnCreate" class="button-primary" type="button"
+                                    onclick="submitContact()">Create contact ✓</button>
+                                <button id="overlayBtnDelete" class="button-ghost hidden" type="button"
+                                    onclick="confirmAndDeleteContact()">Delete</button>
+                                <button id="overlayBtnSave" class="button-primary hidden" type="button"
+                                    onclick="submitContact()">Save ✓</button>
+                            </div>
+
+                            <div class="form-note" id="contactFormNote"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="successToast" class="success-toast hidden">
+            <p class="success-toast-text">Contact successfully created</p>
+        </div>
+        <div id="editToast" class="success-toast hidden">
+            <p class="success-toast-text">Contact successfully updated</p>
+        </div>
+        <div id="deleteToast" class="success-toast hidden">
+            <p class="success-toast-text">Contact successfully deleted</p>
+        </div>
+    </main>
+</body>
+
+</html>

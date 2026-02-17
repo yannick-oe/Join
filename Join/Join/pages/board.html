@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Board</title>
+
+	<link rel="stylesheet" href="../css/fonts.css" />
+	<link rel="stylesheet" href="../css/global.css" />
+	<link rel="stylesheet" href="../css/layout.css" />
+	<link rel="stylesheet" href="../css/components.css" />
+	<link rel="stylesheet" href="../css/pages/board.css" />
+	<link rel="stylesheet" href="../css/responsive.css" />
+</head>
+
+<body>
+	<header>
+		<div>
+			<p class="header-line">Kanban Project Management Tool</p>
+		</div>
+		<div class="header-right">
+			<a href="./help.html">
+				<img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
+			</a>
+			<p class="header-user-circle">JJ</p>
+		</div>
+	</header>
+
+	<aside>
+		<div>
+			<img class="logo-icon" src="../assets/icon/Join logo vector.svg" alt="Logo" />
+		</div>
+
+		<section class="sidebar-top">
+			<table class="sidebar-top">
+				<tr class="menu">
+					<td>
+						<a href="./summary.html">
+							<img src="../assets/icon/Icons.svg" class="summary-icon icon" alt="Summary-Icon" />
+							<span>Summary</span>
+						</a>
+					</td>
+				</tr>
+				<tr class="menu">
+					<td>
+						<a href="./add-task.html">
+							<img src="../assets/icon/edit_square.svg" class="task-icon icon" alt="Task-Icon" />
+							<span>Add Task</span>
+						</a>
+					</td>
+				</tr>
+				<tr class="menu">
+					<td>
+						<a href="./board.html" class="is-active">
+							<img src="../assets/icon/vectors.svg" class="board-icon icon" alt="Board-Icon" />
+							<span>Board</span>
+						</a>
+					</td>
+				</tr>
+				<tr class="menu">
+					<td>
+						<a href="./contacts.html">
+							<img src="../assets/icon/perm_contact_calendar.svg" class="contacts-icon icon"
+								alt="Contacts-Icon" />
+							<span>Contacts</span>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</section>
+
+		<section class="sidebar-bottom">
+			<table>
+				<tr class="menu-bottom padding-bottom">
+					<td><a href="./privacy-policy.html"><span>Privacy Policy</span></a></td>
+				</tr>
+				<tr class="menu-bottom">
+					<td><a href="./legal-notice.html"><span>Legal Notice</span></a></td>
+				</tr>
+			</table>
+		</section>
+	</aside>
+
+	<main class="board-main">
+		<section class="board-content content-limit">
+			<div class="board-toolbar">
+				<h1 class="board-title">Board</h1>
+				<div class="board-actions">
+					<label class="board-search" for="boardSearchInput">
+						<input id="boardSearchInput" type="text" placeholder="Find Task" />
+						<span class="board-search-icon">⌕</span>
+					</label>
+					<button class="button-primary board-add-task" type="button">Add task <span>＋</span></button>
+				</div>
+			</div>
+
+			<section class="board-columns">
+				<article class="board-column">
+					<div class="board-column-header">
+						<h2>To do</h2>
+						<button type="button" class="board-add-column-card" aria-label="Add task to to-do">+</button>
+					</div>
+					<div class="board-empty-state">No task to do</div>
+				</article>
+
+				<article class="board-column">
+					<div class="board-column-header">
+						<h2>In progress</h2>
+						<button type="button" class="board-add-column-card" aria-label="Add task to in-progress">+</button>
+					</div>
+					<div class="board-empty-state">No task to do</div>
+				</article>
+
+				<article class="board-column">
+					<div class="board-column-header">
+						<h2>Await feedback</h2>
+						<button type="button" class="board-add-column-card" aria-label="Add task to await feedback">+</button>
+					</div>
+					<div class="board-empty-state">No task to do</div>
+				</article>
+
+				<article class="board-column">
+					<div class="board-column-header">
+						<h2>Done</h2>
+						<button type="button" class="board-add-column-card" aria-label="Add task to done">+</button>
+					</div>
+					<div class="board-empty-state">No task to do</div>
+				</article>
+			</section>
+		</section>
+	</main>
+</body>
+
+</html>

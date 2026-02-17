@@ -1,0 +1,97 @@
+body {
+    overflow: hidden;
+}
+
+.help-main {
+    padding-left: 230px;
+    height: 100vh;
+    background: #f6f7f8;
+    overflow: auto;
+}
+
+.help-content {
+    padding: 56px 64px 80px;
+}
+
+.help-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 250px;
+}
+
+.help-title {
+    margin: 0 0 18px;
+    font-size: 61px;
+    line-height: 1.05;
+}
+
+.help-back-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: #29abe2;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+}
+
+.help-back-button:hover {
+    transform: translateX(-2px);
+}
+
+.help-content p {
+    margin: 0 0 20px;
+    max-width: 920px;
+    color: #2a3647;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.help-content h2 {
+    margin: 10px 0 18px;
+    font-size: 27px;
+    line-height: 1.1;
+}
+
+.help-content h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    line-height: 1.15;
+}
+
+.help-content a {
+    color: #29abe2;
+    text-decoration: none;
+}
+
+.help-content a:hover {
+    text-decoration: underline;
+}
+
+.help-steps {
+    margin: 0;
+    padding-left: 40px;
+    max-width: 940px;
+}
+
+.help-steps li {
+    margin-bottom: 18px;
+    color: #000;
+}
+
+.help-steps li::marker {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.help-steps p {
+    margin: 0;
+}

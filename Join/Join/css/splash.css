@@ -1,0 +1,12 @@
+
+.splash_logo{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 274px; 
+  transition: left 700ms ease, top 700ms ease, width 700ms ease, transform 700ms ease, opacity 250ms ease;
+  z-index: 10;
+}
+
+
