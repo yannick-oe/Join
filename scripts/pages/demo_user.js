@@ -43,15 +43,15 @@ function clearLoginFields(emailInput, passInput){
 function fillDemoFields(emailInput, passInput){
   if(!emailInput || !passInput) return false;
 
-
   emailInput.setAttribute("name", "demo_email");
   passInput.setAttribute("name", "demo_password");
 
-  emailInput.value = DEMO_EMAIL;
-  passInput.value  = DEMO_PASS;
+  emailInput.value = "Guest";
+  passInput.value  = "******";
 
   return true;
 }
+
 
 
 /**
@@ -109,8 +109,11 @@ function redirectToSummary(){
 function demoLogin(e){
   if(e) e.preventDefault();
 
-  var el = getLoginInputs();
-  if(!fillDemoFields(el.email, el.pass)) return false;
+var el = getLoginInputs();
+if(!fillDemoFields(el.email, el.pass)) return false;
+
+if(typeof realPassword !== "undefined") realPassword = DEMO_PASS;
+
 
   saveDemoSession();
   showSuccess(el.msg, el.group);
