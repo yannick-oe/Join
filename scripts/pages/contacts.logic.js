@@ -54,18 +54,34 @@ function selectContact(contactId) {
  */
 async function submitContact() {
     resetFormErrors();
-
     const contactData = readForm();
     const validation = validateContact(contactData);
     if (validation.hasError) return showFormErrors(validation);
-    const isNewContact = !contactsState.editContactId;
-    if (contactsState.editContactId) updateContactInState(contactsState.editContactId, contactData);
-    else addContactToState(contactData);
+    const isNewContact = saveContactInState(contactData);
     await saveContacts(contactsState.contacts);
+    finalizeContactSubmit(isNewContact);
+}
+
+/**
+ * Saves contact into state and returns whether it is new.
+ * @param {{name:string,email:string,phone:string}} contactData
+ */
+function saveContactInState(contactData) {
+    const isNewContact = !contactsState.editContactId;
+    if (isNewContact) addContactToState(contactData);
+    else updateContactInState(contactsState.editContactId, contactData);
+    return isNewContact;
+}
+
+/**
+ * Finalizes submit ui updates and toast.
+ * @param {boolean} isNewContact
+ */
+function finalizeContactSubmit(isNewContact) {
     closeContactOverlay();
     renderContactsPage();
-    if (isNewContact) showSuccessToast();
-    else showEditToast();
+    if (isNewContact) return showSuccessToast();
+    showEditToast();
 }
 
 /**
@@ -86,17 +102,29 @@ async function deleteActiveContact() {
     const contactId = contactsState.editContactId || contactsState.activeContactId;
     if (!contactId) return;
     contactsState.contacts = contactsState.contacts.filter((contact) => contact.id !== contactId);
-    if (contactsState.editContactId) {
-        contactsState.activeContactId = null;
-        contactsState.editContactId = null;
-    } else if (contactsState.activeContactId === contactId) {
-        contactsState.activeContactId = null;
-    }
+    updateSelectionAfterDelete(contactId);
     tryRemoveContactFromTasks(contactId);
     await saveContacts(contactsState.contacts);
     closeContactOverlay();
     renderContactsPage();
     showDeleteToast();
+}
+
+/**
+ * Updates active/edit selection after contact deletion.
+ * @param {string} contactId
+ */
+function updateSelectionAfterDelete(contactId) {
+    if (contactsState.editContactId) return clearEditSelection();
+    if (contactsState.activeContactId === contactId) contactsState.activeContactId = null;
+}
+
+/**
+ * Clears edit mode selection values.
+ */
+function clearEditSelection() {
+    contactsState.activeContactId = null;
+    contactsState.editContactId = null;
 }
 
 /**
@@ -110,7 +138,7 @@ function tryRemoveContactFromTasks(contactId) {
     try {
         globalRemove(contactId);
     } catch (error) {
-        console.error("Failed to remove contact from tasks:", error);
+        return;
     }
 }
 // #endregion

@@ -1,0 +1,145 @@
+.board-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.25);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 300;
+	padding: 24px;
+	box-sizing: border-box;
+}
+
+.board-task-detail-panel {
+	width: 100%;
+	max-width: 520px;
+	max-height: 90vh;
+	overflow: auto;
+	border-radius: 24px;
+	background: #ffffff;
+	padding: 28px;
+	box-sizing: border-box;
+}
+
+.board-task-detail-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 12px;
+	margin-bottom: 14px;
+}
+
+.board-overlay-close {
+	border: none;
+	background: transparent;
+	font-size: 30px;
+	line-height: 1;
+	color: #2a3647;
+	cursor: pointer;
+}
+
+.board-task-detail-title {
+	margin: 0 0 16px;
+	font-size: 44px;
+	line-height: 1.1;
+	color: #000000;
+}
+
+.board-task-detail-description {
+	margin: 0 0 20px;
+	font-size: 20px;
+	color: #2a3647;
+}
+
+.board-task-detail-row {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 16px;
+	font-size: 20px;
+	color: #2a3647;
+}
+
+.board-task-detail-row span {
+	min-width: 100px;
+}
+
+.board-task-detail-row p {
+	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.board-task-detail-row img {
+	width: 18px;
+	height: 18px;
+	object-fit: contain;
+}
+
+.board-task-detail-section h4 {
+	margin: 24px 0 12px;
+	font-size: 20px;
+	font-weight: 400;
+	color: #2a3647;
+}
+
+.board-task-detail-assignees,
+.board-task-detail-subtasks {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.board-task-detail-person {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.board-task-detail-person p {
+	margin: 0;
+	font-size: 19px;
+	color: #2a3647;
+}
+
+.board-task-detail-subtask-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 18px;
+	color: #2a3647;
+	cursor: pointer;
+}
+
+.board-task-detail-actions {
+	margin-top: 24px;
+	padding-top: 16px;
+	border-top: 1px solid #d1d1d1;
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+.board-add-task-panel {
+	width: 100%;
+	max-width: 1120px;
+	max-height: 92vh;
+	overflow: auto;
+	border-radius: 30px;
+	background: #f6f7f8;
+	padding: 34px 48px 26px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.board-add-task-top-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 12px;
+}
+
+.board-add-task-panel .add-task-title {
+	margin-bottom: 24px;
+}

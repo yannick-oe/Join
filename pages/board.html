@@ -10,11 +10,23 @@
 	<link rel="stylesheet" href="../css/global.css" />
 	<link rel="stylesheet" href="../css/layout.css" />
 	<link rel="stylesheet" href="../css/components.css" />
+	<link rel="stylesheet" href="../css/pages/add-task.css" />
 	<link rel="stylesheet" href="../css/pages/board.css" />
+	<link rel="stylesheet" href="../css/pages/board-overlay.css" />
 	<link rel="stylesheet" href="../css/responsive.css" />
+
+	<script src="../scripts/storage.js" defer></script>
+	<script src="../scripts/pages/add-task.ui.js" defer></script>
+	<script src="../scripts/pages/add-task.logic.js" defer></script>
+	<script src="../scripts/pages/board.state.js" defer></script>
+	<script src="../scripts/pages/board.demo.js" defer></script>
+	<script src="../scripts/pages/board.data.js" defer></script>
+	<script src="../scripts/pages/board.templates.js" defer></script>
+	<script src="../scripts/pages/board.render.js" defer></script>
+	<script src="../scripts/pages/board.overlay.js" defer></script>
 </head>
 
-<body>
+<body onload="initBoardPage()">
 	<header>
 		<div>
 			<p class="header-line">Kanban Project Management Tool</p>
@@ -88,10 +100,10 @@
 				<h1 class="board-title">Board</h1>
 				<div class="board-actions">
 					<label class="board-search" for="boardSearchInput">
-						<input id="boardSearchInput" type="text" placeholder="Find Task" />
+						<input id="boardSearchInput" type="text" placeholder="Find Task" oninput="handleBoardSearchInput()" />
 						<span class="board-search-icon">⌕</span>
 					</label>
-					<button class="button-primary board-add-task" type="button">Add task <span>＋</span></button>
+					<button id="boardAddTaskButton" class="button-primary board-add-task" type="button" onclick="openBoardAddTaskOverlay('todo')">Add task <span>＋</span></button>
 				</div>
 			</div>
 
@@ -99,37 +111,49 @@
 				<article class="board-column">
 					<div class="board-column-header">
 						<h2>To do</h2>
-						<button type="button" class="board-add-column-card" aria-label="Add task to to-do">+</button>
+						<button type="button" class="board-add-column-card" aria-label="Add task to to-do" onclick="openBoardAddTaskOverlay('todo')">+</button>
 					</div>
-					<div class="board-empty-state">No task to do</div>
+					<div id="boardColumnTodo" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'todo')" ondragover="allowTaskDrop(event)"></div>
 				</article>
 
 				<article class="board-column">
 					<div class="board-column-header">
 						<h2>In progress</h2>
-						<button type="button" class="board-add-column-card" aria-label="Add task to in-progress">+</button>
+						<button type="button" class="board-add-column-card" aria-label="Add task to in-progress" onclick="openBoardAddTaskOverlay('in-progress')">+</button>
 					</div>
-					<div class="board-empty-state">No task to do</div>
+					<div id="boardColumnInProgress" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'in-progress')" ondragover="allowTaskDrop(event)"></div>
 				</article>
 
 				<article class="board-column">
 					<div class="board-column-header">
 						<h2>Await feedback</h2>
-						<button type="button" class="board-add-column-card" aria-label="Add task to await feedback">+</button>
+						<button type="button" class="board-add-column-card" aria-label="Add task to await feedback" onclick="openBoardAddTaskOverlay('await-feedback')">+</button>
 					</div>
-					<div class="board-empty-state">No task to do</div>
+					<div id="boardColumnAwaitFeedback" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'await-feedback')" ondragover="allowTaskDrop(event)"></div>
 				</article>
 
 				<article class="board-column">
 					<div class="board-column-header">
 						<h2>Done</h2>
-						<button type="button" class="board-add-column-card" aria-label="Add task to done">+</button>
+						<button type="button" class="board-add-column-card" aria-label="Add task to done" onclick="openBoardAddTaskOverlay('done')">+</button>
 					</div>
-					<div class="board-empty-state">No task to do</div>
+					<div id="boardColumnDone" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'done')" ondragover="allowTaskDrop(event)"></div>
 				</article>
 			</section>
 		</section>
 	</main>
+
+	<div id="boardTaskDetailOverlay" class="board-overlay hidden" onclick="closeBoardTaskDetailOverlayOnBackdrop(event)">
+		<div class="board-task-detail-panel" id="boardTaskDetailPanel"></div>
+	</div>
+
+	<div id="boardAddTaskOverlay" class="board-overlay hidden" onclick="closeBoardAddTaskOverlayOnBackdrop(event)">
+		<div class="board-add-task-panel" id="boardAddTaskPanel"></div>
+	</div>
+
+	<div id="boardTaskToast" class="success-toast hidden">
+		<p class="success-toast-text">Task added to board</p>
+	</div>
 </body>
 
 </html>

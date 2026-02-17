@@ -222,19 +222,34 @@ function openAddContactOverlay() {
 function openEditContactOverlay(contactId) {
     const contact = findContactById(contactId);
     if (!contact) return;
+    prepareEditContactOverlay(contactId, contact);
+    applyEditContactOverlayButtons();
+    setVisible(contactsDom.contactOverlay, true);
+}
 
+/**
+ * Prepares contact overlay for edit mode.
+ * @param {string} contactId
+ * @param {{name:string,color?:string,email?:string,phone?:string}} contact
+ */
+function prepareEditContactOverlay(contactId, contact) {
     contactsState.editContactId = contactId;
     resetFormErrors();
     setOverlayTitle("Edit contact");
     fillForm(contact);
     setOverlayAvatar(getInitials(contact.name), contact.color || pickColorForName(contact.name));
+}
+
+/**
+ * Applies edit-mode button visibility in contact overlay.
+ */
+function applyEditContactOverlayButtons() {
     setVisible(contactsDom.overlayLeftSub, false);
     setVisible(contactsDom.overlayBtnCancel, false);
     setVisible(contactsDom.overlayBtnCreate, false);
     setVisible(contactsDom.overlayBtnDelete, true);
     setVisible(contactsDom.overlayBtnSave, true);
     setText(contactsDom.overlayBtnSave, "Save ✓");
-    setVisible(contactsDom.contactOverlay, true);
 }
 
 /**
