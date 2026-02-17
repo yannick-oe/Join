@@ -1,10 +1,12 @@
 window.onload = () => {
   moveLogo();
 };
+
 /**
- * Move splash logo to header position and redirects to login page.
+ * Move splash logo to header position.
  * @returns {void} 
  */
+
 function moveLogo() {
   const splash = document.getElementById("splashLogo");
   const target = document.getElementById("headerLogo");
@@ -19,9 +21,13 @@ function moveLogo() {
     splash.style.transform = "translate(-50%, -50%)";
   });
 
-  setTimeout(goToLogin, 500);
+  setTimeout(goToLogin, 600);
 }
 
+/**
+ * redirects to login page
+ * @returns
+ */
 function goToLogin() {
   window.location.href = "/index.html";
 }

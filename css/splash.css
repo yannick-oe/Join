@@ -5,8 +5,6 @@
   top: 50%;
   transform: translate(-50%, -50%);
   width: 274px; 
-  transition: left 700ms ease, top 700ms ease, width 700ms ease, transform 700ms ease, opacity 250ms ease;
+  transition: left 600ms ease, top 600ms ease, width 600ms ease, transform 600ms ease, opacity 200ms ease;
   z-index: 10;
 }
-
-
