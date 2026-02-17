@@ -10,7 +10,8 @@ body {
 }
 
 .help-content {
-    padding: 56px 64px 80px;
+    padding-top: 100px;
+    padding-left: 150px;
 }
 
 .help-top-row {
@@ -18,6 +19,8 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-right: 250px;
+    max-width: 860px;
+    padding-bottom: 25px;
 }
 
 .help-title {
@@ -62,13 +65,13 @@ body {
 }
 
 .help-content h3 {
-    margin: 0 0 8px;
+    margin-block-end: 0;
     font-size: 20px;
     line-height: 1.15;
 }
 
 .help-content a {
-    color: #29abe2;
+    color: rgb(0, 128, 255);
     text-decoration: none;
 }
 
@@ -80,6 +83,9 @@ body {
     margin: 0;
     padding-left: 40px;
     max-width: 940px;
+    margin-block-start: 0;
+        margin-block-end: 0;
+    padding-inline-start: 30px;
 }
 
 .help-steps li {
