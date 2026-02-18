@@ -13,19 +13,31 @@
     <link rel="stylesheet" href="../css/pages/help.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
 
+
     <script src="../scripts/pages/help.js" defer></script>
+    <script src="../scripts/pages/header.js"></script>
 </head>
 
-<body>
-    <header>
+<body onclick="closeMenu()">
+       <header>
         <div>
             <p class="header-line">Kanban Project Management Tool</p>
         </div>
         <div class="header-right">
-            <p class="header-user-circle">JJ</p>
+            <a href="./help.html">
+                <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
+            </a>
+            <div class="dropdown">
+                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()">JJ</button>
+                    <div id="myDropdown" class="dropdown-content d_none">
+                    <a href="./legal-notice.html"><p class="text-align-center">Legal Notice</p></a>
+                    <a href="./privacy-policy.html"><p class="text-align-center">Privacy Policy</p></a>
+                    <a href="/index.html"><p class="text-align-center">Log out</p></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
-
     <aside>
         <div>
             <img class="logo-icon" src="../assets/icon/Join logo vector.svg" alt="Logo" />
