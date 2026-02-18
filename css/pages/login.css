@@ -224,7 +224,11 @@ input {
    margin-top: -20px;
 margin-bottom: 30px;
 }
+
 #loginMessage{
+  margin-bottom:16px;
+  padding:10px 14px;
+  border-radius:8px;
   font-size:14px;
   display:none;
 }
@@ -237,5 +241,5 @@ margin-bottom: 30px;
 }
 
 .btn_group.success_active{
-  margin-top: 0;
+  margin-top: -25px;
 }
