@@ -161,3 +161,26 @@ h2{
     background-color: #091931;
     color: #ffffff;
 }
+
+.box-size:hover, 
+.sumary-third-line:hover, 
+.sumary-second:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: #091931;
+    color: white;
+    cursor: pointer;
+}
+
+.vector:hover img {
+     content: url("/assets/icon/Vector_grey.svg");
+}
+
+.edit:hover img {
+    content: url("/assets/icon/edit_grey.svg");
+}
+
+.vector:hover .bc-b,
+.edit:hover .bc-b {
+    background-color: #FFFFFF;
+}
