@@ -1,83 +1,10 @@
-@media (max-width: 970px) {
-    .sumary-main-layout {
-        flex-direction: column;
-    }
-
-    .summary-box {
-        padding-left: 0;
+@media (max-width: 830px) {
+    header {
+        padding-left: 150px;
     }
 }
 
-@media (max-width: 830px) {
-    .header-line {
-        display: none;
-    }
-
-    .button-icon {
-    width: 40px;
-    height: 50px;
-    background-image: url('../assets/icon/join_dark.svg'); /* dein Icon */
-    background-size: cover
-    }
-
-    .responsive-header-line {
-        padding-left: 25px;
-    }
-
-    .summary-first-line {
-        flex-direction: column;
-        align-items: start;
-        gap: 0;
-    }
-
-    header {
-        padding-left: 0;
-    }
-
-    .summary-main {
-        padding-left: 0;
-    }
-
-    .greeting {
-        display: none;
-    }
-
-    h1 {
-        padding-left: 50px;
-        margin-block-start: 0.em;
-        margin-block-end: 0em;
-    }
-
-    .summary-first {
-        padding-left: 50px;
-        margin-block-start: 0em;
-        margin-block-end: 0em;
-        font-size: 20px;
-    }
-
-    .summary-box {
-        padding-left: 40px;
-    }
-
-    .sumary-main-layout {
-        align-items: start;
-    }
-
-    .seperator {
-        display: none;
-    }
-
-    .seperator-two {
-        background-color: #29ABE2;
-        height: 2px;
-        width: 90px;
-    }
-
-    .seperator-repsonsive {
-        padding-left: 50px;
-        padding-top: 15px;
-    }
-
+@media (max-width: 750px) {
     aside {
         display: none;
     }
@@ -94,7 +21,7 @@
     }
 
     .responsive-footer span {
-            color: #cdcdcd;
+        color: #cdcdcd;
     }
 
     .responsive-footer a {
@@ -102,15 +29,63 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 5px;
     }
 
+    .responsive-task-icon {
+        height: 30px;
+        width: 30px;
+    }
+
+    .responsive-menu {
+        font-family: 'Open Sans'!important;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    header {
+        padding-left: 0;
+    }
+    
+    .header-help-icon {
+        display: none;
+    }
+
+    .show-responsive {
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 550px) {
     .responsive-task-icon {
         height: 25px;
         width: 25px;
     }
 
-    .responsive-menu {
-        font-family:;
+      .header-line {
+        display: none;
     }
 
+    .responsive-header-line {
+        padding-left: 25px;
+    }
+
+
+    .responsive-menu {
+        font-size: 16px;
+    }
+
+    .button-icon {
+        width: 40px;
+        height: 50px;
+        background-image: url('../assets/icon/join_dark.svg'); 
+        background-size: cover
+    }
 }
+
