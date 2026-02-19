@@ -75,7 +75,7 @@ function showSuccess(msg, group){
 function redirectToSummary(){
   setTimeout(() => {
     window.location.href = "../pages/summary.html";
-  }, 2500);
+  }, 800);
 }
 
 
