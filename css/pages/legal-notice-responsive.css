@@ -1,0 +1,9 @@
+@media (max-width: 750px) {
+    .legal-main {
+        padding-left: 20px;      
+    }
+
+    .main-privacy {
+        padding-left: 20px;
+    }
+}
