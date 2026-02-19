@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="shortcut icon" href="../assets/icon/Capa 1.svg" type="image/x-icon">
+    <script src="../scripts/storage.js" defer></script>
+    <script src="../scripts/pages/header.js" defer></script>
+    <script src="../scripts/pages/signup.js" defer></script>
 
 </head>
 
-<body>
+<body onload="initSignupPage()">
     <div class="content sign_content">
         <header>
             <div class="header_content">
@@ -35,37 +38,39 @@
 
                 <div class="underline"></div>
 
-                <form class="login_form">
+                <form class="login_form" onsubmit="handleSignUpSubmit(event)">
                     <div class="field">
-                        <input type="text" name="name" placeholder="Name" required>
-                        <img class="input_icon" src="../assets/icon/person.svg" alt="Mail Logo">
+                        <input id="signupName" type="text" name="name" placeholder="Name">
+                        <img class="input_icon" src="../assets/icon/person.svg" alt="Name Logo">
                     </div>
 
                     <div class="field">
-                        <input type="text" name="email" placeholder="EMail" required>
-                        <img class="input_icon" src="../assets/icon/mail.svg" alt="Mail Logo">
+                        <input id="signupEmail" type="email" name="email" placeholder="Email">
+                        <img class="input_icon" src="../assets/icon/mail.svg" alt="Email Logo">
                     </div>
 
                     <div class="field">
-                        <input type="text" name="passwort" placeholder="Password" required>
+                        <input id="signupPassword" type="password" name="password" placeholder="Password">
                         <img class="input_icon" src="../assets/icon/lock.svg" alt="Password Logo">
                     </div>
 
                     <div class="field">
-                        <input type="text" name="passwort" placeholder="Password" required>
+                        <input id="signupPasswordRepeat" type="password" name="passwordRepeat" placeholder="Confirm Password">
                         <img class="input_icon" src="../assets/icon/lock.svg" alt="Password Logo">
                     </div>
 
                     <div class="terms">
-                        <input class="checkbox" type="checkbox" required>
+                        <input id="signupPrivacy" class="checkbox" type="checkbox">
                         <div class="police">
                             <p>I accept the</p>
                             <a href="../pages/privacy-policy-external.html">Privacy Policy</a>
                         </div>
                     </div>
 
+                    <div id="signupMessage" class="form_message"></div>
+
                     <div class="Sign_up_btn">
-                        <button class="btn Sign" onclick="SignUp">Sign up</button>
+                        <button class="btn Sign" type="submit">Sign up</button>
                     </div>
 
                 </form>
@@ -74,10 +79,14 @@
     </main>
     <footer>
         <div class="footer_content top">
-            <a class="left" href="#">Privacy Policy</a>
-            <a class="right" href="#">Legal notice</a>
+            <a class="left" href="../pages/privacy-policy-external.html">Privacy Policy</a>
+            <a class="right" href="../pages/legal-notice-external.html">Legal notice</a>
         </div>
     </footer>
+
+    <div id="signupToast" class="success-toast hidden">
+        <p class="success-toast-text">You signed up successfully</p>
+    </div>
 
 </body>
 

@@ -94,7 +94,6 @@ h1 {
 .btn_group {
     display: flex;
     flex-direction: row;
-    margin-top: 48px;
     display: flex;
     justify-content: center;
     gap: 35px;
@@ -123,7 +122,7 @@ h1 {
     width: 422px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
 .field {
@@ -242,23 +241,64 @@ input {
     margin-bottom: 30px;
 }
 
-#loginMessage {
-    margin-bottom: 16px;
-    padding: 10px 14px;
+.form_message {
+    padding: 6px 12px;
     border-radius: 8px;
     font-size: 14px;
-    display: none;
+    min-height: 32px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    visibility: hidden;
 }
 
-#loginMessage.success {
+.form_message.success {
     background: #dcfce7;
     color: #166534;
     border: 1px solid #86efac;
-    display: block;
+    visibility: visible;
+}
+
+.form_message.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+    visibility: visible;
 }
 
 .btn_group.success_active {
     margin-top: -25px;
+}
+
+.success-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2a3647;
+    color: #ffffff;
+    padding: 20px 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: slide-up 0.3s ease-out;
+}
+
+.success-toast-text {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 @media (min-width: 940px) {

@@ -12,6 +12,7 @@ const contactsState = {
  * Loads contacts, ensures demo data, persists, and renders the page.
  */
 async function initContacts() {
+    if (typeof initProtectedPageAuth === "function") initProtectedPageAuth();
     contactsState.contacts = await loadContacts();
     ensureDemoContacts();
     await saveContacts(contactsState.contacts);

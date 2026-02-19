@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../css/pages/legal.css">
     <script src="../scripts/pages/header.js"></script>
 </head>
-<body onclick="closeMenu()">
+<body onload="initProtectedPageAuth()" onclick="closeMenu()">
        <header>
         <div>
             <p class="header-line">Kanban Project Management Tool</p>
@@ -24,11 +24,11 @@
                 <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
             </a>
             <div class="dropdown">
-                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()">G</button>
+                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()"></button>
                     <div id="myDropdown" class="dropdown-content d_none">
                     <a href="./legal-notice.html"><p class="text-align-center">Legal Notice</p></a>
                     <a href="./privacy-policy.html"><p class="text-align-center">Privacy Policy</p></a>
-                    <a href="/index.html"><p class="text-align-center">Log out</p></a>
+                    <a href="/index.html" onclick="return logOutUser(event)"><p class="text-align-center">Log out</p></a>
                     </div>
                 </div>
             </div>
