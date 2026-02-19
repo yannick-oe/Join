@@ -95,6 +95,8 @@ header {
 	align-items: center;
 	border: 2px solid black;
 	margin: 0;
+    font-size: 22px;
+    font-weight: 600;
 }
 
 .header-right {
