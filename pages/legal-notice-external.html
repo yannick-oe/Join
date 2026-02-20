@@ -10,30 +10,67 @@
     <link rel="stylesheet" href="../css/pages/legal.css">
     <link rel="stylesheet" href="../css/pages/login.css">
     <link rel="stylesheet" href="../css/pages/external.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/pages/login.css">
+    <link rel="stylesheet" href="../css/responsive.css">
     <link rel="shortcut icon" href="../assets/icon/Capa 1.svg" type="image/x-icon">
     <script src="../scripts/pages/signup.js" defer></script>
 
 </head>
 
-<body onclick="closeMenu()">
+<body onload="initProtectedPageAuth()" onclick="closeMenu()">
       <header>
         <div>
             <p class="header-line">Kanban Project Management Tool</p>
         </div>
-        <div class="header-right">
+        <div class="header-right block">
             <a href="./help.html">
                 <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
             </a>
             <div class="dropdown">
-                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()">JJ</button>
+                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()"></button>
                     <div id="myDropdown" class="dropdown-content d_none">
                     <a href="./legal-notice.html"><p class="text-align-center">Legal Notice</p></a>
                     <a href="./privacy-policy.html"><p class="text-align-center">Privacy Policy</p></a>
-                    <a href="/index.html"><p class="text-align-center">Log out</p></a>
+                    <a href="/index.html" onclick="return logOutUser(event)"><p class="text-align-center">Log out</p></a>
                     </div>
                 </div>
             </div>
         </div>
+    </header>
+
+    <aside>
+        <div>
+            <img class="logo-icon" src="../assets/icon/Join logo vector.svg" alt="Logo" />
+        </div>
+
+        <section class="sidebar-top">
+            <table class="sidebar-top">
+                <tr class="menu">
+                    <td>
+                        <a href="../index.html" class="is-active">
+                            <img src="../assets/icon/login.svg" class="summary-icon icon" alt="Summary-Icon" />
+                            <span>log In</span>
+                        </a>
+                    </td>
+                </tr>
+
+            </table>
+        </section>
+
+        <section class="sidebar-bottom">
+            <table>
+                <tr class="menu-bottom padding-bottom">
+                    <td><a href="./privacy-policy.html"><span>Privacy Policy</span></a></td>
+                </tr>
+                <tr class="menu-bottom">
+                    <td><a href="./legal-notice.html" class="is-active"><span>Legal Notice</span></a></td>
+                </tr>
+            </table>
+        </section>
+    </aside>
+
     </header>
 
     <main class="legal-main">
