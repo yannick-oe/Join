@@ -173,14 +173,6 @@ input {
     background-color: white;
 }
 
-.sign_content {
-    height: 100vh !important;
-}
-
-.top {
-    margin-top: 80px;
-}
-
 .police {
     display: flex;
     justify-content: center;
