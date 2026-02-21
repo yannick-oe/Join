@@ -289,3 +289,7 @@ body {
 .team-member-badge-purple {
 	background: #9327ff;
 }
+
+.responsive-search {
+	display: none;
+}

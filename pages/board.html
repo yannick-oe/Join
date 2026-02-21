@@ -110,12 +110,19 @@
 			<div class="board-toolbar">
 				<h1 class="board-title">Board</h1>
 				<div class="board-actions">
-					<label class="board-search" for="boardSearchInput">
+					<label class="board-search desktop-search" for="boardSearchInput">
 						<input id="boardSearchInput" type="text" placeholder="Find Task" oninput="handleBoardSearchInput()" />
 						<span class="board-search-icon">⌕</span>
 					</label>
 					<button id="boardAddTaskButton" class="button-primary board-add-task" type="button" onclick="openBoardAddTaskOverlay('todo')">Add task <span>＋</span></button>
 				</div>
+			</div>
+
+			<div>
+				<label class="board-search responsive-search" for="boardSearchInput">
+					<input id="boardSearchInput" type="text" placeholder="Find Task" oninput="handleBoardSearchInput()" />
+					<span class="board-search-icon responsive-search">⌕</span>
+				</label>
 			</div>
 
 			<section class="board-columns">
@@ -155,26 +162,28 @@
 	</main>
 
 	 <footer >
-            <section class="responsive-footer">
-                <a href="./summary.html">
-                    <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
-                    <span class="responsive-menu">Summary</span>
-                </a>
-                <a href="./add-task.html">
-                    <img src="../assets/icon/edit_square.svg" class="responsive-task-icon" alt="Task-Icon" />
-                    <span class="responsive-menu">Add Task</span>
-                </a>
-                <a href="./board.html">
-                    <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
-                    <span class="responsive-menu">Board</span>
-                </a>
-                 <a href="./contacts.html">
-                    <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon"
-                        alt="Contacts-Icon" />
-                    <span class="responsive-menu">Contacts</span>
-                </a>
-            </section>
-        </footer>
+        <section class="responsive-footer">
+            <a href="./summary.html">
+                <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
+                <span class="responsive-menu">Summary</span>
+            </a>
+            <a href="./add-task.html">
+                <img src="../assets/icon/edit_square.svg" class="responsive-task-icon" alt="Task-Icon" />
+                <span class="responsive-menu">Add Task</span>
+            </a>
+            <a href="./board.html">
+                <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
+                <span class="responsive-menu">Board</span>
+            </a>
+                <a href="./contacts.html">
+                <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon"
+                    alt="Contacts-Icon" />
+                <span class="responsive-menu">Contacts</span>
+            </a>
+        </section>
+    </footer>
+
+	
 
 	<div id="boardTaskDetailOverlay" class="board-overlay hidden" onclick="closeBoardTaskDetailOverlayOnBackdrop(event)">
 		<div class="board-task-detail-panel" id="boardTaskDetailPanel"></div>
