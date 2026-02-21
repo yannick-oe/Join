@@ -333,8 +333,8 @@ body {
 .task-form-footer {
     margin-top: 72px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .task-required-note {
