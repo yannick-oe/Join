@@ -164,3 +164,7 @@ header {
 .text-align-center {
 	text-align: center;
 }
+
+.responsive-footer {
+	display: none;
+}
