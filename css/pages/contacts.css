@@ -274,6 +274,10 @@ body {
     color: #2a3647;
 }
 
+.responsive-button {
+    display: none;
+}
+
 @keyframes contacts-slide-in-right {
     from {
         opacity: 0;
