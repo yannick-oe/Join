@@ -44,7 +44,6 @@ body, html {
     height: 120px;
     border-radius: 30px;
     background-color: #FFFFFF;
-    display: flex;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 20px;
@@ -146,6 +145,10 @@ h1 {
     height: 50px;
     width: 50px;
     border-radius: 50px;
+}
+
+.show-responsive {
+    display: none;
 }
 
 h2{
