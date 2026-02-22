@@ -124,13 +124,17 @@
         <div id="contactOverlay" class="overlay hidden" onclick="closeContactOverlay()">
             <div class="overlay-panel" onclick="event.stopPropagation()">
                 <div class="overlay-left">
+                    <div class="overlay-close-wrapper">
+                        <button class="responsive-button-overlaycontact" type="button" onclick="closeContactOverlay()">X</button>
+                    </div>
                     <img class="overlay-logo" src="../assets/icon/Join logo vector.svg" alt="Join" />
                     <h2 class="overlay-left-title" id="overlayTitle">Add contact</h2>
                     <p id="overlayLeftSub" class="overlay-left-subtitle">Tasks are better with a team!</p>
                     <div class="overlay-left-line"></div>
                 </div>
 
-                <button class="overlay-close-button" type="button" onclick="closeContactOverlay()">×</button>
+                  <button class="overlay-close-button" type="button" onclick="closeContactOverlay()">×</button>
+
 
                 <div class="overlay-right">
                     <div class="overlay-content">

@@ -274,8 +274,19 @@ body {
     color: #2a3647;
 }
 
-.responsive-button {
+.overlay-right {
     display: none;
+}
+
+.overlay-close-wrapper {
+    display: none;
+}
+
+.responsive-button-overlaycontact {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
 }
 
 @keyframes contacts-slide-in-right {
