@@ -38,14 +38,14 @@
 
                 <div class="underline"></div>
 
-                <form class="login_form" onsubmit="handleSignUpSubmit(event)">
+                <form class="login_form" onsubmit="handleSignUpSubmit(event)" novalidate>
                     <div class="field">
-                        <input id="signupName" type="text" name="name" placeholder="Name">
+                        <input id="signupName" type="text" name="name" placeholder="Name" oninput="handleSignupFormChange()">
                         <img class="input_icon" src="../assets/icon/person.svg" alt="Name Logo">
                     </div>
 
                     <div class="field">
-                        <input id="signupEmail" type="email" name="email" placeholder="Email">
+                        <input id="signupEmail" type="email" name="email" placeholder="Email" oninput="handleSignupFormChange()">
                         <img class="input_icon" src="../assets/icon/mail.svg" alt="Email Logo">
                     </div>
 
@@ -64,7 +64,7 @@
                     </div>
 
                     <div class="terms">
-                        <input id="signupPrivacy" class="checkbox" type="checkbox">
+                        <input id="signupPrivacy" class="checkbox" type="checkbox" onchange="handleSignupFormChange()">
                         <div class="police">
                             <p>I accept the</p>
                             <a href="../pages/privacy-policy-external.html">Privacy Policy</a>
@@ -74,7 +74,7 @@
                     <div id="signupMessage" class="form_message"></div>
 
                     <div class="Sign_up_btn">
-                        <button class="btn Sign" type="submit">Sign up</button>
+                        <button class="btn Sign" type="submit" disabled>Sign up</button>
                     </div>
 
                 </form>

@@ -134,7 +134,7 @@
 	width: 16px;
 	height: 16px;
 	object-fit: contain;
-	transition: filter 140ms ease;
+	transition: filter 120ms ease;
 }
 
 .board-task-detail-actions .link-button + .link-button {

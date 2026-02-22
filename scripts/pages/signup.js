@@ -14,6 +14,7 @@ function initSignupPage() {
     clearSignupForm();
     syncSignupPasswordToggle("signupPassword");
     syncSignupPasswordToggle("signupPasswordRepeat");
+    syncSignupSubmitState();
     setSignupMessage("", "");
 }
 // #endregion
@@ -41,7 +42,7 @@ async function handleSignUpSubmit(event) {
  */
 function finalizeSignupError(message) {
     setSignupMessage(message, "error");
-    setSignupButtonDisabled(false);
+    syncSignupSubmitState();
 }
 
 /**
@@ -184,6 +185,7 @@ function clearSignupForm() {
     setSignupCheckbox("signupPrivacy", false);
     syncSignupPasswordToggle("signupPassword");
     syncSignupPasswordToggle("signupPasswordRepeat");
+    syncSignupSubmitState();
 }
 
 /**
@@ -192,6 +194,27 @@ function clearSignupForm() {
  */
 function handleSignupPasswordInput(fieldId) {
     syncSignupPasswordToggle(fieldId);
+    syncSignupSubmitState();
+}
+
+/**
+ * Handles generic signup field updates.
+ */
+function handleSignupFormChange() {
+    syncSignupSubmitState();
+}
+
+/**
+ * Syncs signup submit button state based on required fields.
+ */
+function syncSignupSubmitState() {
+    const signupData = readSignupForm();
+    const hasName = !!String(signupData.name || "").trim();
+    const hasEmail = !!String(signupData.email || "").trim();
+    const hasPassword = !!String(signupData.password || "").trim();
+    const hasPasswordRepeat = !!String(signupData.passwordRepeat || "").trim();
+    const canSubmit = hasName && hasEmail && hasPassword && hasPasswordRepeat && !!signupData.acceptedPrivacy;
+    setSignupButtonDisabled(!canSubmit);
 }
 
 /**

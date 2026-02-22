@@ -28,7 +28,31 @@ function getTeamMemberItemTemplate(contact, index) {
 	const checked = addTaskState.selectedContactIds.includes(contact.id) ? "checked" : "";
 	const color = contact.color || addTaskState.palette[index % addTaskState.palette.length];
 	const initials = getInitials(contact.name);
-	return `<div class="dropdown-item" onclick="toggleTeamMember('${contact.id}')"><label><span class="team-member-avatar" style="background:${color}">${initials}</span>${contact.name}</label><input type="checkbox" ${checked} onclick="event.stopPropagation()" onchange="toggleTeamMember('${contact.id}')"></div>`;
+	return `
+		<div class="dropdown-item" onclick="toggleTeamMember('${contact.id}')">
+			${getTeamMemberItemLabelTemplate(contact.name, color, initials)}
+			${getTeamMemberItemCheckboxTemplate(contact.id, checked)}
+		</div>
+	`;
+}
+
+/**
+ * Builds team member item label block.
+ * @param {string} name
+ * @param {string} color
+ * @param {string} initials
+ */
+function getTeamMemberItemLabelTemplate(name, color, initials) {
+	return `<label><span class="team-member-avatar" style="background:${color}">${initials}</span>${name}</label>`;
+}
+
+/**
+ * Builds team member item checkbox block.
+ * @param {string} contactId
+ * @param {string} checked
+ */
+function getTeamMemberItemCheckboxTemplate(contactId, checked) {
+	return `<input type="checkbox" ${checked} onclick="event.stopPropagation()" onchange="toggleTeamMember('${contactId}')">`;
 }
 
 /**
@@ -108,7 +132,25 @@ function renderSubtasks() {
  */
 function getSubtaskTemplate(subtask) {
 	if (addTaskState.subtaskEditId === subtask.id) return getEditableSubtaskTemplate(subtask);
-	return `<div class="subtask-row"><div class="subtask-row-left">• <span>${escapeHtml(subtask.text)}</span></div><div class="subtask-row-actions"><button class="subtask-action" type="button" onclick="startSubtaskEdit('${subtask.id}')">✎</button><button class="subtask-action" type="button" onclick="removeSubtask('${subtask.id}')">🗑</button></div></div>`;
+	return `
+		<div class="subtask-row">
+			<div class="subtask-row-left">• <span>${escapeHtml(subtask.text)}</span></div>
+			${getSubtaskRowActionsTemplate(subtask.id)}
+		</div>
+	`;
+}
+
+/**
+ * Builds action buttons for one subtask row.
+ * @param {string} subtaskId
+ */
+function getSubtaskRowActionsTemplate(subtaskId) {
+	return `
+		<div class="subtask-row-actions">
+			<button class="subtask-action" type="button" onclick="startSubtaskEdit('${subtaskId}')">✎</button>
+			<button class="subtask-action" type="button" onclick="removeSubtask('${subtaskId}')">🗑</button>
+		</div>
+	`;
 }
 
 /**
@@ -116,7 +158,25 @@ function getSubtaskTemplate(subtask) {
  * @param {{id:string,text:string}} subtask
  */
 function getEditableSubtaskTemplate(subtask) {
-	return `<div class="subtask-row"><input id="subtaskEditInput" class="subtask-edit-input" value="${escapeHtml(subtask.text)}" onkeydown="handleSubtaskEditKey(event, '${subtask.id}')"><div class="subtask-row-actions"><button class="subtask-action" type="button" onclick="removeSubtask('${subtask.id}')">🗑</button><button class="subtask-action" type="button" onclick="saveSubtaskEdit('${subtask.id}')">✓</button></div></div>`;
+	return `
+		<div class="subtask-row">
+			<input id="subtaskEditInput" class="subtask-edit-input" value="${escapeHtml(subtask.text)}" onkeydown="handleSubtaskEditKey(event, '${subtask.id}')">
+			${getEditableSubtaskActionsTemplate(subtask.id)}
+		</div>
+	`;
+}
+
+/**
+ * Builds editable subtask action buttons.
+ * @param {string} subtaskId
+ */
+function getEditableSubtaskActionsTemplate(subtaskId) {
+	return `
+		<div class="subtask-row-actions">
+			<button class="subtask-action" type="button" onclick="removeSubtask('${subtaskId}')">🗑</button>
+			<button class="subtask-action" type="button" onclick="saveSubtaskEdit('${subtaskId}')">✓</button>
+		</div>
+	`;
 }
 // #endregion
 

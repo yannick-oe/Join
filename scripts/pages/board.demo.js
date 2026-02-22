@@ -54,6 +54,20 @@ const boardDemoTaskDefinitions = [
 			{ id: "s_demo_4", text: "Setup Base Styles", done: true },
 		],
 	},
+	{
+		id: "t_demo_api",
+		title: "API Integration for Contacts",
+		description: "Connect contacts data flow with storage adapter and fallback handling.",
+		dueDate: "2026-10-14",
+		priority: "medium",
+		category: "Technical Task",
+		status: "todo",
+		createdOffset: 5000,
+		teamMemberKeys: ["sofia", "anton"],
+		subtasks: [
+			{ id: "s_demo_5", text: "Map storage response to UI model", done: false },
+		],
+	},
 ];
 
 /**

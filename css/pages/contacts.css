@@ -37,7 +37,7 @@ body {
     justify-content: center;
     gap: 10px;
     cursor: pointer;
-    transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 120ms ease, box-shadow 140ms ease, filter 140ms ease;
+    transition: background 120ms ease, border-color 120ms ease, color 120ms ease, transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
     border: none;
     background: #2a3647;
     color: #ffffff;
@@ -236,7 +236,7 @@ body {
     width: 16px;
     height: 16px;
     object-fit: contain;
-    transition: filter 140ms ease;
+    transition: filter 120ms ease;
 }
 
 .contact-detail-actions .link-button:hover {

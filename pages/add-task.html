@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/layout.css" />
     <link rel="stylesheet" href="../css/components.css" />
     <link rel="stylesheet" href="../css/pages/add-task.css" />
+    <link rel="stylesheet" href="../css/pages/add-task-toast.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
 
     <script src="../scripts/storage.js" defer></script>
@@ -100,7 +101,7 @@
         <section class="add-task-content content-limit">
             <h1 class="add-task-title">Add Task</h1>
 
-            <form class="task-form" onsubmit="submitTaskForm(event)">
+            <form class="task-form" onsubmit="submitTaskForm(event)" novalidate>
                 <div class="task-form-grid">
                     <section class="task-form-left">
                         <label class="task-label" for="taskTitle">Title<span id="taskTitleRequiredStar" class="required-star">*</span></label>

@@ -68,12 +68,12 @@ function runLoginLogoIntro() {
   const splashLogo = document.getElementById("loginSplashLogo");
   const headerLogo = document.getElementById("headerLogo");
   if (!splashScreen || !splashLogo || !headerLogo) return;
-  const introDuration = 650;
+  const introDuration = 120;
   applyLogoTargetPosition(splashLogo, headerLogo);
   splashLogo.classList.add("is-visible");
   requestAnimationFrame(() => splashLogo.classList.add("is-moving"));
   setTimeout(() => hideLoginSplashScreen(splashScreen), Math.round(introDuration / 2));
-  setTimeout(() => hideLoginSplashLogo(splashLogo), introDuration + 70);
+  setTimeout(() => hideLoginSplashLogo(splashLogo), introDuration + 10);
 }
 
 /**
