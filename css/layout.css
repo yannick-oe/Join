@@ -155,14 +155,26 @@ header {
     right: 0px;
     top: 75px;
 	background-color: #2a3647;
+	padding: 8px;
 	z-index: 1000;
 }
 
 .dropdown-content a {
 	color: #CDCDCD;
-	padding: 1px 0px;
+	padding: 10px 14px;
 	text-decoration: none;
 	display: block;
+	border-radius: 10px;
+	transition: background-color 120ms ease, color 120ms ease;
+}
+
+.dropdown-content a:hover {
+	background-color: #2f4058;
+	color: #ffffff;
+}
+
+.dropdown-content a p {
+	margin: 0;
 }
 
 .d_none {
