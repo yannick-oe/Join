@@ -269,6 +269,10 @@ body {
 	object-fit: contain;
 }
 
+.board-card-priority[src*="medium-prio.svg"] {
+	filter: brightness(0) saturate(100%) invert(66%) sepia(96%) saturate(1608%) hue-rotate(1deg) brightness(101%) contrast(104%);
+}
+
 .board-team-member-plus {
 	background: #2a3647;
 }

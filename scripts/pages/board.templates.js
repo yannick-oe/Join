@@ -69,8 +69,14 @@ function getBoardTaskDetailTemplate(viewModel) {
 		<div class="board-task-detail-section"><h4>Assigned To:</h4><div class="board-task-detail-assignees">${viewModel.assigneesHtml}</div></div>
 		<div class="board-task-detail-section"><h4>Subtasks:</h4><div class="board-task-detail-subtasks">${viewModel.subtasksHtml}</div></div>
 		<div class="board-task-detail-actions">
-			<button class="link-button" type="button" onclick="deleteBoardTask('${viewModel.taskId}')">Delete</button>
-			<button class="link-button" type="button" onclick="startBoardTaskEdit('${viewModel.taskId}')">Edit</button>
+			<button class="link-button" type="button" onclick="deleteBoardTask('${viewModel.taskId}')">
+				<img src="../assets/icon/delete.svg" alt="" aria-hidden="true" />
+				Delete
+			</button>
+			<button class="link-button" type="button" onclick="startBoardTaskEdit('${viewModel.taskId}')">
+				<img src="../assets/icon/edit_grey.svg" alt="" aria-hidden="true" />
+				Edit
+			</button>
 		</div>
 	`;
 }
