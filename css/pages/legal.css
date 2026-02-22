@@ -39,13 +39,3 @@ h1 {
 .font-size20 {
     font-size: 20px;
 }
-
-.sidebar-bottom a.is-active {
-    background-color: #091931;
-    color: #ffffff;
-}
-
-.sidebar-bottom a {
-    display: block;
-    padding: 10px 65px;
-}

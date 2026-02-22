@@ -30,21 +30,35 @@ header {
 .sidebar-bottom {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: stretch;
 	padding-top: 100px;
 }
 
+.sidebar-bottom table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
 .sidebar-bottom a {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
 	text-decoration: none;
 	color: #a8a8a8;
 	font-size: 14px;
 	font-family: "Inter", sans-serif;
-	transition: color 0.2s ease, transform 0.2s ease;
+	padding: 8px 0 8px 52px;
+	transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .sidebar-bottom a:hover {
 	color: #29abe2;
-	transform: translateX(3px);
+	background-color: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-bottom a.is-active {
+	background-color: #091931;
+	color: #ffffff;
 }
 
 .sidebar-icon {
@@ -113,7 +127,7 @@ header {
 }
 
 .menu-bottom td {
-	padding-bottom: 10px;
+	padding-bottom: 0;
 }
 
 .header-help-icon {
