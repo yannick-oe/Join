@@ -15,7 +15,49 @@ function initLoginPage() {
 function resetLoginUi() {
   setLoginInputValue("email", "");
   setLoginInputValue("password", "");
+  syncLoginPasswordToggle();
   setLoginMessage("", "");
+}
+
+/**
+ * Handles password input changes on login.
+ */
+function handleLoginPasswordInput() {
+  syncLoginPasswordToggle();
+}
+
+/**
+ * Toggles login password visibility.
+ */
+function toggleLoginPasswordVisibility() {
+  const input = document.getElementById("password");
+  if (!input || !String(input.value || "").trim()) return;
+  input.type = input.type === "password" ? "text" : "password";
+  syncLoginPasswordToggle();
+}
+
+/**
+ * Syncs login password icon and button state.
+ */
+function syncLoginPasswordToggle() {
+  const input = document.getElementById("password");
+  const button = document.getElementById("loginPasswordToggle");
+  const icon = document.getElementById("loginPasswordIcon");
+  if (!input || !button || !icon) return;
+  const hasValue = !!String(input.value || "").trim();
+  button.disabled = !hasValue;
+  icon.src = getLoginPasswordIconPath(input.type, hasValue);
+}
+
+/**
+ * Resolves login password icon path by state.
+ * @param {string} inputType
+ * @param {boolean} hasValue
+ */
+function getLoginPasswordIconPath(inputType, hasValue) {
+  if (!hasValue) return "./assets/icon/lock.svg";
+  if (inputType === "text") return "./assets/icon/eye-open.svg";
+  return "./assets/icon/eye-closed.svg";
 }
 
 /**

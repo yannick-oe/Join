@@ -49,14 +49,18 @@
                         <img class="input_icon" src="../assets/icon/mail.svg" alt="Email Logo">
                     </div>
 
-                    <div class="field">
-                        <input id="signupPassword" type="password" name="password" placeholder="Password">
-                        <img class="input_icon" src="../assets/icon/lock.svg" alt="Password Logo">
+                    <div class="field password-field">
+                        <input id="signupPassword" type="password" name="password" placeholder="Password" oninput="handleSignupPasswordInput('signupPassword')">
+                        <button id="signupPasswordToggle" class="input_icon_button" type="button" onclick="toggleSignupPasswordVisibility('signupPassword')" aria-label="Toggle password visibility">
+                            <img id="signupPasswordIcon" class="input_icon" src="../assets/icon/lock.svg" alt="Password visibility">
+                        </button>
                     </div>
 
-                    <div class="field">
-                        <input id="signupPasswordRepeat" type="password" name="passwordRepeat" placeholder="Confirm Password">
-                        <img class="input_icon" src="../assets/icon/lock.svg" alt="Password Logo">
+                    <div class="field password-field">
+                        <input id="signupPasswordRepeat" type="password" name="passwordRepeat" placeholder="Confirm Password" oninput="handleSignupPasswordInput('signupPasswordRepeat')">
+                        <button id="signupPasswordRepeatToggle" class="input_icon_button" type="button" onclick="toggleSignupPasswordVisibility('signupPasswordRepeat')" aria-label="Toggle password visibility">
+                            <img id="signupPasswordRepeatIcon" class="input_icon" src="../assets/icon/lock.svg" alt="Password visibility">
+                        </button>
                     </div>
 
                     <div class="terms">

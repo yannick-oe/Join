@@ -46,9 +46,11 @@
                         <img class="input_icon" src="./assets/icon/mail.svg" alt="Email Logo">
                     </div>
 
-                    <div class="field">
-                        <input id="password" type="password" name="password" placeholder="Password">
-                        <img class="input_icon" src="./assets/icon/lock.svg" alt="Password Logo">
+                    <div class="field password-field">
+                        <input id="password" type="password" name="password" placeholder="Password" oninput="handleLoginPasswordInput()">
+                        <button id="loginPasswordToggle" class="input_icon_button" type="button" onclick="toggleLoginPasswordVisibility()" aria-label="Toggle password visibility">
+                            <img id="loginPasswordIcon" class="input_icon" src="./assets/icon/lock.svg" alt="Password visibility">
+                        </button>
                     </div>
 
                     <div id="loginMessage" class="form_message"></div>

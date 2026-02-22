@@ -12,6 +12,8 @@ function signUp() {
 function initSignupPage() {
     if (hasActiveSession()) return window.location.href = "/pages/summary.html";
     clearSignupForm();
+    syncSignupPasswordToggle("signupPassword");
+    syncSignupPasswordToggle("signupPasswordRepeat");
     setSignupMessage("", "");
 }
 // #endregion
@@ -180,6 +182,68 @@ function clearSignupForm() {
     setSignupInputValue("signupPassword", "");
     setSignupInputValue("signupPasswordRepeat", "");
     setSignupCheckbox("signupPrivacy", false);
+    syncSignupPasswordToggle("signupPassword");
+    syncSignupPasswordToggle("signupPasswordRepeat");
+}
+
+/**
+ * Handles signup password field input.
+ * @param {string} fieldId
+ */
+function handleSignupPasswordInput(fieldId) {
+    syncSignupPasswordToggle(fieldId);
+}
+
+/**
+ * Toggles visibility for one signup password field.
+ * @param {string} fieldId
+ */
+function toggleSignupPasswordVisibility(fieldId) {
+    const input = document.getElementById(fieldId);
+    if (!input || !String(input.value || "").trim()) return;
+    input.type = input.type === "password" ? "text" : "password";
+    syncSignupPasswordToggle(fieldId);
+}
+
+/**
+ * Syncs one signup password icon and button state.
+ * @param {string} fieldId
+ */
+function syncSignupPasswordToggle(fieldId) {
+    const input = document.getElementById(fieldId);
+    const refs = getSignupPasswordRefs(fieldId);
+    if (!input || !refs.button || !refs.icon) return;
+    const hasValue = !!String(input.value || "").trim();
+    refs.button.disabled = !hasValue;
+    refs.icon.src = getSignupPasswordIconPath(input.type, hasValue);
+}
+
+/**
+ * Returns icon/button ids for one signup password field.
+ * @param {string} fieldId
+ */
+function getSignupPasswordRefs(fieldId) {
+    if (fieldId === "signupPasswordRepeat") {
+        return {
+            button: document.getElementById("signupPasswordRepeatToggle"),
+            icon: document.getElementById("signupPasswordRepeatIcon"),
+        };
+    }
+    return {
+        button: document.getElementById("signupPasswordToggle"),
+        icon: document.getElementById("signupPasswordIcon"),
+    };
+}
+
+/**
+ * Resolves signup password icon path by state.
+ * @param {string} inputType
+ * @param {boolean} hasValue
+ */
+function getSignupPasswordIconPath(inputType, hasValue) {
+    if (!hasValue) return "../assets/icon/lock.svg";
+    if (inputType === "text") return "../assets/icon/eye-open.svg";
+    return "../assets/icon/eye-closed.svg";
 }
 // #endregion
 
