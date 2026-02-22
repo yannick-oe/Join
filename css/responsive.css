@@ -156,7 +156,7 @@
     }
 
     .board-column {
-        height: calc(40vh - 290px);
+        height: calc(52vh - 290px);
          width: 500px;
     }
 }
@@ -209,7 +209,7 @@
 
 @media (max-width: 560px) {
     .board-column {
-        height: calc(41vh - 290px);
+        height: calc(55vh - 290px);
         width: 260px;
     }
 }
@@ -267,7 +267,6 @@
     .contacts-left {
         width: 100%;
     }
-
 }
 
 @media (max-width: 1040px) {
@@ -279,6 +278,7 @@
 
     .overlay {
         padding: 0;
+        background-color: white;
     }
 
     .button-ghost {
@@ -311,7 +311,7 @@
     }
 
     .overlay-left {
-        height: 340px;
+        height: 280px;
         padding: 56px 20px;
     }
 
@@ -349,7 +349,6 @@
 
 }
 
-
 @media (max-width: 750px) {
     .contacts-main {
         padding-left: 0px;
@@ -358,6 +357,16 @@
 
 @media (max-width: 400px) {
     .contacts-list {
-        height: calc(95vh - 200px);
+        height: calc(100vh - 245px);
+
     }
+}
+
+
+/* For all Respsonsive classes */
+
+.responsive-footer a.is-active {
+    padding: 10px 0px;
+    background-color: #091931;
+    border-radius: 8px;
 }
