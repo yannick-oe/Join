@@ -37,7 +37,7 @@ body {
     justify-content: center;
     gap: 10px;
     cursor: pointer;
-    transition: transform 100ms ease, filter 100ms ease;
+    transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 120ms ease, box-shadow 140ms ease, filter 140ms ease;
     border: none;
     background: #2a3647;
     color: #ffffff;
@@ -51,8 +51,12 @@ body {
 }
 
 .contacts-add-button:hover {
+    background: #29abe2;
+    border-color: #29abe2;
+    color: #ffffff;
+    filter: none;
     transform: translateY(-1px);
-    filter: brightness(1.02);
+    box-shadow: 0 4px 10px rgba(41, 171, 226, 0.28);
 }
 
 .contacts-list {

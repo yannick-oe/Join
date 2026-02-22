@@ -87,6 +87,15 @@ body {
 	line-height: 1;
 }
 
+.board-add-task:hover {
+	background: #29abe2;
+	border-color: #29abe2;
+	color: #ffffff;
+	filter: none;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 10px rgba(41, 171, 226, 0.28);
+}
+
 .board-columns {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));

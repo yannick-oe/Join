@@ -356,6 +356,24 @@ body {
     padding: 0 24px;
 }
 
+.task-create-button:hover {
+    background: #29abe2;
+    border-color: #29abe2;
+    color: #ffffff;
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(41, 171, 226, 0.28);
+}
+
+.task-clear-button:hover {
+    background: #ffffff;
+    border-color: #29abe2;
+    color: #29abe2;
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(41, 171, 226, 0.24);
+}
+
 .success-toast {
     position: fixed;
     bottom: 30px;
