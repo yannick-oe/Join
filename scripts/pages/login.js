@@ -4,6 +4,7 @@
  */
 function initLoginPage() {
   resetLoginUi();
+  runLoginLogoIntro();
   if (!hasActiveSession()) return;
   window.location.href = "./pages/summary.html";
 }
@@ -15,6 +16,58 @@ function resetLoginUi() {
   setLoginInputValue("email", "");
   setLoginInputValue("password", "");
   setLoginMessage("", "");
+}
+
+/**
+ * Runs logo intro animation from center to header position.
+ */
+function runLoginLogoIntro() {
+  const splashScreen = document.getElementById("loginSplashScreen");
+  const splashLogo = document.getElementById("loginSplashLogo");
+  const headerLogo = document.getElementById("headerLogo");
+  if (!splashScreen || !splashLogo || !headerLogo) return;
+  const introDuration = 650;
+  applyLogoTargetPosition(splashLogo, headerLogo);
+  splashLogo.classList.add("is-visible");
+  requestAnimationFrame(() => splashLogo.classList.add("is-moving"));
+  setTimeout(() => hideLoginSplashScreen(splashScreen), Math.round(introDuration / 2));
+  setTimeout(() => hideLoginSplashLogo(splashLogo), introDuration + 70);
+}
+
+/**
+ * Hides splash overlay during logo animation.
+ * @param {HTMLElement} splashScreen
+ */
+function hideLoginSplashScreen(splashScreen) {
+  splashScreen.classList.add("is-hidden");
+}
+
+/**
+ * Hides moving splash logo after intro animation.
+ * @param {HTMLElement} splashLogo
+ */
+function hideLoginSplashLogo(splashLogo) {
+  splashLogo.classList.add("is-hidden");
+}
+
+/**
+ * Applies header logo center position to splash CSS vars.
+ * @param {HTMLElement} splashLogo
+ * @param {HTMLElement} headerLogo
+ */
+function applyLogoTargetPosition(splashLogo, headerLogo) {
+  const center = getLogoTargetCenter(headerLogo);
+  splashLogo.style.setProperty("--logo-target-left", `${center.left}px`);
+  splashLogo.style.setProperty("--logo-target-top", `${center.top}px`);
+}
+
+/**
+ * Returns center point coordinates for one logo element.
+ * @param {HTMLElement} element
+ */
+function getLogoTargetCenter(element) {
+  const rect = element.getBoundingClientRect();
+  return { left: rect.left + rect.width / 2, top: rect.top + rect.height / 2 };
 }
 // #endregion
 

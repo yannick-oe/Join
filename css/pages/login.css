@@ -108,7 +108,7 @@ h1 {
     height: 449px;
     width: 652px;
     border-radius: 30px;
-    margin-top: 140px;
+    margin-top: 100px;
     padding-top: 48px;
     display: flex;
     flex-direction: column;
@@ -122,7 +122,7 @@ h1 {
     width: 422px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .field {
@@ -153,6 +153,50 @@ input {
 
 }
 
+.login_splash_logo {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 220px;
+    height: auto;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: 20;
+    pointer-events: none;
+    will-change: left, top, width, opacity, transform;
+}
+
+.login_splash_screen {
+    position: fixed;
+    inset: 0;
+    background-color: #F6F7F8;
+    z-index: 19;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 360ms cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0s linear 360ms;
+}
+
+.login_splash_screen.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.login_splash_logo.is-visible {
+    opacity: 1;
+}
+
+.login_splash_logo.is-moving {
+    left: var(--logo-target-left);
+    top: var(--logo-target-top);
+    width: 100px;
+    transform: translate(-50%, -50%);
+    transition: left 650ms ease, top 650ms ease, width 650ms ease, opacity 260ms ease;
+}
+
+.login_splash_logo.is-hidden {
+    opacity: 0;
+}
+
 .footer_content a {
     font-size: 16px;
     font-weight: 400;
@@ -161,10 +205,10 @@ input {
 
 .sign_up {
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
-    height: 630px;
+    height: 600px;
     width: 598px;
     border-radius: 30px;
-    margin-top: 90px;
+    margin-top: 20px;
     padding-top: 48px;
     display: flex;
     flex-direction: column;
