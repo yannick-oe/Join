@@ -197,3 +197,7 @@ header {
 .height {
 	height: 100vh;
 }
+
+.show-responsive {
+	display: none !important;
+}
