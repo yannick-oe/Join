@@ -13,6 +13,7 @@ body {
     padding-top: 100px;
     padding-left: 150px;
     padding-right: 12px;
+    width: 70%;
 }
 
 .help-top-row {
@@ -38,7 +39,6 @@ body {
     justify-content: center;
     border: none;
     background: transparent;
-    color: #29abe2;
     font-size: 32px;
     font-weight: 700;
     line-height: 1;

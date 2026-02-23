@@ -133,6 +133,9 @@
     .help-content {
         padding-left: 0px
     }
+    .help-content {
+        width: 95%;
+    }
 
     .help-main {
         padding-left: 20px;
