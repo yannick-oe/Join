@@ -169,3 +169,7 @@ header {
 .responsive-footer {
 	display: none;
 }
+
+.height {
+	height: 100vh;
+}

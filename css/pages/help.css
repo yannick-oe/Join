@@ -12,6 +12,7 @@ body {
 .help-content {
     padding-top: 100px;
     padding-left: 150px;
+    padding-right: 12px;
 }
 
 .help-top-row {

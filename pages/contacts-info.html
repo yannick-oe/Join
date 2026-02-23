@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacts</title>
+
+    <link rel="stylesheet" href="../css/fonts.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/pages/contacts.css" />
+    <link rel="stylesheet" href="../css/pages/contacts-overlay.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/pages/contacts-info.css">
+    <link rel="stylesheet" href="../css/pages/repsonsive-second.css">
+
+    <script src="../scripts/storage.js" defer></script>
+    <script src="../scripts/pages/contacts.ui.js" defer></script>
+    <script src="../scripts/pages/contacts.logic.js" defer></script>
+    <script src="../scripts/pages/header.js"></script>
+</head>
+
+<body onload="initContacts()" onclick="closeMenu()">
+      <header>
+        <div class="responsive-header-line">
+            <p class="header-line">Kanban Project Management Tool</p>
+            <div class="button-icon"></div>
+        </div>
+        <div class="header-right">
+            <a href="./help.html">
+                <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
+            </a>
+            <div class="dropdown">
+                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()">JJ</button>
+                    <div id="myDropdown" class="dropdown-content d_none">
+                        <a href="./help.html"><p class="text-align-center show-responsive">Help</p></a>
+                        <a href="./legal-notice.html"><p class="text-align-center">Legal Notice</p></a>
+                        <a href="./privacy-policy.html"><p class="text-align-center">Privacy Policy</p></a>
+                        <a href="/index.html"><p class="text-align-center">Log out</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-limit height">
+            <div class="contacts-right show-on-mobile">
+                <div class="contacts-head">
+                    <div class="head-first"><h1 class="contacts-title">Contacts</h1> <a href="./contacts.html"><img class="arrow-icon" src="../assets/icon/arrow_left.svg" alt=""></a></div>
+                    <div class="contacts-subtitle">Better with a team</div>
+                    <div class="seperator-line"></div>
+                </div>
+                <div class="contact-detail" id="contactDetail"></div>
+            </div>
+        </section>
+
+        <section class="responsive-button">
+            <button type="button" class="button-contact" onclick="toggleContactMenu()">
+            <img class="icon-contact" src="../assets/icon/more_vert.svg" alt="Mehr Optionen">
+            </button>
+
+            <div id="contactMenu" class="contact-menu hidden">
+                <button type="button" class="menu-item" onclick="editContact()">Edit</button>
+                <button type="button" class="menu-item" onclick="deleteContact()">Delete</button>
+            </div>
+        </section>
+    </main>
+    
+
+    <footer >
+        <section class="responsive-footer">
+            <a href="./summary.html">
+                <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
+                <span class="responsive-menu">Summary</span>
+            </a>
+            <a href="./add-task.html">
+                <img src="../assets/icon/edit_square.svg" class="responsive-task-icon" alt="Task-Icon" />
+                <span class="responsive-menu">Add Task</span>
+            </a>
+            <a href="./board.html">
+                <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
+                <span class="responsive-menu">Board</span>
+            </a>
+                <a href="./contacts.html" class="is-active">
+                <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon"
+                    alt="Contacts-Icon" />
+                <span class="responsive-menu">Contacts</span>
+            </a>
+        </section>
+    </footer>
+    
+</body>
+</html>

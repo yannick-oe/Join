@@ -1,0 +1,140 @@
+/* header and aside line */
+
+@media (max-width: 830px) {
+    header {
+        padding-left: 150px;
+    }
+}
+
+@media (max-width: 750px) {
+    aside {
+        display: none;
+    }
+
+    .responsive-footer {
+        display: block;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 80px;
+        background-color: #2a3647;
+    }
+
+    .responsive-footer span {
+        color: #cdcdcd;
+    }
+
+    .responsive-footer a {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .responsive-task-icon {
+        height: 30px;
+        width: 30px;
+    }
+
+    .responsive-menu {
+        font-family: 'Open Sans'!important;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    header {
+        padding-left: 0;
+    }
+    
+    .header-help-icon {
+        display: none;
+    }
+
+    .show-responsive {
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .board-toolbar-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .board-add-task {
+        width: 100%;
+    }
+
+    .board-search input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 550px) {
+    .responsive-task-icon {
+        height: 25px;
+        width: 25px;
+    }
+
+      .header-line {
+        display: none;
+    }
+
+    .responsive-header-line {
+        padding-left: 25px;
+    }
+
+
+    .responsive-menu {
+        font-size: 16px;
+    }
+
+    .button-icon {
+        width: 40px;
+        height: 50px;
+        background-image: url('../assets/icon/join_dark.svg'); 
+        background-size: cover
+    }
+}
+
+
+/* For all Respsonsive classes */
+
+.responsive-footer a.is-active {
+    padding: 10px 0px;
+    background-color: #091931;
+    border-radius: 8px;
+}
+
+
+/* Main Privacy, Legal Notice and Help Responsive */
+
+@media (max-width: 750px) {
+    .legal-main {
+        padding-left: 20px;      
+    }
+
+    .main-privacy {
+        padding-left: 20px;
+    }
+
+    .help-content {
+        padding-left: 0px
+    }
+
+    .help-main {
+        padding-left: 20px;
+    }
+}
