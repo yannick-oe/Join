@@ -68,12 +68,22 @@ function runLoginLogoIntro() {
   const splashLogo = document.getElementById("loginSplashLogo");
   const headerLogo = document.getElementById("headerLogo");
   if (!splashScreen || !splashLogo || !headerLogo) return;
-  const introDuration = 120;
+  applySplashLogoVariant(splashLogo);
+  const introDuration = 700;
   applyLogoTargetPosition(splashLogo, headerLogo);
   splashLogo.classList.add("is-visible");
   requestAnimationFrame(() => splashLogo.classList.add("is-moving"));
-  setTimeout(() => hideLoginSplashScreen(splashScreen), Math.round(introDuration / 2));
-  setTimeout(() => hideLoginSplashLogo(splashLogo), introDuration + 10);
+  setTimeout(() => hideLoginSplashScreen(splashScreen), Math.round(introDuration * 0.85));
+  setTimeout(() => hideLoginSplashLogo(splashLogo), introDuration + 140);
+}
+
+/**
+ * Applies mobile/desktop splash logo asset.
+ * @param {HTMLImageElement} splashLogo
+ */
+function applySplashLogoVariant(splashLogo) {
+  const isMobile = window.matchMedia("(max-width: 750px)").matches;
+  splashLogo.src = isMobile ? "./assets/icon/join_logo_mobile.png" : "./assets/icon/Capa 1.svg";
 }
 
 /**

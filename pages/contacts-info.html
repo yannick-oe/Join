@@ -13,15 +13,16 @@
     <link rel="stylesheet" href="../css/pages/contacts-overlay.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
     <link rel="stylesheet" href="../css/pages/contacts-info.css">
-    <link rel="stylesheet" href="../css/pages/repsonsive-second.css">
+    <link rel="stylesheet" href="../css/responsive-second.css">
 
     <script src="../scripts/storage.js" defer></script>
+    <script src="../scripts/pages/contacts.dom.js" defer></script>
     <script src="../scripts/pages/contacts.ui.js" defer></script>
     <script src="../scripts/pages/contacts.logic.js" defer></script>
     <script src="../scripts/pages/header.js"></script>
 </head>
 
-<body onload="initContacts()" onclick="closeMenu()">
+<body onload="initContacts()" onclick="closeMenu(); closeContactMenu()">
       <header>
         <div class="responsive-header-line">
             <p class="header-line">Kanban Project Management Tool</p>
@@ -49,7 +50,7 @@
         <section class="content-limit height">
             <div class="contacts-right show-on-mobile">
                 <div class="contacts-head">
-                    <div class="head-first"><h1 class="contacts-title">Contacts</h1> <a href="./contacts.html"><img class="arrow-icon" src="../assets/icon/arrow_left.svg" alt=""></a></div>
+                    <div class="head-first"><h1 class="contacts-title">Contacts</h1> <button type="button" class="help-back-button" onclick="goBackOrFallback('./contacts.html')" aria-label="Go back"><img class="arrow-icon" src="../assets/icon/arrow_left.svg" alt="Back"></button></div>
                     <div class="contacts-subtitle">Better with a team</div>
                     <div class="seperator-line"></div>
                 </div>
@@ -58,16 +59,88 @@
         </section>
 
         <section class="responsive-button">
-            <button type="button" class="button-contact" onclick="toggleContactMenu()">
+            <button type="button" class="button-contact" onclick="toggleContactMenu(); event.stopPropagation()">
             <img class="icon-contact" src="../assets/icon/more_vert.svg" alt="Mehr Optionen">
             </button>
 
-            <div id="contactMenu" class="contact-menu hidden">
+            <div id="contactMenu" class="contact-menu hidden" onclick="event.stopPropagation()">
                 <button type="button" class="menu-item" onclick="editContact()">Edit</button>
                 <button type="button" class="menu-item" onclick="deleteContact()">Delete</button>
             </div>
         </section>
     </main>
+
+    <div id="contactOverlay" class="overlay hidden" onclick="closeContactOverlay()">
+        <div class="overlay-panel" onclick="event.stopPropagation()">
+            <div class="overlay-left">
+                <div class="overlay-close-wrapper">
+                    <button class="responsive-button-overlaycontact" type="button" onclick="closeContactOverlay()">X</button>
+                </div>
+                <img class="overlay-logo" src="../assets/icon/Join logo vector.svg" alt="Join" />
+                <h2 class="overlay-left-title" id="overlayTitle">Add contact</h2>
+                <p id="overlayLeftSub" class="overlay-left-subtitle">Tasks are better with a team!</p>
+                <div class="overlay-left-line"></div>
+            </div>
+
+              <button class="overlay-close-button" type="button" onclick="closeContactOverlay()">×</button>
+
+
+            <div class="overlay-right">
+                <div class="overlay-content">
+                    <div class="overlay-avatar" id="overlayAvatar">A</div>
+
+                    <form class="overlay-form" onsubmit="return false">
+                        <div class="field">
+                            <div class="field-wrapper">
+                                <input id="contactNameInput" type="text" placeholder="Name" />
+                                <img class="field-icon" src="../assets/icon/person.svg" alt="" />
+                            </div>
+                            <div class="field-error-message" id="contactNameError"></div>
+                        </div>
+
+                        <div class="field">
+                            <div class="field-wrapper">
+                                <input id="contactEmailInput" type="email" placeholder="Email" />
+                                <img class="field-icon" src="../assets/icon/mail.svg" alt="" />
+                            </div>
+                            <div class="field-error-message" id="contactEmailError"></div>
+                        </div>
+
+                        <div class="field">
+                            <div class="field-wrapper">
+                                <input id="contactPhoneInput" type="text" placeholder="Phone" />
+                                <img class="field-icon" src="../assets/icon/call.svg" alt="" />
+                            </div>
+                            <div class="field-error-message" id="contactPhoneError"></div>
+                        </div>
+
+                        <div class="overlay-actions">
+                            <button id="overlayBtnCancel" class="button-ghost" type="button"
+                                onclick="closeContactOverlay()">Cancel</button>
+                            <button id="overlayBtnCreate" class="button-primary" type="button"
+                                onclick="submitContact()">Create contact ✓</button>
+                            <button id="overlayBtnDelete" class="button-ghost hidden" type="button"
+                                onclick="confirmAndDeleteContact()">Delete</button>
+                            <button id="overlayBtnSave" class="button-primary hidden" type="button"
+                                onclick="submitContact()">Save ✓</button>
+                        </div>
+
+                        <div class="form-note" id="contactFormNote"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="successToast" class="success-toast hidden">
+        <p class="success-toast-text">Contact successfully created</p>
+    </div>
+    <div id="editToast" class="success-toast hidden">
+        <p class="success-toast-text">Contact successfully updated</p>
+    </div>
+    <div id="deleteToast" class="success-toast hidden">
+        <p class="success-toast-text">Contact successfully deleted</p>
+    </div>
     
 
     <footer >

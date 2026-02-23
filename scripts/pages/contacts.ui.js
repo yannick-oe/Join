@@ -225,6 +225,45 @@ function closeContactOverlay() {
 }
 
 /**
+ * Toggles floating contact action menu on mobile detail view.
+ */
+function toggleContactMenu() {
+    const menu = document.getElementById("contactMenu");
+    if (!menu) return;
+    menu.classList.toggle("hidden");
+}
+
+/**
+ * Closes floating contact action menu.
+ */
+function closeContactMenu() {
+    const menu = document.getElementById("contactMenu");
+    if (!menu) return;
+    menu.classList.add("hidden");
+}
+
+/**
+ * Opens edit overlay from mobile action menu.
+ */
+function editContact() {
+    closeContactMenu();
+    if (!contactsState.activeContactId) return;
+    openEditContactOverlay(contactsState.activeContactId);
+}
+
+/**
+ * Deletes active contact from mobile action menu.
+ */
+async function deleteContact() {
+    closeContactMenu();
+    if (!contactsState.activeContactId) return;
+    await confirmAndDeleteContact(contactsState.activeContactId);
+    if (typeof isContactsMobileViewport === "function" && isContactsMobileViewport()) {
+        window.location.href = "./contacts.html";
+    }
+}
+
+/**
  * Sets overlay title text.
  * @param {string} title
  */

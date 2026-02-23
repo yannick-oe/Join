@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="../css/pages/board.css" />
 	<link rel="stylesheet" href="../css/pages/board-overlay.css" />
 	<link rel="stylesheet" href="../css/responsive.css" />
-	<link rel="stylesheet" href="../css/pages/repsonsive-second.css">
+	<link rel="stylesheet" href="../css/responsive-second.css">
 
 	<script src="../scripts/storage.js" defer></script>
 	<script src="../scripts/pages/add-task.ui.js" defer></script>
@@ -114,8 +114,8 @@
 			<div class="board-toolbar">
 				<h1 class="board-title">Board</h1>
 				<div class="board-actions">
-					<label class="board-search desktop-search" for="boardSearchInput">
-						<input id="boardSearchInput" type="text" placeholder="Find Task" oninput="handleBoardSearchInput()" />
+					<label class="board-search desktop-search" for="boardSearchInputDesktop">
+						<input id="boardSearchInputDesktop" type="text" placeholder="Find Task" oninput="handleBoardSearchInput(this.value, 'desktop')" />
 						<span class="board-search-icon">⌕</span>
 					</label>
 					<button id="boardAddTaskButton" class="button-primary board-add-task" type="button" onclick="openBoardAddTaskOverlay('todo')">Add task <span>＋</span></button>
@@ -123,9 +123,9 @@
 			</div>
 
 			<div>
-				<label class="board-search responsive-search" for="boardSearchInput">
-					<input id="boardSearchInput" type="text" placeholder="Find Task" oninput="handleBoardSearchInput()" />
-					<span class="board-search-icon responsive-search">⌕</span>
+				<label class="board-search responsive-search" for="boardSearchInputMobile">
+					<input id="boardSearchInputMobile" type="text" placeholder="Find Task" oninput="handleBoardSearchInput(this.value, 'mobile')" />
+					<span class="board-search-icon">⌕</span>
 				</label>
 			</div>
 

@@ -5,6 +5,10 @@ const contactsState = {
     editContactId: null,
     palette: ["#FF7A00", "#9327FF", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1", "#0038FF", "#C3FF2B"],
 };
+
+const contactsStorage = {
+    activeContactId: "joinActiveContactId",
+};
 // #endregion
 
 // #region Init
@@ -15,6 +19,7 @@ async function initContacts() {
     if (typeof initProtectedPageAuth === "function") initProtectedPageAuth();
     contactsState.contacts = await loadContacts();
     ensureDemoContacts();
+    hydrateActiveContactId();
     await saveContacts(contactsState.contacts);
     renderContactsPage();
 }
@@ -45,7 +50,46 @@ function buildContactsDemoList() {
  */
 function selectContact(contactId) {
     contactsState.activeContactId = contactId;
+    persistActiveContactId();
+    if (isContactsListPage() && isContactsMobileViewport()) {
+        window.location.href = "./contacts-info.html";
+        return;
+    }
     renderContactsPage();
+}
+
+/**
+ * Restores active contact id from session storage.
+ */
+function hydrateActiveContactId() {
+    const storedId = sessionStorage.getItem(contactsStorage.activeContactId);
+    if (!storedId) return;
+    contactsState.activeContactId = storedId;
+}
+
+/**
+ * Persists active contact id to session storage.
+ */
+function persistActiveContactId() {
+    if (!contactsState.activeContactId) {
+        sessionStorage.removeItem(contactsStorage.activeContactId);
+        return;
+    }
+    sessionStorage.setItem(contactsStorage.activeContactId, contactsState.activeContactId);
+}
+
+/**
+ * Checks if current page is contacts list page.
+ */
+function isContactsListPage() {
+    return window.location.pathname.endsWith("/contacts.html") || window.location.pathname.endsWith("contacts.html");
+}
+
+/**
+ * Checks if viewport is in mobile contacts mode.
+ */
+function isContactsMobileViewport() {
+    return window.matchMedia("(max-width: 1140px)").matches;
 }
 // #endregion
 
@@ -118,6 +162,7 @@ async function deleteActiveContact() {
 function updateSelectionAfterDelete(contactId) {
     if (contactsState.editContactId) return clearEditSelection();
     if (contactsState.activeContactId === contactId) contactsState.activeContactId = null;
+    persistActiveContactId();
 }
 
 /**
@@ -126,6 +171,7 @@ function updateSelectionAfterDelete(contactId) {
 function clearEditSelection() {
     contactsState.activeContactId = null;
     contactsState.editContactId = null;
+    persistActiveContactId();
 }
 
 /**

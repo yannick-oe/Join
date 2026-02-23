@@ -178,9 +178,15 @@ function getBoardEmptyStateText(status) {
 /**
  * Handles search input changes.
  */
-function handleBoardSearchInput() {
-	const searchInput = document.getElementById("boardSearchInput");
-	boardState.searchValue = searchInput ? searchInput.value : "";
+function handleBoardSearchInput(value, source) {
+	const desktopInput = document.getElementById("boardSearchInputDesktop");
+	const mobileInput = document.getElementById("boardSearchInputMobile");
+	const inputValue = typeof value === "string"
+		? value
+		: (desktopInput && desktopInput.value) || (mobileInput && mobileInput.value) || "";
+	boardState.searchValue = inputValue;
+	if (source !== "desktop" && desktopInput && desktopInput.value !== inputValue) desktopInput.value = inputValue;
+	if (source !== "mobile" && mobileInput && mobileInput.value !== inputValue) mobileInput.value = inputValue;
 	renderBoardColumns();
 }
 
