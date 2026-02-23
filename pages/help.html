@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Help</title>
+    <link rel="shortcut icon" href="../assets/icon/Capa 1.svg" type="image/x-icon">
 
     <link rel="stylesheet" href="../css/fonts.css" />
     <link rel="stylesheet" href="../css/global.css" />
@@ -15,11 +16,10 @@
     <link rel="stylesheet" href="../css/pages/repsonsive-second.css">
 
 
-    <script src="../scripts/pages/help.js" defer></script>
-    <script src="../scripts/pages/header.js"></script>
+    <script src="../scripts/pages/header.js" defer></script>
 </head>
 
-<body onclick="closeMenu()">
+<body onload="initProtectedPageAuth()" onclick="closeMenu()">
        <header>
         <div class="responsive-header-line">
             <p class="header-line">Kanban Project Management Tool</p>
@@ -30,12 +30,12 @@
                 <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
             </a>
             <div class="dropdown">
-                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()">JJ</button>
+                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()"></button>
                     <div id="myDropdown" class="dropdown-content d_none">
                     <a href="./help.html"><p class="text-align-center show-responsive">Help</p></a>
                     <a href="./legal-notice.html"><p class="text-align-center">Legal Notice</p></a>
                     <a href="./privacy-policy.html"><p class="text-align-center">Privacy Policy</p></a>
-                    <a href="/index.html"><p class="text-align-center">Log out</p></a>
+                    <a href="/index.html" onclick="return logOutUser(event)"><p class="text-align-center">Log out</p></a>
                     </div>
                 </div>
             </div>
@@ -187,8 +187,8 @@
                     </p>
                     <br>
                     <p>
-                        Have more questions about <span class="join">Join</span>? Feel free to contact us at 
-                        [Your Contact Email]. We're here to help you!
+                        Have more questions about <span class="join">Join</span>? Feel free to contact us at
+                        team.join.project@outlook.com. We're here to help you!
                     </p>
                 </li>
             </ol>

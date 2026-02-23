@@ -1,81 +1,5 @@
-// #region DOM ids
-const contactsDom = {
-    contactsList: "contactsList",
-    contactDetail: "contactDetail",
-    contactOverlay: "contactOverlay",
-    overlayTitle: "overlayTitle",
-    overlayAvatar: "overlayAvatar",
-    overlayLeftSub: "overlayLeftSub",
-    overlayBtnCancel: "overlayBtnCancel",
-    overlayBtnCreate: "overlayBtnCreate",
-    overlayBtnDelete: "overlayBtnDelete",
-    overlayBtnSave: "overlayBtnSave",
-    contactNameInput: "contactNameInput",
-    contactEmailInput: "contactEmailInput",
-    contactPhoneInput: "contactPhoneInput",
-    contactNameError: "contactNameError",
-    contactEmailError: "contactEmailError",
-    contactPhoneError: "contactPhoneError",
-    contactFormNote: "contactFormNote",
-    successToast: "successToast",
-    editToast: "editToast",
-    deleteToast: "deleteToast",
-};
-// #endregion
-
-// #region DOM helpers
-/**
- * Sets innerHTML of an element by id.
- * @param {string} elementId
- * @param {string} html
- */
-function setHtml(elementId, html) {
-    const element = document.getElementById(elementId);
-    if (element) element.innerHTML = html || "";
-}
-
-/**
- * Sets innerText of an element by id.
- * @param {string} elementId
- * @param {string} text
- */
-function setText(elementId, text) {
-    const element = document.getElementById(elementId);
-    if (element) element.innerText = text || "";
-}
-
-/**
- * Reads input value by id.
- * @param {string} elementId
- */
-function getInputValue(elementId) {
-    const element = document.getElementById(elementId);
-    return element ? element.value : "";
-}
-
-/**
- * Sets input value by id.
- * @param {string} elementId
- * @param {string} value
- */
-function setInputValue(elementId, value) {
-    const element = document.getElementById(elementId);
-    if (element) element.value = value || "";
-}
-
-/**
- * Shows or hides an element by toggling .hidden.
- * @param {string} elementId
- * @param {boolean} shouldShow
- */
-function setVisible(elementId, shouldShow) {
-    const element = document.getElementById(elementId);
-    if (!element) return;
-    element.classList.toggle("hidden", !shouldShow);
-}
-// #endregion
-
 // #region Render
+
 /**
  * Renders contacts list and detail panel.
  */
@@ -171,36 +95,69 @@ function getEmptyDetailTemplate() {
 function getContactDetailTemplate(detail) {
     return `
         <div class="contact-detail-content">
-            <div class="contact-detail-top">
-                <div class="contact-detail-avatar" style="background:${detail.color}">${detail.initials}</div>
-                <div>
-                    <h2 class="contact-detail-name">${detail.name}</h2>
-                    <div class="contact-detail-actions">
-                        <button class="link-button" type="button" onclick="openEditContactOverlay('${detail.id}')">
-                            <img src="../assets/icon/edit.svg" alt="" aria-hidden="true" />
-                            Edit
-                        </button>
-                        <button class="link-button" type="button" onclick="confirmAndDeleteContact('${detail.id}')">
-                            <img src="../assets/icon/delete.svg" alt="" aria-hidden="true" />
-                            Delete
-                        </button>
-                    </div>
+            ${getContactDetailTopTemplate(detail)}
+            ${getContactDetailInfoTemplate(detail)}
         </div>
-      </div>
+    `;
+}
 
-            <div class="contact-detail-block-title">Contact Information</div>
-            <div class="contact-info-grid">
-                <div class="contact-info-row">
-                    <div class="contact-info-label">Email</div>
-                    <div class="contact-info-value">${detail.email}</div>
-                </div>
-                <div class="contact-info-row">
-                    <div class="contact-info-label">Phone</div>
-                    <div class="contact-info-value is-phone">${detail.phone || "—"}</div>
-                </div>
-      </div>
-    </div>
-  `;
+/**
+ * Returns top area template for contact detail.
+ * @param {{id:string,name:string,initials:string,color:string}} detail
+ */
+function getContactDetailTopTemplate(detail) {
+    return `
+        <div class="contact-detail-top">
+            <div class="contact-detail-avatar" style="background:${detail.color}">${detail.initials}</div>
+            <div>
+                <h2 class="contact-detail-name">${detail.name}</h2>
+                ${getContactDetailActionsTemplate(detail.id)}
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Returns action buttons template for contact detail header.
+ * @param {string} contactId
+ */
+function getContactDetailActionsTemplate(contactId) {
+    return `
+        <div class="contact-detail-actions">
+            <button class="link-button" type="button" onclick="openEditContactOverlay('${contactId}')"><img src="../assets/icon/edit.svg" alt="" aria-hidden="true" />Edit</button>
+            <button class="link-button" type="button" onclick="confirmAndDeleteContact('${contactId}')"><img src="../assets/icon/delete.svg" alt="" aria-hidden="true" />Delete</button>
+        </div>
+    `;
+}
+
+/**
+ * Returns contact information grid template.
+ * @param {{email:string,phone:string}} detail
+ */
+function getContactDetailInfoTemplate(detail) {
+    return `
+        <div class="contact-detail-block-title">Contact Information</div>
+        <div class="contact-info-grid">
+            ${getContactDetailEmailRowTemplate(detail.email)}
+            ${getContactDetailPhoneRowTemplate(detail.phone || "—")}
+        </div>
+    `;
+}
+
+/**
+ * Returns email row template in detail info grid.
+ * @param {string} email
+ */
+function getContactDetailEmailRowTemplate(email) {
+    return `<div class="contact-info-row"><div class="contact-info-label">Email</div><div class="contact-info-value">${email}</div></div>`;
+}
+
+/**
+ * Returns phone row template in detail info grid.
+ * @param {string} phone
+ */
+function getContactDetailPhoneRowTemplate(phone) {
+    return `<div class="contact-info-row"><div class="contact-info-label">Phone</div><div class="contact-info-value is-phone">${phone}</div></div>`;
 }
 // #endregion
 
@@ -221,7 +178,7 @@ function openAddContactOverlay() {
     setVisible(contactsDom.overlayBtnSave, false);
     setText(contactsDom.overlayBtnCreate, "Create contact ✓");
     setVisible(contactsDom.contactOverlay, true);
-} 
+}
 
 /**
  * Opens overlay in "edit" mode and fills the form with contact data.

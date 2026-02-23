@@ -1,28 +1,9 @@
-       .header_content {
-           background-color: #f6f7f8;
-       }
-
-       .legal-main {
-           padding-left: 150px !important;
-           margin-right: 80px;
-       }
-
-       .header_right {
-           padding-right: 80px;
-       }
-
-       .privacy-wrapper {
-           margin-right: 80px;
-       }
-
-       .header_content {
-           background-color: #f6f7f8;
-       }
-
-       .main-privacy {
-           padding-left: 150px !important;
-       }
-
-       .header_right {
-           padding-right: 80px;
-       }
+.block{
+    display: none !important;
+}
+.privacy-wrapper{
+    width: 90% !important;
+}
+.content-limit{
+    width: 90% !important;
+}

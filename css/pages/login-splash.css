@@ -1,0 +1,43 @@
+.login_splash_logo {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 220px;
+    height: auto;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    z-index: 20;
+    pointer-events: none;
+    will-change: left, top, width, opacity, transform;
+}
+
+.login_splash_screen {
+    position: fixed;
+    inset: 0;
+    background-color: #f6f7f8;
+    z-index: 19;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 120ms ease, visibility 0s linear 120ms;
+}
+
+.login_splash_screen.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.login_splash_logo.is-visible {
+    opacity: 1;
+}
+
+.login_splash_logo.is-moving {
+    left: var(--logo-target-left);
+    top: var(--logo-target-top);
+    width: 100px;
+    transform: translate(-50%, -50%);
+    transition: left 120ms ease, top 120ms ease, width 120ms ease, opacity 120ms ease;
+}
+
+.login_splash_logo.is-hidden {
+    opacity: 0;
+}

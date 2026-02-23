@@ -17,6 +17,7 @@ const addTaskState = {
  * Initializes Add Task page data and UI.
  */
 async function initAddTaskPage() {
+	if (typeof initProtectedPageAuth === "function") initProtectedPageAuth();
 	addTaskState.contacts = await loadContactsSafe();
 	addTaskState.tasks = await loadTasksSafe();
 	setMinDateToToday();

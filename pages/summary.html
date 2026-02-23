@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Summary</title>
+    <link rel="shortcut icon" href="../assets/icon/Capa 1.svg" type="image/x-icon">
 
     <link rel="stylesheet" href="../css/fonts.css" />
     <link rel="stylesheet" href="../css/global.css" />
@@ -13,10 +14,12 @@
     <link rel="stylesheet" href="../css/pages/summary.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
     <link rel="stylesheet" href="../css/pages/repsonsive-second.css">
+    <script src="../scripts/storage.js" defer></script>
     <script src="../scripts/pages/header.js"></script>
+    <script src="../scripts/pages/summary.js" defer></script>
 </head>
 
-<body onclick="closeMenu()">
+<body onload="initSummaryPage()" onclick="closeMenu()">
     <header>
         <div class="responsive-header-line">
             <p class="header-line">Kanban Project Management Tool</p>
@@ -27,12 +30,12 @@
                 <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
             </a>
             <div class="dropdown">
-                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()">JJ</button>
+                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()"></button>
                     <div id="myDropdown" class="dropdown-content d_none">
                         <a href="./help.html"><p class="text-align-center show-responsive">Help</p></a>
                         <a href="./legal-notice.html"><p class="text-align-center">Legal Notice</p></a>
                         <a href="./privacy-policy.html"><p class="text-align-center">Privacy Policy</p></a>
-                        <a href="/index.html"><p class="text-align-center">Log out</p></a>
+                        <a href="/index.html" onclick="return logOutUser(event)"><p class="text-align-center">Log out</p></a>
                     </div>
                 </div>
             </div>
@@ -108,70 +111,70 @@
             <section class="sumary-main-layout">
                 <section class="summary-box">
                     <section class="summary-second-line">
-
                         <section>
-                            <div class="sumary-second edit size center gap15">
+                            <div class="sumary-second edit size center gap15" onclick="openBoardPage()">
                                 <div class="bc-b circle">
                                     <img src="../assets/icon/edit.svg" class="icon-size" alt="Edit-Icon">
                                 </div>
                                 <div class="center fd-c">
-                                    <p class="font-size64 text-align">1</p>
+                                    <p id="summaryTodoCount" class="font-size64 text-align">0</p>
                                     <p class="text-align font-size16">To-do</p>
                                 </div>
                             </div>
                         </section>
 
                         <section>
-                            <div class="sumary-second vector center gap15 size">
+                            <div class="sumary-second vector center gap15 size" onclick="openBoardPage()">
                                 <div class="bc-b circle">
-                                    <img src="../assets/icon/Vector.svg" class="icon-size" alt="Vector-Icon">
+                                    <img src="../assets/icon/Vector.svg" class="icon-size" alt="Done-Icon">
                                 </div>
                                 <div>
-                                    <p class="font-size64 text-align">1</p>
+                                    <p id="summaryDoneCount" class="font-size64 text-align">0</p>
                                     <p class="text-align font-size16">Done</p>
                                 </div>
                             </div>
-
                         </section>
                     </section>
 
-                    <section class="sumary-third-line">
+                    <section class="sumary-third-line" onclick="openBoardPage()">
                         <div class="center gap15">
-                            <div class="circlee">                    
-                                <p class="text-align">.</p>
+                            <div class="circlee center">
+                                <img src="../assets/icon/high-prio.svg" class="icon-size" alt="Urgent-Icon">
                             </div>
 
                             <div>
-                                <p class="font-size64 text-align">1</p>
-                                <p class="text-align font-size16">urgent</p>
+                                <p id="summaryUrgentCount" class="font-size64 text-align">0</p>
+                                <p class="text-align font-size16">Urgent</p>
                             </div>
                         </div>
                         <div class="seperator-line"></div>
                         <div>
-                            <p class="text-align padding-bottom10">Date</p>
+                            <p id="summaryUpcomingDate" class="text-align padding-bottom10">No deadline</p>
                             <p class="text-align">Upcoming Deadline</p>
                         </div>
                     </section>
 
                     <section class="center gap20">
-                        <div class="box-size">
-                            <p class="text-align font-size64">5</p>
+                        <div class="box-size" onclick="openBoardPage()">
+                            <p id="summaryTasksInBoard" class="text-align font-size64">0</p>
                             <p class="font-size20 text-align">Tasks in Board</p>
                         </div>
-                        <div class="box-size font-size20">
-                            <p class="text-align font-size64">2</p>
-                            <p class="font-size20 text-align">Tasks in Progress</p>
+                        <div class="box-size font-size20" onclick="openBoardPage()">
+                            <p id="summaryInProgressCount" class="text-align font-size64">0</p>
+                            <p class="font-size20 text-align">Tasks In Progress</p>
                         </div>
-                        <div class="box-size font-size20">
-                            <p class="text-align font-size64">2</p>
+                        <div class="box-size font-size20" onclick="openBoardPage()">
+                            <p id="summaryAwaitingFeedbackCount" class="text-align font-size64">0</p>
                             <p class="font-size20 text-align">Awaiting Feedback</p>
                         </div>
                     </section>
                 </section>
                 <section class="greeting">
-                    <h2>Good Morning!</h2>
+                    <h2 id="summaryGreetingTitle">Good morning</h2>
+                    <p id="summaryGreetingName" class="greeting-user-name hidden"></p>
                 </section>
             </section>
+        </section>
     </main>
 
     <footer >

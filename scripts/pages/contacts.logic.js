@@ -12,6 +12,7 @@ const contactsState = {
  * Loads contacts, ensures demo data, persists, and renders the page.
  */
 async function initContacts() {
+    if (typeof initProtectedPageAuth === "function") initProtectedPageAuth();
     contactsState.contacts = await loadContacts();
     ensureDemoContacts();
     await saveContacts(contactsState.contacts);
@@ -23,16 +24,16 @@ async function initContacts() {
  */
 function ensureDemoContacts() {
     if (contactsState.contacts && contactsState.contacts.length) return;
+    contactsState.contacts = buildContactsDemoList();
+}
 
-    contactsState.contacts = [
-        { id: createId(), name: "Anton Mayer", email: "anton@gmail.com", phone: "+49 1111 111 11 11", color: "#FF7A00" },
-        { id: createId(), name: "Anja Schulz", email: "schulz@hotmail.com", phone: "+49 2222 222 22 22", color: "#9327FF" },
-        { id: createId(), name: "Benedikt Ziegler", email: "benedikt@gmail.com", phone: "+49 3333 333 33 33", color: "#6E52FF" },
-        { id: createId(), name: "David Eisenberg", email: "davidberg@gmail.com", phone: "+49 4444 444 44 44", color: "#FC71FF" },
-        { id: createId(), name: "Eva Fischer", email: "eva@gmail.com", phone: "+49 5555 555 55 55", color: "#FFBB2B" },
-        { id: createId(), name: "Emmanuel Mauer", email: "emmanuel@gmail.com", phone: "+49 6666 666 66 66", color: "#1FD7C1" },
-        { id: createId(), name: "Marcel Bauer", email: "bauer@gmail.com", phone: "+49 7777 777 77 77", color: "#0038FF" },
-        { id: createId(), name: "Tatjana Wolf", email: "wolf@gmail.com", phone: "+49 2222 222 22 2", color: "#C3FF2B" },
+/**
+ * Builds default contacts demo list.
+ */
+function buildContactsDemoList() {
+    return [
+        { id: createId(), name: "Anton Mayer", email: "anton@gmail.com", phone: "+49 1111 111 11 11", color: "#FF7A00" }, { id: createId(), name: "Anja Schulz", email: "schulz@hotmail.com", phone: "+49 2222 222 22 22", color: "#9327FF" }, { id: createId(), name: "Benedikt Ziegler", email: "benedikt@gmail.com", phone: "+49 3333 333 33 33", color: "#6E52FF" }, { id: createId(), name: "David Eisenberg", email: "davidberg@gmail.com", phone: "+49 4444 444 44 44", color: "#FC71FF" }, { id: createId(), name: "Eva Fischer", email: "eva@gmail.com", phone: "+49 5555 555 55 55", color: "#FFBB2B" },
+        { id: createId(), name: "Emmanuel Mauer", email: "emmanuel@gmail.com", phone: "+49 6666 666 66 66", color: "#1FD7C1" }, { id: createId(), name: "Marcel Bauer", email: "bauer@gmail.com", phone: "+49 7777 777 77 77", color: "#0038FF" }, { id: createId(), name: "Tatjana Wolf", email: "wolf@gmail.com", phone: "+49 2222 222 22 2", color: "#C3FF2B" }, { id: createId(), name: "Sofia Müller", email: "sofia@mail.com", phone: "+49 8888 888 88 88", color: "#29ABE2" }, { id: createId(), name: "Lukas Schneider", email: "lukas@mail.com", phone: "+49 9999 999 99 99", color: "#462F8A" },
     ];
 }
 // #endregion

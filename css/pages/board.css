@@ -87,6 +87,15 @@ body {
 	line-height: 1;
 }
 
+.board-add-task:hover {
+	background: #29abe2;
+	border-color: #29abe2;
+	color: #ffffff;
+	filter: none;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 10px rgba(41, 171, 226, 0.28);
+}
+
 .board-columns {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -129,6 +138,13 @@ body {
 	font-size: 16px;
 	line-height: 1;
 	cursor: pointer;
+	transition: border-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
+}
+
+.board-add-column-card:hover {
+	border-color: #29abe2;
+	color: #29abe2;
+	box-shadow: 0 0 0 2px rgba(41, 171, 226, 0.2);
 }
 
 .board-empty-state {
@@ -251,6 +267,10 @@ body {
 	width: 16px;
 	height: 16px;
 	object-fit: contain;
+}
+
+.board-card-priority[src*="medium-prio.svg"] {
+	filter: brightness(0) saturate(100%) invert(66%) sepia(96%) saturate(1608%) hue-rotate(1deg) brightness(101%) contrast(104%);
 }
 
 .board-team-member-plus {

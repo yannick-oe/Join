@@ -8,10 +8,10 @@ const SESSION_KEY = "joinSession";
  */
 function getLoginInputs(){
   return {
-    email: document.getElementById("email"),
-    pass:  document.getElementById("password"),
-    msg:   document.getElementById("loginMessage"),
-    group: document.getElementById("btnGroup")
+    emailInput: document.getElementById("email"),
+    passwordInput:  document.getElementById("password"),
+    messageElement:   document.getElementById("loginMessage"),
+    buttonGroupElement: document.getElementById("btnGroup")
   };
 }
 
@@ -19,9 +19,9 @@ function getLoginInputs(){
 /**
  * Clears login input fields.
  */
-function clearLoginFields(emailInput, passInput){
+function clearLoginFields(emailInput, passwordInput){
   if(emailInput) emailInput.value = "";
-  if(passInput)  passInput.value  = "";
+  if(passwordInput)  passwordInput.value  = "";
 }
 
 
@@ -29,14 +29,14 @@ function clearLoginFields(emailInput, passInput){
  * Inserts demo display values into the login form.
  * Does NOT expose real demo credentials in UI.
  */
-function fillDemoFields(emailInput, passInput){
-  if(!emailInput || !passInput) return false;
+function fillDemoFields(emailInput, passwordInput){
+  if(!emailInput || !passwordInput) return false;
 
   emailInput.setAttribute("name", "demo_email");
-  passInput.setAttribute("name", "demo_password");
+  passwordInput.setAttribute("name", "demo_password");
 
   emailInput.value = "Guest";
-  passInput.value  = "******";
+  passwordInput.value  = "******";
 
   return true;
 }
@@ -50,7 +50,7 @@ function saveDemoSession(){
   localStorage.setItem(SESSION_KEY, JSON.stringify({
     email: DEMO_EMAIL,
     role: "demo",
-    ts: Date.now()
+    timestamp: Date.now()
   }));
 }
 
@@ -58,13 +58,13 @@ function saveDemoSession(){
 /**
  * Displays success message and adjusts layout state.
  */
-function showSuccess(msg, group){
-  if(msg){
-    msg.textContent = "Login successful.";
-    msg.className = "success";
+function showSuccess(messageElement, buttonGroupElement){
+  if(messageElement){
+    messageElement.textContent = "Login successful.";
+    messageElement.className = "success";
   }
-  if(group){
-    group.classList.add("success_active");
+  if(buttonGroupElement){
+    buttonGroupElement.classList.add("success_active");
   }
 }
 
@@ -75,7 +75,26 @@ function showSuccess(msg, group){
 function redirectToSummary(){
   setTimeout(() => {
     window.location.href = "../pages/summary.html";
-  }, 2500);
+  }, 800);
+}
+
+/**
+ * Synchronizes optional global demo password variable.
+ */
+function syncDemoPasswordVar(){
+  if(typeof realPassword === "undefined") return;
+  realPassword = DEMO_PASS;
+}
+
+/**
+ * Finalizes demo login by persisting session and redirecting.
+ * @param {HTMLElement|null} messageElement
+ * @param {HTMLElement|null} buttonGroupElement
+ */
+function finalizeDemoLogin(messageElement, buttonGroupElement){
+  saveDemoSession();
+  showSuccess(messageElement, buttonGroupElement);
+  redirectToSummary();
 }
 
 
@@ -88,22 +107,15 @@ function redirectToSummary(){
  * Show success message
  * Redirect to summary page
  *
- * @param {Event} [e]
+ * @param {Event} [event]
  */
-function demoLogin(e){
-  if(e) e.preventDefault();
+function demoLogin(event){
+  if(event) event.preventDefault();
 
-  const el = getLoginInputs();
-  if(!fillDemoFields(el.email, el.pass)) return false;
-
-  // If smart password masking is active, set internal password
-  if(typeof realPassword !== "undefined"){
-    realPassword = DEMO_PASS;
-  }
-
-  saveDemoSession();
-  showSuccess(el.msg, el.group);
-  redirectToSummary();
+  const loginElements = getLoginInputs();
+  if(!fillDemoFields(loginElements.emailInput, loginElements.passwordInput)) return false;
+  syncDemoPasswordVar();
+  finalizeDemoLogin(loginElements.messageElement, loginElements.buttonGroupElement);
 
   return true;
 }
@@ -114,12 +126,12 @@ function demoLogin(e){
  * Restores original input names and clears values.
  */
 window.onload = function(){
-  const el = getLoginInputs();
+  const loginElements = getLoginInputs();
 
-  if(el.email) el.email.setAttribute("name", "email");
-  if(el.pass)  el.pass.setAttribute("name", "passwort");
+  if(loginElements.emailInput) loginElements.emailInput.setAttribute("name", "email");
+  if(loginElements.passwordInput)  loginElements.passwordInput.setAttribute("name", "passwort");
 
-  clearLoginFields(el.email, el.pass);
+  clearLoginFields(loginElements.emailInput, loginElements.passwordInput);
 };
 
 

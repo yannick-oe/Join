@@ -3,6 +3,7 @@
  * Initializes board page.
  */
 async function initBoardPage() {
+	if (typeof initProtectedPageAuth === "function") initProtectedPageAuth();
 	await loadBoardData();
 	bindBoardGlobalEvents();
 	renderBoardColumns();

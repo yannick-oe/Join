@@ -37,7 +37,7 @@ body {
     justify-content: center;
     gap: 10px;
     cursor: pointer;
-    transition: transform 100ms ease, filter 100ms ease;
+    transition: background 120ms ease, border-color 120ms ease, color 120ms ease, transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
     border: none;
     background: #2a3647;
     color: #ffffff;
@@ -51,8 +51,12 @@ body {
 }
 
 .contacts-add-button:hover {
+    background: #29abe2;
+    border-color: #29abe2;
+    color: #ffffff;
+    filter: none;
     transform: translateY(-1px);
-    filter: brightness(1.02);
+    box-shadow: 0 4px 10px rgba(41, 171, 226, 0.28);
 }
 
 .contacts-list {
@@ -232,7 +236,7 @@ body {
     width: 16px;
     height: 16px;
     object-fit: contain;
-    transition: filter 140ms ease;
+    transition: filter 120ms ease;
 }
 
 .contact-detail-actions .link-button:hover {

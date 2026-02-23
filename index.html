@@ -7,16 +7,21 @@
     <title>Join</title>
 
     <link rel="stylesheet" href="./css/pages/login.css">
+    <link rel="stylesheet" href="./css/pages/login-splash.css">
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/global.css">
     <link rel="shortcut icon" href="./assets/icon/Capa 1.svg" type="image/x-icon">
-    <script src="./scripts/pages/signup.js" defer></script>
-    <script src="./scripts/pages/demo_user.js" defer></script>
+    <script src="./scripts/storage.js" defer></script>
+    <script src="./scripts/pages/header.js" defer></script>
     <script src="./scripts/pages/login.js" defer></script>
+    <script src="./scripts/pages/signup.js" defer></script>
 
 </head>
 
-<body>
+<body onload="initLoginPage()">
+    <div id="loginSplashScreen" class="login_splash_screen">
+        <img id="loginSplashLogo" class="login_splash_logo" src="./assets/icon/Capa 1.svg" alt="Join Logo">
+    </div>
     <div class="content">
         <header>
             <div class="header_content">
@@ -36,22 +41,24 @@
                 <h1>Log in</h1>
                 <div class="underline"></div>
 
-                <form class="login_form">
+                <form class="login_form" onsubmit="handleLoginSubmit(event)" novalidate>
                     <div class="field">
-                        <input id="email" type="email" name="email" placeholder="EMail" required>
-                        <img class="input_icon" src="./assets/icon/mail.svg" alt="Mail Logo">
+                        <input id="email" type="email" name="email" placeholder="Email">
+                        <img class="input_icon" src="./assets/icon/mail.svg" alt="Email Logo">
                     </div>
 
-                    <div class="field">
-                        <input id="password" type="passwort" name="passwort" placeholder="Password" oninput="handlePasswordInput()" required>
-                        <img class="input_icon" src="./assets/icon/lock.svg" alt="Password Logo">
+                    <div class="field password-field">
+                        <input id="password" type="password" name="password" placeholder="Password" oninput="handleLoginPasswordInput()">
+                        <button id="loginPasswordToggle" class="input_icon_button" type="button" onclick="toggleLoginPasswordVisibility()" aria-label="Toggle password visibility">
+                            <img id="loginPasswordIcon" class="input_icon" src="./assets/icon/lock.svg" alt="Password visibility">
+                        </button>
                     </div>
 
-                    <div id="loginMessage" class="login_message"></div>
+                    <div id="loginMessage" class="form_message"></div>
 
                     <div id="btnGroup" class="btn_group">
-                        <button class="btn login_btn" onclick="logIn()">Log in</button>
-                        <button class="guest_btn" onclick="demoLogin(event)">Guest Log in</button>
+                        <button class="btn login_btn" type="submit">Log in</button>
+                        <button class="guest_btn" type="button" onclick="guestLogIn(event)">Guest Log in</button>
                     </div>
 
                 </form>

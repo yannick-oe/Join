@@ -4,6 +4,7 @@ const storageState = {
   firebaseBaseUrl: "https://join-41a54-default-rtdb.europe-west1.firebasedatabase.app/",
   contactsKey: "joinContacts",
   tasksKey: "joinTasks",
+  usersKey: "joinUsers",
 };
 // #endregion
 
@@ -46,6 +47,26 @@ async function saveTasks(list) {
     return true;
   }
   return await saveTasksToFirebase(list);
+}
+
+/**
+ * Loads users from the active storage provider.
+ */
+async function loadUsers() {
+  if (!storageState.useFirebase) return loadUsersFromLocal();
+  return await loadUsersFromFirebase();
+}
+
+/**
+ * Saves users to the active storage provider.
+ * @param {Array} list
+ */
+async function saveUsers(list) {
+  if (!storageState.useFirebase) {
+    saveUsersToLocal(list);
+    return true;
+  }
+  return await saveUsersToFirebase(list);
 }
 
 /**
@@ -104,6 +125,28 @@ function loadTasksFromLocal() {
 function saveTasksToLocal(list) {
   localStorage.setItem(storageState.tasksKey, JSON.stringify(list || []));
 }
+
+/**
+ * Loads users from localStorage.
+ */
+function loadUsersFromLocal() {
+  const raw = localStorage.getItem(storageState.usersKey);
+  if (!raw) return [];
+  try {
+    const list = JSON.parse(raw);
+    return Array.isArray(list) ? list : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+/**
+ * Saves users to localStorage.
+ * @param {Array} list
+ */
+function saveUsersToLocal(list) {
+  localStorage.setItem(storageState.usersKey, JSON.stringify(list || []));
+}
 // #endregion
 
 // #region Firebase
@@ -156,6 +199,29 @@ async function saveTasksToFirebase(list) {
 }
 
 /**
+ * Loads users from Firebase Realtime Database.
+ */
+async function loadUsersFromFirebase() {
+  const url = buildFirebaseUrl("users.json");
+  const response = await fetch(url);
+  if (!response.ok) return [];
+  const data = await response.json();
+  if (!data || data.error) return [];
+  return normalizeUsersData(data);
+}
+
+/**
+ * Saves users to Firebase Realtime Database.
+ * @param {Array} list
+ */
+async function saveUsersToFirebase(list) {
+  const url = buildFirebaseUrl("users.json");
+  const body = JSON.stringify(list || []);
+  const response = await fetch(url, { method: "PUT", headers: { "Content-Type": "application/json" }, body });
+  return response.ok;
+}
+
+/**
  * Builds the Firebase payload as an object keyed by contact id.
  * @param {Array} list
  */
@@ -183,6 +249,16 @@ function normalizeTasksData(data) {
   if (Array.isArray(data)) return data.filter((task) => task && typeof task === "object");
   if (!data || typeof data !== "object") return [];
   return Object.values(data).filter((task) => task && typeof task === "object");
+}
+
+/**
+ * Normalizes Firebase users payload.
+ * @param {Array|Object} data
+ */
+function normalizeUsersData(data) {
+  if (Array.isArray(data)) return data.filter((user) => user && typeof user === "object");
+  if (!data || typeof data !== "object") return [];
+  return Object.values(data).filter((user) => user && typeof user === "object");
 }
 
 /**

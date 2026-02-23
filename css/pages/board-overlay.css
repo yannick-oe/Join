@@ -122,6 +122,40 @@
 	gap: 8px;
 }
 
+.board-task-detail-actions .link-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding-left: 0;
+	border-radius: 0;
+}
+
+.board-task-detail-actions .link-button img {
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
+	transition: filter 120ms ease;
+}
+
+.board-task-detail-actions .link-button + .link-button {
+	border-left: 1px solid #d1d1d1;
+	padding-left: 12px;
+}
+
+.board-task-detail-actions .link-button:hover {
+	color: #29abe2;
+	background: transparent;
+	transform: none;
+}
+
+.board-task-detail-actions .link-button:hover img {
+	filter: brightness(0) saturate(100%) invert(61%) sepia(74%) saturate(1710%) hue-rotate(165deg) brightness(91%) contrast(89%);
+}
+
+.board-task-detail-row img[src*="medium-prio.svg"] {
+	filter: brightness(0) saturate(100%) invert(66%) sepia(96%) saturate(1608%) hue-rotate(1deg) brightness(101%) contrast(104%);
+}
+
 .board-add-task-panel {
 	width: 100%;
 	max-width: 1120px;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legal Notice</title>
+    <link rel="shortcut icon" href="../assets/icon/Capa 1.svg" type="image/x-icon">
 
     <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/fonts.css">
@@ -16,7 +17,7 @@
     <script src="../scripts/pages/header.js"></script>
 </head>
 
-<body onclick="closeMenu()">
+<body onload="initProtectedPageAuth()" onclick="closeMenu()">
       <header>
         <div class="responsive-header-line">
             <p class="header-line">Kanban Project Management Tool</p>
@@ -27,12 +28,12 @@
                 <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
             </a>
             <div class="dropdown">
-                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()">JJ</button>
+                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()"></button>
                     <div id="myDropdown" class="dropdown-content d_none">
                         <a href="./help.html"><p class="text-align-center show-responsive">Help</p></a>
                         <a href="./legal-notice.html"><p class="text-align-center">Legal Notice</p></a>
                         <a href="./privacy-policy.html"><p class="text-align-center">Privacy Policy</p></a>
-                        <a href="/index.html"><p class="text-align-center">Log out</p></a>
+                        <a href="/index.html" onclick="return logOutUser(event)"><p class="text-align-center">Log out</p></a>
                     </div>
                 </div>
             </div>
@@ -102,12 +103,12 @@
             <h3 class="font-size20">Imprint</h3>
             <ul class="contact">
                 <li>Michael K., Tuncay C., Yannick O.</li>
-                <li>Street</li>
-                <li>Location</li>
+                <li>Musterstraße 12</li>
+                <li>22767 Hamburg, Germany</li>
             </ul>
 
             <h3 class="h-class">Exploring the Board</h3>
-            <p class="p-class">Email: <a href="mailto:EMAILADDRESS">E-Mail Adress</a></p>
+            <p class="p-class">Email: <a href="mailto:team.join.project@outlook.com">team.join.project@outlook.com</a></p>
 
             <h3 class="h-class">Acceptance of terms</h3>
             <p class="p-class"> By accessing and using <span class="join">Join</span> (Product), you acknowledge and agree to the following terms and conditions and 
@@ -146,7 +147,7 @@
                cost, or liability (including reasonable legal fees) arising out of or relating to your use of <span class="join">Join</span>
                and/or your breach of this Legal Notice.</p>
 
-            <p>For any questions or notices, please contact us at <a href="mailto:Email Adress">Email Adress</a>.</p>
+            <p>For any questions or notices, please contact us at <a href="mailto:team.join.project@outlook.com">team.join.project@outlook.com</a>.</p>
 
             <p>Date: February 17, 2026</p>
             </div>
