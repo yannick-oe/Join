@@ -31,7 +31,7 @@ body, html {
 
 .summary-second-line {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     padding-bottom: 28px;
     gap: 32px;
