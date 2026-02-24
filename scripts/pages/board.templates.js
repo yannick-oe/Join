@@ -6,7 +6,7 @@
  */
 function getBoardTaskCardTemplate(viewModel) {
 	return `
-		<article class="board-task-card" draggable="true" ondragstart="startTaskDrag(event, '${viewModel.id}')" onclick="openBoardTaskDetail('${viewModel.id}')">
+		<article class="board-task-card" data-task-id="${viewModel.id}" draggable="true" ondragstart="startTaskDrag(event, '${viewModel.id}')" ondragend="endTaskDrag()" onclick="openBoardTaskDetail('${viewModel.id}')">
 			<p class="board-card-category ${viewModel.categoryClass}">${viewModel.categoryLabel}</p>
 			<h3 class="board-card-title">${viewModel.title}</h3>
 			<p class="board-card-description">${viewModel.description}</p>

@@ -189,10 +189,27 @@ body {
 	box-sizing: border-box;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
 	cursor: pointer;
+	transition: transform 100ms ease, opacity 100ms ease;
 }
 
 .board-task-card:hover {
 	transform: translateY(-1px);
+}
+
+.board-task-card.is-dragging-origin {
+	opacity: 0.45;
+}
+
+.board-drop-preview {
+	height: 128px;
+	border-radius: 24px;
+	border: 2px dashed #29abe2;
+	background: rgba(41, 171, 226, 0.08);
+	box-sizing: border-box;
+}
+
+.board-empty-state-hidden {
+	display: none;
 }
 
 .board-card-category {

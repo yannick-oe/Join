@@ -4,6 +4,8 @@ const boardState = {
 	tasks: [],
 	searchValue: "",
 	dragTaskId: "",
+	dragOverStatus: "",
+	dragPreviewIndex: -1,
 	overlayTargetStatus: "todo",
 	overlayEditTaskId: "",
 	hasDocumentClickBinding: false,
