@@ -7,10 +7,6 @@
         box-sizing: border-box;
     }
 
-    .join_logo {
-        margin-left: 38px;
-    }
-
     .header_right {
         gap: 18px;
         margin-right: clamp(8px, 2vw, 32px);
@@ -149,7 +145,7 @@
     }
 
     .content_wrapper {
-        margin-top: 120px;
+        margin-top: 100px;
     }
 
     .join_logo {
@@ -169,7 +165,7 @@
 
     .no_user_content {
         display: flex;
-        margin-top: -200px;
+        margin-top: -140px;
         flex-direction: row;
         justify-content: center;
         align-items: center;
@@ -191,7 +187,7 @@
     .login {
         width: min(396px, calc(100vw - 32px));
         margin-top: 0;
-        height: 475px;
+        height: 500px;
         min-height: 430px;
         border-radius: 20px;
         padding: 30px 16px 22px;
