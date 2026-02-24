@@ -1,13 +1,5 @@
 @media (max-width:1100px) {
 
-    .summary-main,
-    .add-task-main,
-    .board-main,
-    .contacts-main,
-    .help-main {
-        padding-left: 150px;
-    }
-
     .main-privacy,
     .legal-main {
         padding-left: 260px;
@@ -135,8 +127,8 @@
     }
 
     .overlay-avatar {
-        margin-top: -58px;
-        margin-bottom: 12px;
+        margin-top: -155px;
+        margin-bottom: 30px;
     }
 
     .overlay-form {
@@ -500,6 +492,16 @@
 
     .contacts-list {
         height: calc(100vh - 240px);
+    }
+
+    .success-toast-text {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .success-toast {
+        bottom: 100px;
+        padding: 10px 10px;
     }
 }
 
