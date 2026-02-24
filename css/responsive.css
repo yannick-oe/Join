@@ -1,24 +1,26 @@
 /* Sumary Repsonsive */
 
-@media (max-width: 830px) {
-    .summary-main {
-        padding-left: 150px;
+@media (max-width: 1190px) {
+    .sumary-main-layout {
+        flex-direction: column;
     }
-}
 
-@media (max-width: 750px) {
-    .summary-main {
+    .summary-box {
         padding-left: 0;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 960px) {
+    h1 {
+    padding-left: 70px;
+    }
+
     .summary-first-line {
         flex-direction: column;
         align-items: start;
         gap: 6px;
     }
-    
+
      .seperator {
         display: none;
     }
@@ -27,25 +29,39 @@
         background-color: #29ABE2;
         height: 2px;
         width: 90px;
+        position: absolute;
+        left: 300px;
     }
 
-    .seperator-repsonsive {
-        padding-left: 50px;
-        padding-top: 15px;
+    .summary-first {
+        padding-left: 70px;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        font-size: 20px;
     }
 
+}
+
+
+@media (max-width: 750px) {
+    .summary-main {
+        padding-left: 0;
+    }
+
+    .seperator-two {
+        left: 70px;
+        }
+}
+
+@media (max-width: 600px) {
      h1 {
         padding-left: 50px;
         margin-block-start: 0em;
         margin-block-end: 0em;
     }
 
-    .summary-first {
-        padding-left: 50px;
-        margin-block-start: 0em;
-        margin-block-end: 0em;
-        font-size: 20px;
-    }
+    .sumary-main-layout {
+        flex-direction: row;
 
     .summary-box {
         padding-left: 0px;
@@ -62,6 +78,35 @@
     .greeting {
         display: none;
     }
+
+    .size {
+        width: 250px;
+    }
+
+    .sumary-third-line {
+        width: 530px;
+        margin: 0 auto;
+    }
+
+    .box-size {
+        width: 155px;
+    }
+
+    .summary-first {
+        padding-left: 10px;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+    }
+
+    .seperator-two {
+        left: 10px;
+    }
+
+    h1 {
+        padding-left: 10px;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+    }
 }
 
 @media (max-width: 420px) {
@@ -70,7 +115,7 @@
     }
 
     .gap15 {
-        gap: 4px;
+        gap: 0px;
     }
 
     .summary-second-line {
@@ -82,7 +127,6 @@
     .sumary-third-line {
         margin: 0px 56px;
         width: 285px;
-        margin-bottom: 20px !important;
     }
 
 
@@ -356,3 +400,4 @@
 
     }
 }
+
