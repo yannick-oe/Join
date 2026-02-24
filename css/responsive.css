@@ -1,12 +1,11 @@
-@media (max-width:1100px) {
+@media (max-width:1200px) {
 
-    .summary-main,
-    .add-task-main,
-    .board-main,
-    .contacts-main,
-    .help-main {
-        padding-left: 150px;
+    .board-columns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
+
+@media (max-width:1100px) {
 
     .main-privacy,
     .legal-main {
@@ -135,8 +134,8 @@
     }
 
     .overlay-avatar {
-        margin-top: -58px;
-        margin-bottom: 12px;
+        margin-top: -155px;
+        margin-bottom: 30px;
     }
 
     .overlay-form {
@@ -146,6 +145,63 @@
 
     .overlay-actions {
         justify-content: center;
+    }
+
+        .add-task-content {
+        padding: 96px 20px 120px;
+    }
+
+    .add-task-title {
+        font-size: 47px;
+        margin-bottom: 24px;
+    }
+
+    .task-form-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .task-form-grid::before {
+        display: none;
+    }
+
+    .task-form-left,
+    .task-form-right {
+        grid-column: 1;
+    }
+
+    .task-required-note {
+        margin-top: 4px;
+        font-size: 14px;
+    }
+
+    .task-form-footer {
+        margin-top: 28px;
+        position: static;
+        bottom: auto;
+        background: transparent;
+        padding: 0;
+        z-index: auto;
+        justify-content: flex-end;
+    }
+
+    .task-clear-button,
+    .task-create-button {
+        height: 48px;
+        font-size: 18px;
+        padding: 0 18px;
+    }
+}
+
+@media (max-width:1050px) {
+    .responsive-search {
+        display: flex;
+        margin-bottom: 14px;
+        width: 100%;
+    }
+
+    .desktop-search {
+        display: none;
     }
 }
 
@@ -228,51 +284,6 @@
         display: none;
     }
 
-    .add-task-content {
-        padding: 96px 20px 120px;
-    }
-
-    .add-task-title {
-        font-size: 47px;
-        margin-bottom: 24px;
-    }
-
-    .task-form-grid {
-        grid-template-columns: 1fr;
-        gap: 22px;
-    }
-
-    .task-form-grid::before {
-        display: none;
-    }
-
-    .task-form-left,
-    .task-form-right {
-        grid-column: 1;
-    }
-
-    .task-required-note {
-        margin-top: 4px;
-        font-size: 14px;
-    }
-
-    .task-form-footer {
-        margin-top: 28px;
-        position: static;
-        bottom: auto;
-        background: transparent;
-        padding: 0;
-        z-index: auto;
-        justify-content: flex-end;
-    }
-
-    .task-clear-button,
-    .task-create-button {
-        height: 48px;
-        font-size: 18px;
-        padding: 0 18px;
-    }
-
     .board-content {
         padding: 96px 20px 24px;
     }
@@ -296,12 +307,6 @@
 
     .desktop-search {
         display: none;
-    }
-
-    .responsive-search {
-        display: flex;
-        margin-bottom: 14px;
-        width: 100%;
     }
 
     .board-search {
@@ -332,6 +337,11 @@
     .board-column-drop-zone {
         max-height: none;
         overflow: visible;
+        flex-direction: row;
+    }
+
+    .board-task-card {
+        max-width: 252px;
     }
 
     .contacts-main {
@@ -407,6 +417,13 @@
         color: #29abe2;
         font-weight: 700;
         text-align: center;
+    }
+}
+
+@media (max-width:600px) {
+
+    .board-column-drop-zone {
+        flex-direction: column;
     }
 }
 
@@ -491,7 +508,7 @@
 
     .task-footer-actions {
         width: 100%;
-        justify-content: center;
+        justify-content: flex-end;
     }
 
     .board-task-detail-title {
@@ -500,6 +517,16 @@
 
     .contacts-list {
         height: calc(100vh - 240px);
+    }
+
+    .success-toast-text {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .success-toast {
+        bottom: 100px;
+        padding: 10px 10px;
     }
 }
 

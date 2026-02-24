@@ -88,10 +88,6 @@
         z-index: 900;
     }
 
-    .responsive-footer span {
-        color: #cdcdcd;
-    }
-
     .responsive-footer a {
         height: 100%;
         flex: 1;
@@ -112,6 +108,7 @@
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 14px;
+        color: #cdcdcd;
     }
 
     .responsive-footer a.is-active {

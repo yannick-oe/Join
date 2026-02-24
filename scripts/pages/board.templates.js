@@ -222,6 +222,7 @@ function getBoardAddTaskOverlayRightColumnTemplate() {
 			${getBoardAddTaskAssignedBlockTemplate()}
 			${getBoardAddTaskCategoryBlockTemplate()}
 			${getBoardAddTaskSubtaskBlockTemplate()}
+			<p class="task-required-note"><span>*</span> This field is required</p>
 		</section>
 	`;
 }
@@ -292,7 +293,6 @@ function getBoardAddTaskSubtaskBlockTemplate() {
 function getBoardAddTaskOverlayFooterTemplate(submitLabel) {
 	return `
 		<div class="task-form-footer">
-			<p class="task-required-note"><span>*</span>This field is required</p>
 			<div class="task-footer-actions">
 				<button class="button-ghost task-clear-button" type="button" onclick="closeBoardAddTaskOverlay()">Cancel ×</button>
 				<button class="button-primary task-create-button" type="submit">${submitLabel}</button>

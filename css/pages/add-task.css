@@ -59,7 +59,7 @@ body {
 .task-label {
     font-size: 20px;
     color: #2a3647;
-    margin: 0 0 8px;
+    margin: 8px 0 8px;
 }
 
 .required-star,
