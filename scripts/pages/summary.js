@@ -308,7 +308,7 @@ function openBoardPage() {
  * Shows mobile greeting intro before summary cards.
  */
 function runSummaryMobileIntro() {
-	if (!window.matchMedia("(max-width: 750px)").matches) return;
+	if (!window.matchMedia("(max-width: 1180px)").matches) return;
 	const sessionUser = getSessionUser();
 	if (!sessionUser) return;
 	const greeting = getTimeBasedGreeting();
