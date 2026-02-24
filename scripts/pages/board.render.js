@@ -201,14 +201,6 @@ function handleBoardDocumentClick(event) {
 }
 
 /**
- * Enables drop area behavior.
- * @param {DragEvent} event
- */
-function allowTaskDrop(event) {
-	event.preventDefault();
-}
-
-/**
  * Starts dragging one task card.
  * @param {DragEvent} event
  * @param {string} taskId
@@ -218,6 +210,33 @@ function startTaskDrag(event, taskId) {
 	boardState.dragTaskId = taskId;
 	event.dataTransfer.setData("text/plain", taskId);
 	event.dataTransfer.effectAllowed = "move";
+	const taskCard = event.currentTarget?.closest(".board-task-card") || event.target?.closest(".board-task-card");
+	if (taskCard) taskCard.classList.add("is-dragging-origin");
+}
+
+/**
+ * Handles dragover to show drop preview index in one status column.
+ * @param {DragEvent} event
+ * @param {string} status
+ */
+function allowTaskDrop(event, status) {
+	event.preventDefault();
+	if (!boardState.dragTaskId) return;
+	const normalizedStatus = boardNormalizeStatus(status);
+	const dropZone = document.getElementById(boardState.columnIds[normalizedStatus]);
+	if (!dropZone) return;
+	boardState.dragOverStatus = normalizedStatus;
+	const visibleCards = getBoardDropTargetCards(dropZone);
+	const previewIndex = getBoardDropPreviewIndex(event, visibleCards);
+	boardState.dragPreviewIndex = previewIndex;
+	renderBoardDropPreview(dropZone, visibleCards, previewIndex);
+}
+
+/**
+ * Ends task drag interaction and resets preview state.
+ */
+function endTaskDrag() {
+	clearBoardDropPreviewState();
 }
 
 /**
@@ -229,11 +248,166 @@ async function dropTaskToStatus(event, nextStatus) {
 	event.preventDefault();
 	const taskId = event.dataTransfer.getData("text/plain") || boardState.dragTaskId;
 	if (!taskId) return;
-	const task = findBoardTaskById(taskId);
-	if (!task) return;
-	task.status = boardNormalizeStatus(nextStatus);
+	const normalizedStatus = boardNormalizeStatus(nextStatus);
+	const targetIndex = boardState.dragOverStatus === normalizedStatus && boardState.dragPreviewIndex >= 0
+		? boardState.dragPreviewIndex
+		: getBoardStatusTaskCount(normalizedStatus);
+	moveBoardTaskToStatusIndex(taskId, normalizedStatus, targetIndex);
 	await persistBoardTasks();
+	clearBoardDropPreviewState();
 	renderBoardColumns();
+}
+
+/**
+ * Moves one task to status and insertion index within that status list.
+ * @param {string} taskId
+ * @param {string} nextStatus
+ * @param {number} targetIndex
+ */
+function moveBoardTaskToStatusIndex(taskId, nextStatus, targetIndex) {
+	const tasks = Array.isArray(boardState.tasks) ? boardState.tasks.slice() : [];
+	const currentIndex = tasks.findIndex((task) => task && task.id === taskId);
+	if (currentIndex < 0) return;
+	const [task] = tasks.splice(currentIndex, 1);
+	task.status = nextStatus;
+	const clampedTargetIndex = Math.max(0, Math.min(Number(targetIndex) || 0, getBoardStatusTaskCountFromList(tasks, nextStatus)));
+	const insertIndex = getBoardInsertArrayIndexByStatus(tasks, nextStatus, clampedTargetIndex);
+	tasks.splice(insertIndex, 0, task);
+	boardState.tasks = tasks;
+}
+
+/**
+ * Returns insertion index in full task array for one status-local index.
+ * @param {Array} tasks
+ * @param {string} status
+ * @param {number} targetIndex
+ */
+function getBoardInsertArrayIndexByStatus(tasks, status, targetIndex) {
+	let statusCount = 0;
+	for (let index = 0; index < tasks.length; index++) {
+		if (boardNormalizeStatus(tasks[index]?.status) !== status) continue;
+		if (statusCount === targetIndex) return index;
+		statusCount++;
+	}
+	return tasks.length;
+}
+
+/**
+ * Returns total number of tasks in one status.
+ * @param {string} status
+ */
+function getBoardStatusTaskCount(status) {
+	return getBoardStatusTaskCountFromList(boardState.tasks, status);
+}
+
+/**
+ * Returns total number of tasks in one status from task list.
+ * @param {Array} tasks
+ * @param {string} status
+ */
+function getBoardStatusTaskCountFromList(tasks, status) {
+	let count = 0;
+	for (let index = 0; index < tasks.length; index++) {
+		if (boardNormalizeStatus(tasks[index]?.status) === status) count++;
+	}
+	return count;
+}
+
+/**
+ * Returns drop-target cards excluding currently dragged card.
+ * @param {HTMLElement} dropZone
+ */
+function getBoardDropTargetCards(dropZone) {
+	const cards = Array.from(dropZone.querySelectorAll(".board-task-card"));
+	return cards.filter((card) => card.dataset.taskId !== boardState.dragTaskId);
+}
+
+/**
+ * Computes insertion preview index by pointer position.
+ * @param {DragEvent} event
+ * @param {HTMLElement[]} cards
+ */
+function getBoardDropPreviewIndex(event, cards) {
+	const pointerY = Number(event.clientY || 0);
+	for (let index = 0; index < cards.length; index++) {
+		const rect = cards[index].getBoundingClientRect();
+		if (pointerY < rect.top + rect.height / 2) return index;
+	}
+	return cards.length;
+}
+
+/**
+ * Renders one placeholder preview in drop zone.
+ * @param {HTMLElement} dropZone
+ * @param {HTMLElement[]} cards
+ * @param {number} previewIndex
+ */
+function renderBoardDropPreview(dropZone, cards, previewIndex) {
+	clearBoardPreviewFromOtherDropZones(dropZone);
+	const placeholder = getOrCreateBoardDropPreviewElement(dropZone);
+	hideBoardDropZoneEmptyState(dropZone);
+	const targetCard = cards[previewIndex] || null;
+	if (targetCard) {
+		dropZone.insertBefore(placeholder, targetCard);
+		return;
+	}
+	dropZone.appendChild(placeholder);
+}
+
+/**
+ * Clears preview placeholders from all non-active drop zones.
+ * @param {HTMLElement} activeDropZone
+ */
+function clearBoardPreviewFromOtherDropZones(activeDropZone) {
+	const dropZones = document.querySelectorAll(".board-column-drop-zone");
+	for (let index = 0; index < dropZones.length; index++) {
+		if (dropZones[index] === activeDropZone) continue;
+		const placeholder = dropZones[index].querySelector(".board-drop-preview");
+		if (placeholder) placeholder.remove();
+		const emptyState = dropZones[index].querySelector(".board-empty-state");
+		if (emptyState) emptyState.classList.remove("board-empty-state-hidden");
+	}
+}
+
+/**
+ * Returns existing preview element or creates one.
+ * @param {HTMLElement} dropZone
+ */
+function getOrCreateBoardDropPreviewElement(dropZone) {
+	let placeholder = dropZone.querySelector(".board-drop-preview");
+	if (placeholder) return placeholder;
+	placeholder = document.createElement("div");
+	placeholder.className = "board-drop-preview";
+	return placeholder;
+}
+
+/**
+ * Hides empty-state element inside drop zone while dragging.
+ * @param {HTMLElement} dropZone
+ */
+function hideBoardDropZoneEmptyState(dropZone) {
+	const emptyState = dropZone.querySelector(".board-empty-state");
+	if (!emptyState) return;
+	emptyState.classList.add("board-empty-state-hidden");
+}
+
+/**
+ * Clears drag classes and state from board.
+ */
+function clearBoardDropPreviewState() {
+	const dropZones = document.querySelectorAll(".board-column-drop-zone");
+	for (let index = 0; index < dropZones.length; index++) {
+		const placeholder = dropZones[index].querySelector(".board-drop-preview");
+		if (placeholder) placeholder.remove();
+		const emptyState = dropZones[index].querySelector(".board-empty-state");
+		if (emptyState) emptyState.classList.remove("board-empty-state-hidden");
+	}
+	const draggingCards = document.querySelectorAll(".board-task-card.is-dragging-origin");
+	for (let index = 0; index < draggingCards.length; index++) {
+		draggingCards[index].classList.remove("is-dragging-origin");
+	}
 	boardState.dragTaskId = "";
+	boardState.dragOverStatus = "";
+	boardState.dragPreviewIndex = -1;
 }
 // #endregion

@@ -26,6 +26,12 @@
 
 }
 
+@media (min-width: 749px){
+    .no_user_content{
+        display: none;
+    }
+}
+
 @media (max-width: 750px) {
     aside {
         display: none;
@@ -88,10 +94,6 @@
         z-index: 900;
     }
 
-    .responsive-footer span {
-        color: #cdcdcd;
-    }
-
     .responsive-footer a {
         height: 100%;
         flex: 1;
@@ -112,6 +114,7 @@
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 14px;
+        color: #cdcdcd;
     }
 
     .responsive-footer a.is-active {

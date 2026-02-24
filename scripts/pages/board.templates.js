@@ -6,7 +6,7 @@
  */
 function getBoardTaskCardTemplate(viewModel) {
 	return `
-		<article class="board-task-card" draggable="true" ondragstart="startTaskDrag(event, '${viewModel.id}')" onclick="openBoardTaskDetail('${viewModel.id}')">
+		<article class="board-task-card" data-task-id="${viewModel.id}" draggable="true" ondragstart="startTaskDrag(event, '${viewModel.id}')" ondragend="endTaskDrag()" onclick="openBoardTaskDetail('${viewModel.id}')">
 			<p class="board-card-category ${viewModel.categoryClass}">${viewModel.categoryLabel}</p>
 			<h3 class="board-card-title">${viewModel.title}</h3>
 			<p class="board-card-description">${viewModel.description}</p>
@@ -222,6 +222,7 @@ function getBoardAddTaskOverlayRightColumnTemplate() {
 			${getBoardAddTaskAssignedBlockTemplate()}
 			${getBoardAddTaskCategoryBlockTemplate()}
 			${getBoardAddTaskSubtaskBlockTemplate()}
+			<p class="task-required-note"><span>*</span> This field is required</p>
 		</section>
 	`;
 }
@@ -292,7 +293,6 @@ function getBoardAddTaskSubtaskBlockTemplate() {
 function getBoardAddTaskOverlayFooterTemplate(submitLabel) {
 	return `
 		<div class="task-form-footer">
-			<p class="task-required-note"><span>*</span>This field is required</p>
 			<div class="task-footer-actions">
 				<button class="button-ghost task-clear-button" type="button" onclick="closeBoardAddTaskOverlay()">Cancel ×</button>
 				<button class="button-primary task-create-button" type="submit">${submitLabel}</button>
