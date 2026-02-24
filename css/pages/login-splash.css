@@ -6,7 +6,7 @@
     height: auto;
     transform: translate(-50%, -50%);
     opacity: 0;
-    z-index: 20;
+    z-index: 1001;
     pointer-events: none;
     will-change: left, top, width, opacity, transform;
 }
@@ -15,10 +15,10 @@
     position: fixed;
     inset: 0;
     background-color: #f6f7f8;
-    z-index: 19;
+    z-index: 1000;
     opacity: 1;
     visibility: visible;
-    transition: opacity 120ms ease, visibility 0s linear 120ms;
+    transition: opacity 280ms ease, visibility 0s linear 280ms;
 }
 
 .login_splash_screen.is-hidden {
@@ -35,7 +35,7 @@
     top: var(--logo-target-top);
     width: 100px;
     transform: translate(-50%, -50%);
-    transition: left 120ms ease, top 120ms ease, width 120ms ease, opacity 120ms ease;
+    transition: left 680ms ease, top 680ms ease, width 680ms ease, opacity 250ms ease;
 }
 
 .login_splash_logo.is-hidden {

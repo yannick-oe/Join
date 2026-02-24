@@ -4,6 +4,7 @@
 async function initSummaryPage() {
 	initProtectedPageAuth();
 	renderSummaryGreeting();
+	runSummaryMobileIntro();
 	await renderSummaryMetrics();
 }
 
@@ -301,4 +302,26 @@ function setSummaryGreetingName(name) {
  */
 function openBoardPage() {
 	window.location.href = "./board.html";
+}
+
+/**
+ * Shows mobile greeting intro before summary cards.
+ */
+function runSummaryMobileIntro() {
+	if (!window.matchMedia("(max-width: 750px)").matches) return;
+	const sessionUser = getSessionUser();
+	if (!sessionUser) return;
+	const greeting = getTimeBasedGreeting();
+	const isGuest = sessionUser.role === "guest";
+	const introTitle = isGuest ? `${greeting}!` : `${greeting},`;
+	const introName = isGuest ? "" : String(sessionUser.name || "");
+	const intro = document.createElement("section");
+	intro.className = "summary-mobile-intro";
+	intro.innerHTML = `
+		<p class="summary-mobile-intro-title">${introTitle}</p>
+		${introName ? `<p class="summary-mobile-intro-name">${introName}</p>` : ""}
+	`;
+	document.body.appendChild(intro);
+	setTimeout(() => intro.classList.add("is-hidden"), 1300);
+	setTimeout(() => intro.remove(), 1650);
 }

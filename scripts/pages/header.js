@@ -112,3 +112,15 @@ function logOutUser(event) {
 function redirectToLoginPage() {
     window.location.href = "/index.html";
 }
+
+/**
+ * Navigates one step back in browser history, with a fallback URL.
+ * @param {string} fallbackUrl
+ */
+function goBackOrFallback(fallbackUrl) {
+    if (window.history.length > 1) {
+        window.history.back();
+        return;
+    }
+    window.location.href = fallbackUrl || "/index.html";
+}
