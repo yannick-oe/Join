@@ -26,6 +26,12 @@
 
 }
 
+@media (min-width: 749px){
+    .no_user_content{
+        display: none;
+    }
+}
+
 @media (max-width: 750px) {
     aside {
         display: none;
