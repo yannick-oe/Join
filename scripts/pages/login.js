@@ -27,6 +27,15 @@ function handleLoginPasswordInput() {
 }
 
 /**
+ * Prefills demo login credentials when email gets focus.
+ */
+function prefillDemoLogin() {
+  setLoginInputValue("email", "sofia@gmail.com");
+  setLoginInputValue("password", "123456");
+  syncLoginPasswordToggle();
+}
+
+/**
  * Toggles login password visibility.
  */
 function toggleLoginPasswordVisibility() {
