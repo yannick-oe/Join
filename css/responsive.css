@@ -146,6 +146,51 @@
     .overlay-actions {
         justify-content: center;
     }
+
+        .add-task-content {
+        padding: 96px 20px 120px;
+    }
+
+    .add-task-title {
+        font-size: 47px;
+        margin-bottom: 24px;
+    }
+
+    .task-form-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .task-form-grid::before {
+        display: none;
+    }
+
+    .task-form-left,
+    .task-form-right {
+        grid-column: 1;
+    }
+
+    .task-required-note {
+        margin-top: 4px;
+        font-size: 14px;
+    }
+
+    .task-form-footer {
+        margin-top: 28px;
+        position: static;
+        bottom: auto;
+        background: transparent;
+        padding: 0;
+        z-index: auto;
+        justify-content: flex-end;
+    }
+
+    .task-clear-button,
+    .task-create-button {
+        height: 48px;
+        font-size: 18px;
+        padding: 0 18px;
+    }
 }
 
 @media (max-width:1050px) {
@@ -237,51 +282,6 @@
 
     .greeting {
         display: none;
-    }
-
-    .add-task-content {
-        padding: 96px 20px 120px;
-    }
-
-    .add-task-title {
-        font-size: 47px;
-        margin-bottom: 24px;
-    }
-
-    .task-form-grid {
-        grid-template-columns: 1fr;
-        gap: 22px;
-    }
-
-    .task-form-grid::before {
-        display: none;
-    }
-
-    .task-form-left,
-    .task-form-right {
-        grid-column: 1;
-    }
-
-    .task-required-note {
-        margin-top: 4px;
-        font-size: 14px;
-    }
-
-    .task-form-footer {
-        margin-top: 28px;
-        position: static;
-        bottom: auto;
-        background: transparent;
-        padding: 0;
-        z-index: auto;
-        justify-content: space-between;
-    }
-
-    .task-clear-button,
-    .task-create-button {
-        height: 48px;
-        font-size: 18px;
-        padding: 0 18px;
     }
 
     .board-content {
@@ -508,7 +508,7 @@
 
     .task-footer-actions {
         width: 100%;
-        justify-content: center;
+        justify-content: flex-end;
     }
 
     .board-task-detail-title {
