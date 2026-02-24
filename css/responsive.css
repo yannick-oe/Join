@@ -380,12 +380,6 @@
         width: 100%
     }
 
-    .board-add-task {
-        font-size: 0; 
-        padding: 10px 14px;
-        gap: 0;
-    }
-
     .board-add-task span {
         font-size: 20px; 
     }
@@ -604,6 +598,12 @@
         display: flex;
         margin-bottom: 14px;
         width: 100%;
+    }
+
+     .board-add-task {
+        font-size: 0; 
+        padding: 10px 14px;
+        gap: 0;
     }
 
     .desktop-search {
