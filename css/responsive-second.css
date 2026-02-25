@@ -22,14 +22,12 @@
 
 }
 
-@media (min-width: 749px){
-    .no_user_content{
+@media (max-width: 768px) {
+    aside {
         display: none;
     }
-}
 
-@media (max-width: 750px) {
-    aside {
+    .no_user_content{
         display: none;
     }
 
