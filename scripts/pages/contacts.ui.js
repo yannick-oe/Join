@@ -49,6 +49,7 @@ function getLetterGroupTemplate(group) {
     <div class="letter-group">
       <div class="letter-heading">${group.letter}</div>
       ${buildRowsHtml(group.items)}
+            <div class="letter-group-separator"></div>
     </div>
   `;
 }
@@ -257,8 +258,8 @@ function editContact() {
 async function deleteContact() {
     closeContactMenu();
     if (!contactsState.activeContactId) return;
-    await confirmAndDeleteContact(contactsState.activeContactId);
-    if (typeof isContactsMobileViewport === "function" && isContactsMobileViewport()) {
+    const deleted = await confirmAndDeleteContact(contactsState.activeContactId);
+    if (deleted && typeof isContactsMobileViewport === "function" && isContactsMobileViewport()) {
         window.location.href = "./contacts.html";
     }
 }

@@ -3,6 +3,8 @@ const contactsState = {
     contacts: [],
     activeContactId: null,
     editContactId: null,
+    pendingDeleteContactId: null,
+    deleteConfirmResolver: null,
     palette: ["#FF7A00", "#9327FF", "#6E52FF", "#FC71FF", "#FFBB2B", "#1FD7C1", "#0038FF", "#C3FF2B"],
 };
 
@@ -134,10 +136,36 @@ function finalizeContactSubmit(isNewContact) {
  * @param {string} contactId
  */
 async function confirmAndDeleteContact(contactId) {
-    const confirmed = window.confirm("Delete this contact?");
-    if (!confirmed) return;
-    if (contactId) contactsState.editContactId = contactId;
+    const targetContactId = contactId || contactsState.editContactId || contactsState.activeContactId;
+    if (!targetContactId) return false;
+    contactsState.pendingDeleteContactId = targetContactId;
+    setVisible(contactsDom.contactDeleteConfirmOverlay, true);
+    return new Promise((resolve) => {
+        contactsState.deleteConfirmResolver = resolve;
+    });
+}
+
+/**
+ * Closes custom contact delete-confirm overlay.
+ * @param {boolean} confirmed
+ */
+function closeDeleteContactConfirm(confirmed) {
+    setVisible(contactsDom.contactDeleteConfirmOverlay, false);
+    contactsState.pendingDeleteContactId = null;
+    const resolver = contactsState.deleteConfirmResolver;
+    contactsState.deleteConfirmResolver = null;
+    if (typeof resolver === "function") resolver(!!confirmed);
+}
+
+/**
+ * Handles delete confirmation action from custom overlay.
+ */
+async function confirmDeleteContactAction() {
+    const targetContactId = contactsState.pendingDeleteContactId || contactsState.editContactId || contactsState.activeContactId;
+    if (!targetContactId) return closeDeleteContactConfirm(false);
+    contactsState.editContactId = targetContactId;
     await deleteActiveContact();
+    closeDeleteContactConfirm(true);
 }
 
 /**

@@ -20,6 +20,7 @@ const contactsDom = {
     successToast: "successToast",
     editToast: "editToast",
     deleteToast: "deleteToast",
+    contactDeleteConfirmOverlay: "contactDeleteConfirmOverlay",
 };
 // #endregion
 

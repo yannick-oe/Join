@@ -9,6 +9,34 @@
     z-index: 999;
 }
 
+.contacts-delete-confirm {
+    width: min(420px, calc(100% - 24px));
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px;
+    box-sizing: border-box;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+.contacts-delete-confirm h3 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    color: #2a3647;
+}
+
+.contacts-delete-confirm p {
+    margin: 0;
+    font-size: 16px;
+    color: #2a3647;
+}
+
+.contacts-delete-confirm-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
 .overlay-panel {
     width: min(1120px, 100%);
     min-height: 520px;
@@ -237,5 +265,73 @@
     to {
         opacity: 1;
         transform: translateX(0) scale(1);
+    }
+}
+
+@media (max-width: 1040px) {
+    .overlay {
+        padding: 12px;
+        align-items: flex-start;
+        overflow-y: auto;
+    }
+
+    .overlay-panel {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        max-height: calc(100vh - 24px);
+        border-radius: 20px;
+        overflow-y: auto;
+    }
+
+    .overlay-left {
+        height: auto;
+        min-height: 220px;
+        padding: 36px 20px 20px;
+    }
+
+    .overlay-right {
+        padding: 0;
+    }
+
+    .overlay-content {
+        padding: 0 16px 20px;
+        box-sizing: border-box;
+    }
+
+    .overlay-avatar {
+        width: 92px;
+        height: 92px;
+        margin-top: -62px;
+        margin-bottom: 16px;
+        font-size: 30px;
+    }
+
+    .overlay-avatar-icon {
+        width: 92px;
+        height: 92px;
+    }
+
+    .overlay-actions {
+        margin-top: 10px;
+        padding-bottom: 6px;
+    }
+}
+
+@media (max-width: 560px) {
+    .overlay-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .overlay-actions .button-primary,
+    .overlay-actions .button-ghost {
+        width: 100%;
+    }
+
+    .contacts-delete-confirm {
+        padding: 20px;
+        margin-top: auto;
+        margin-bottom: auto;
     }
 }

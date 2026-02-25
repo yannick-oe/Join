@@ -133,11 +133,16 @@
     }
 
     .content {
-        padding: 0 16px 160px;
+        min-height: 100vh;
+        padding: 0 16px 110px;
     }
 
     .content_wrapper {
         margin-top: 0;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 16px;
+        box-sizing: border-box;
     }
 
     .join_logo {
@@ -157,7 +162,8 @@
 
     .no_user_content {
         display: flex;
-        margin-top: -140px;
+        margin-top: 20px;
+        margin-bottom: 16px;
         flex-direction: row;
         justify-content: center;
         align-items: center;
@@ -179,7 +185,7 @@
     .login {
         width: min(396px, calc(100vw - 32px));
         margin-top: 0;
-        height: 500px;
+        height: auto;
         min-height: 430px;
         border-radius: 20px;
         padding: 30px 16px 22px;
@@ -267,11 +273,13 @@
     }
 
     .footer_content {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 10px;
-        width: 95%;
+        position: static;
+        left: auto;
+        transform: none;
+        top: auto;
+        width: 100%;
+        margin-top: 12px;
+        padding-bottom: 12px;
     }
 
     .login_splash_screen {
