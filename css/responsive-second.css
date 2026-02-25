@@ -1,9 +1,7 @@
 @media (max-width: 980px) {
     .content {
         max-width: 100%;
-        height: auto;
-        min-height: 100vh;
-        padding: 0 20px 40px;
+        padding: 0 20px 0px;
         box-sizing: border-box;
     }
 
@@ -24,10 +22,6 @@
 
 @media (max-width: 768px) {
     aside {
-        display: none;
-    }
-
-    .no_user_content{
         display: none;
     }
 
@@ -217,11 +211,11 @@
     .login_form {
         width: 100%;
         margin-top: 30px;
-        gap: 32px;
+        gap: 10px;
     }
 
     .sign_form{
-        gap: 21px !important;
+        gap: 10px;
         margin-top: 0;
     }
 
@@ -232,9 +226,9 @@
 
     .btn_group {
         flex-direction: column;
-        gap: 21px;
+        gap: 10px;
         width: 100%;
-        margin-top: -30px;
+        margin-top: 20px;
     }
 
     .login_btn,
