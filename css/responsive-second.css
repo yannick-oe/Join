@@ -271,7 +271,7 @@
         left: 50%;
         transform: translateX(-50%);
         top: 10px;
-        width: 100%;
+        width: 95%;
     }
 
     .login_splash_screen {
@@ -322,4 +322,13 @@
     .Sign_up_btn .btn {
         width: 170px;
     }
+}
+
+@media (max-width: 400px){
+  .login{
+    margin-top: 100px;
+  }  
+  .sign_up{
+    margin-top: 80px;
+  }
 }
