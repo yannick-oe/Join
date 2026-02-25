@@ -132,10 +132,6 @@
         padding-left: 0;
     }
 
-    .content {
-        min-height: 100vh;
-        padding: 0 16px 110px;
-    }
 
     .content_wrapper {
         margin-top: 0;
@@ -277,7 +273,7 @@
         left: auto;
         transform: none;
         top: auto;
-        width: 100%;
+        width: 95%;
         margin-top: 12px;
         padding-bottom: 12px;
     }
