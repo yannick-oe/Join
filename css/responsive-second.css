@@ -27,6 +27,13 @@
 }
 
 @media (max-width: 768px) {
+    main{
+        height: 100vh;
+    }
+    .hight{
+        height: 105vh;
+    }
+
     aside {
         display: none;
     }
