@@ -158,7 +158,7 @@
 
     .no_user_content {
         display: flex;
-        margin-top: 20px;
+        margin-top: 32px;
         margin-bottom: 16px;
         flex-direction: row;
         justify-content: center;
@@ -181,11 +181,12 @@
     .login {
         width: min(396px, calc(100vw - 32px));
         margin-top: 0;
-        height: auto;
+        height: 475px;
         min-height: 430px;
         border-radius: 20px;
         padding: 30px 16px 22px;
         box-sizing: border-box;
+        margin-top: 100px;
     }
 
     .sign_up {
@@ -196,6 +197,7 @@
         border-radius: 20px;
         padding: 30px 16px 22px;
         box-sizing: border-box;
+        margin-top: 40px;
     }
 
     .login h1,
@@ -217,7 +219,7 @@
     }
 
     .sign_form{
-        gap: 10px;
+        gap: 24px;
         margin-top: 0;
     }
 
@@ -231,6 +233,10 @@
         gap: 10px;
         width: 100%;
         margin-top: 20px;
+    }
+
+    .terms{
+        margin-top: -44px !important;
     }
 
     .login_btn,
@@ -250,12 +256,12 @@
     }
 
     .Sign_up_btn {
-        margin-top: 2px;
+        margin-top: 35px;
     }
 
     .Sign {
         width: 180px;
-        margin-top: -20px;
+        margin-top: -30px;
     }
 
     .police p,
@@ -274,7 +280,6 @@
         transform: none;
         top: auto;
         width: 95%;
-        margin-top: 12px;
         padding-bottom: 12px;
     }
 
@@ -294,9 +299,7 @@
 }
 
 @media (max-width: 420px) {
-    .content {
-        padding-bottom: 170px;
-    }
+
 
     .header_right {
         bottom: 108px;
@@ -328,11 +331,3 @@
     }
 }
 
-@media (max-width: 400px){
-  .login{
-    margin-top: 100px;
-  }  
-  .sign_up{
-    margin-top: 80px;
-  }
-}

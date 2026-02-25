@@ -5,6 +5,11 @@
 body {
     background: rgb(246, 247, 248);
     margin: 0;
+    height: 100vh;
+}
+
+main{
+    height: 100vh;
 }
 
 .join_logo {
@@ -29,7 +34,6 @@ body {
     width: 100%;
     max-width: clamp(960px, 80%, 1440px);
     margin: 0 auto;
-    min-height: 95vh;
     display: flex;
     flex-direction: column;
 }
@@ -202,6 +206,7 @@ input:focus {
     justify-content: center;
     padding: 8px;
     gap: 16px;
+    margin-top: 49px;
 
 }
 
