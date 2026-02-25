@@ -704,6 +704,10 @@
         max-width: 252px;
     }
 
+    .board-card-move-shell {
+        display: block;
+    }
+
     .contacts-main {
         overflow: auto;
     }

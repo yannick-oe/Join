@@ -78,7 +78,13 @@ function doesBoardTaskMatchSearch(task, searchValue) {
 function buildBoardTaskCardViewModel(task) {
 	const boardCardText = getBoardTaskCardText(task);
 	const boardCardMeta = getBoardTaskCardMeta(task);
-	return { id: task.id, ...boardCardText, ...boardCardMeta };
+	return {
+		id: task.id,
+		draggableValue: "true",
+		moveMenuHtml: buildBoardTaskMoveMenuHtml(task),
+		...boardCardText,
+		...boardCardMeta,
+	};
 }
 
 /**
@@ -195,9 +201,21 @@ function handleBoardSearchInput(value, source) {
  * @param {MouseEvent} event
  */
 function handleBoardDocumentClick(event) {
+	closeBoardTaskMoveMenuOnOutsideClick(event);
 	const addTaskOverlay = document.getElementById("boardAddTaskOverlay");
 	if (!addTaskOverlay || addTaskOverlay.classList.contains("hidden")) return;
 	if (typeof handlePageClick === "function") handlePageClick(event);
+}
+
+/**
+ * Closes mobile move menu on outside click.
+ * @param {MouseEvent} event
+ */
+function closeBoardTaskMoveMenuOnOutsideClick(event) {
+	if (!boardState.mobileMoveMenuTaskId) return;
+	if (event.target.closest(".board-card-move-shell")) return;
+	boardState.mobileMoveMenuTaskId = "";
+	renderBoardColumns();
 }
 
 /**
@@ -206,8 +224,10 @@ function handleBoardDocumentClick(event) {
  * @param {string} taskId
  */
 function startTaskDrag(event, taskId) {
+	if (isBoardMobileView()) return;
 	event.stopPropagation();
 	boardState.dragTaskId = taskId;
+	boardState.mobileMoveMenuTaskId = "";
 	event.dataTransfer.setData("text/plain", taskId);
 	event.dataTransfer.effectAllowed = "move";
 	const taskCard = event.currentTarget?.closest(".board-task-card") || event.target?.closest(".board-task-card");
@@ -220,6 +240,7 @@ function startTaskDrag(event, taskId) {
  * @param {string} status
  */
 function allowTaskDrop(event, status) {
+	if (isBoardMobileView()) return;
 	event.preventDefault();
 	if (!boardState.dragTaskId) return;
 	const normalizedStatus = boardNormalizeStatus(status);
@@ -245,6 +266,7 @@ function endTaskDrag() {
  * @param {string} nextStatus
  */
 async function dropTaskToStatus(event, nextStatus) {
+	if (isBoardMobileView()) return;
 	event.preventDefault();
 	const taskId = event.dataTransfer.getData("text/plain") || boardState.dragTaskId;
 	if (!taskId) return;
@@ -409,5 +431,78 @@ function clearBoardDropPreviewState() {
 	boardState.dragTaskId = "";
 	boardState.dragOverStatus = "";
 	boardState.dragPreviewIndex = -1;
+}
+
+/**
+ * Toggles one task move menu in mobile view.
+ * @param {Event} event
+ * @param {string} taskId
+ */
+function toggleBoardTaskMoveMenu(event, taskId) {
+	if (event) {
+		event.preventDefault();
+		event.stopPropagation();
+	}
+	const nextId = boardState.mobileMoveMenuTaskId === taskId ? "" : taskId;
+	boardState.mobileMoveMenuTaskId = nextId;
+	renderBoardColumns();
+}
+
+/**
+ * Moves task to selected status from mobile menu.
+ * @param {Event} event
+ * @param {string} taskId
+ * @param {string} nextStatus
+ */
+async function moveBoardTaskByMenu(event, taskId, nextStatus) {
+	if (event) {
+		event.preventDefault();
+		event.stopPropagation();
+	}
+	const normalizedStatus = boardNormalizeStatus(nextStatus);
+	moveBoardTaskToStatusIndex(taskId, normalizedStatus, getBoardStatusTaskCount(normalizedStatus));
+	boardState.mobileMoveMenuTaskId = "";
+	await persistBoardTasks();
+	renderBoardColumns();
+}
+
+/**
+ * Builds task move menu html for mobile cards.
+ * @param {Object} task
+ */
+function buildBoardTaskMoveMenuHtml(task) {
+	if (!isBoardMobileView()) return "";
+	const currentStatus = boardNormalizeStatus(task.status);
+	const statusIndex = boardState.statusOrder.indexOf(currentStatus);
+	const optionHtml = boardState.statusOrder
+		.filter((status) => status !== currentStatus)
+		.map((status) => {
+			const targetIndex = boardState.statusOrder.indexOf(status);
+			const arrow = targetIndex < statusIndex ? "↑" : "↓";
+			const label = boardEscapeHtml(getBoardStatusLabel(status));
+			return `<button type="button" onclick="moveBoardTaskByMenu(event, '${task.id}', '${status}')">${arrow} ${label}</button>`;
+		})
+		.join("");
+	if (!optionHtml) return "";
+	const isOpenClass = boardState.mobileMoveMenuTaskId === task.id ? " is-open" : "";
+	return `<div class="board-task-move-menu${isOpenClass}"><p>Move to</p>${optionHtml}</div>`;
+}
+
+/**
+ * Returns board column label by status.
+ * @param {string} status
+ */
+function getBoardStatusLabel(status) {
+	if (status === "in-progress") return "In progress";
+	if (status === "await-feedback") return "Review";
+	if (status === "done") return "Done";
+	return "To-do";
+}
+
+/**
+ * Returns whether board is currently in mobile viewport.
+ */
+function isBoardMobileView() {
+	return window.matchMedia("(max-width: 768px)").matches;
 }
 // #endregion

@@ -6,6 +6,7 @@ const boardState = {
 	dragTaskId: "",
 	dragOverStatus: "",
 	dragPreviewIndex: -1,
+	mobileMoveMenuTaskId: "",
 	overlayTargetStatus: "todo",
 	overlayEditTaskId: "",
 	hasDocumentClickBinding: false,
