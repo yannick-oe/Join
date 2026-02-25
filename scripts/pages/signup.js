@@ -50,9 +50,8 @@ function finalizeSignupError(message) {
  * @param {{name:string,email:string}} signupData
  */
 function finalizeSignupSuccess(signupData) {
-    setSessionUser(buildSignupSession(signupData));
     showSignupToast();
-    setTimeout(() => window.location.href = "/pages/summary.html", 900);
+    setTimeout(() => window.location.href = "/index.html", 900);
 }
 // #endregion
 
@@ -117,6 +116,7 @@ function validateSignupForm(signupData) {
     if (!isValidSignupEmail(signupData.email)) return "Please enter a valid email.";
     if (!String(signupData.password || "").trim()) return "Please enter a password.";
     if (String(signupData.password).length < 6) return "Password must contain at least 6 characters.";
+    if (!String(signupData.passwordRepeat || "").trim()) return "Please confirm your password.";
     if (signupData.password !== signupData.passwordRepeat) return "Passwords do not match.";
     if (!signupData.acceptedPrivacy) return "Please accept the Privacy Policy.";
     return "";
@@ -194,14 +194,43 @@ function clearSignupForm() {
  */
 function handleSignupPasswordInput(fieldId) {
     syncSignupPasswordToggle(fieldId);
-    syncSignupSubmitState();
+    handleSignupFormChange(fieldId);
 }
 
 /**
  * Handles generic signup field updates.
+ * @param {string} fieldId
  */
-function handleSignupFormChange() {
+function handleSignupFormChange(fieldId) {
     syncSignupSubmitState();
+    if (!fieldId) return;
+    clearSignupMessageForValidField(fieldId);
+}
+
+/**
+ * Handles privacy checkbox state changes.
+ */
+function handleSignupPrivacyChange() {
+    syncSignupSubmitState();
+    if (isSignupCheckboxChecked("signupPrivacy")) {
+        clearSignupMessageIfFormValid();
+        return;
+    }
+    setSignupMessage("Please accept the Privacy Policy.", "error");
+}
+
+/**
+ * Handles signup field blur validation.
+ * @param {string} fieldId
+ */
+async function handleSignupFieldBlur(fieldId) {
+    const signupData = readSignupForm();
+    const validationText = await getSignupFieldValidationMessage(fieldId, signupData);
+    if (validationText) {
+        setSignupMessage(validationText, "error");
+        return;
+    }
+    clearSignupMessageIfFormValid();
 }
 
 /**
@@ -213,8 +242,53 @@ function syncSignupSubmitState() {
     const hasEmail = !!String(signupData.email || "").trim();
     const hasPassword = !!String(signupData.password || "").trim();
     const hasPasswordRepeat = !!String(signupData.passwordRepeat || "").trim();
-    const canSubmit = hasName && hasEmail && hasPassword && hasPasswordRepeat && !!signupData.acceptedPrivacy;
+    const canSubmit = hasName && hasEmail && hasPassword && hasPasswordRepeat;
     setSignupButtonDisabled(!canSubmit);
+}
+
+/**
+ * Returns one validation message by field id.
+ * @param {string} fieldId
+ * @param {{name:string,email:string,password:string,passwordRepeat:string,acceptedPrivacy:boolean}} signupData
+ */
+async function getSignupFieldValidationMessage(fieldId, signupData) {
+    if (fieldId === "signupName" && !String(signupData.name || "").trim()) return "Please enter your name.";
+    if (fieldId === "signupEmail") {
+        if (!String(signupData.email || "").trim()) return "Please enter your email.";
+        if (!isValidSignupEmail(signupData.email)) return "Please enter a valid email.";
+        const users = await loadUsers();
+        if (isEmailRegistered(users, signupData.email)) return "Account already exists.";
+    }
+    if (fieldId === "signupPassword") {
+        if (!String(signupData.password || "").trim()) return "Please enter a password.";
+        if (String(signupData.password || "").length < 6) return "Password must contain at least 6 characters.";
+    }
+    if (fieldId === "signupPasswordRepeat") {
+        if (!String(signupData.passwordRepeat || "").trim()) return "Please confirm your password.";
+        if (String(signupData.password || "").trim() && signupData.password !== signupData.passwordRepeat) return "Passwords do not match.";
+    }
+    if (fieldId === "signupPrivacy" && !signupData.acceptedPrivacy) return "Please accept the Privacy Policy.";
+    return "";
+}
+
+/**
+ * Clears signup message when edited field has valid value.
+ * @param {string} fieldId
+ */
+function clearSignupMessageForValidField(fieldId) {
+    if (fieldId === "signupName" && String(getSignupInputValue("signupName") || "").trim()) return setSignupMessage("", "");
+    if (fieldId === "signupEmail" && isValidSignupEmail(getSignupInputValue("signupEmail"))) return setSignupMessage("", "");
+    if (fieldId === "signupPassword" && String(getSignupInputValue("signupPassword") || "").trim()) return setSignupMessage("", "");
+    if (fieldId === "signupPasswordRepeat" && String(getSignupInputValue("signupPasswordRepeat") || "").trim()) return setSignupMessage("", "");
+    if (fieldId === "signupPrivacy" && isSignupCheckboxChecked("signupPrivacy")) return setSignupMessage("", "");
+}
+
+/**
+ * Clears signup message when full form is valid.
+ */
+function clearSignupMessageIfFormValid() {
+    const signupData = readSignupForm();
+    if (!validateSignupForm(signupData)) setSignupMessage("", "");
 }
 
 /**

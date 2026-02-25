@@ -155,7 +155,6 @@ async function handleLoginSubmit(event) {
  */
 function completeLogin(user) {
   setSessionUser(buildSessionPayload(user));
-  setLoginMessage("Login successful.", "success");
   setTimeout(() => window.location.href = "./pages/summary.html", 500);
 }
 
