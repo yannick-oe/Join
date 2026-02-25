@@ -102,6 +102,10 @@ h1 {
     gap: 35px;
 }
 
+.no_user_content {
+    display: none;
+}
+
 .no_user {
     font-size: 24px;
 }
@@ -198,7 +202,7 @@ input {
 
 .sign_up {
     box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
-    height: 600px;
+    height: 580px;
     width: 598px;
     border-radius: 30px;
     margin-top: 20px;

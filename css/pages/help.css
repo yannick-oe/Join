@@ -21,7 +21,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 250px;
     max-width: 860px;
     padding-bottom: 25px;
 }
