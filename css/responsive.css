@@ -52,9 +52,11 @@
     .summary-main,
     .add-task-main,
     .board-main,
-    .contacts-main,
     .help-main {
         padding-left: 150px;
+    }
+    .contacts-main {
+        padding-left: 230px;
     }
 
     .main-privacy,
@@ -211,6 +213,7 @@
         padding: 0 10px;
         margin-bottom: 18px;
         border-radius: 24px;
+        justify-content: space-around;
     }
 
     .sumary-third-line .font-size64 {
