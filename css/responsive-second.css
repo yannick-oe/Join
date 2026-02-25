@@ -275,10 +275,10 @@
     }
 
     .footer_content {
-        position: fixed;
+        position: relative;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 20px;
+        top: 10px;
         width: 100%;
     }
 
