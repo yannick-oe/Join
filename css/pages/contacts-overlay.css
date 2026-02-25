@@ -16,6 +16,8 @@
     padding: 24px;
     box-sizing: border-box;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .contacts-delete-confirm h3 {
@@ -331,7 +333,5 @@
 
     .contacts-delete-confirm {
         padding: 20px;
-        margin-top: auto;
-        margin-bottom: auto;
     }
 }
