@@ -4,6 +4,12 @@
     }
 }
 
+@media (max-width: 900px) {
+    .content_wrapper {
+    margin-top: 100px;
+}
+}
+
 @media (max-width: 980px) {
     .content {
         max-width: 100%;
@@ -21,7 +27,6 @@
     .login,
     .sign_up {
         width: min(560px, calc(100vw - 40px));
-        margin-top: 62px;
     }
 
 }
