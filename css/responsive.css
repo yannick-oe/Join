@@ -332,7 +332,7 @@
 
 /* Add To Ask Responsive */
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .task-form-grid {
         display: block;
     }
