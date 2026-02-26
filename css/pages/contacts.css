@@ -60,7 +60,7 @@ body {
 }
 
 .contacts-list {
-    padding: 10px 0;
+    padding-bottom: 55px;
     overflow: auto;
     height: calc(100vh - 200px);
 }
