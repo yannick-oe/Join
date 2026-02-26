@@ -6,6 +6,7 @@ aside {
 	font-weight: 400;
 	top: 0;
 	left: 0;
+	overflow-y: auto;
 }
 
 header {
