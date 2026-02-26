@@ -101,6 +101,10 @@ h1 {
     width: 28px;
 }
 
+.sumary-second .icon-size {
+    filter: brightness(0) invert(1);
+}
+
 .fd-c {
     flex-direction: column;
 }

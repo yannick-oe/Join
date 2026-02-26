@@ -1,6 +1,16 @@
-@media (min-width: 900px) and (min-height: 1000px){
-    .content{
+@media (min-width: 900px) and (min-height: 1000px) {
+    .content {
         min-height: 100dvh;
+    }
+}
+
+@media (max-width: 900px) {
+    .content_wrapper {
+        margin-top: 100px;
+    }
+
+    .helper-signup {
+        margin-top: 10px;
     }
 }
 
@@ -21,16 +31,16 @@
     .login,
     .sign_up {
         width: min(560px, calc(100vw - 40px));
-        margin-top: 62px;
     }
 
 }
 
 @media (max-width: 768px) {
-    main{
+    main {
         height: 100vh;
     }
-    .hight{
+
+    .hight {
         height: 105vh;
     }
 
@@ -154,6 +164,11 @@
         box-sizing: border-box;
     }
 
+    .helper-signup {
+        margin-top: 100px;
+        padding-top: 0;
+    }
+
     .join_logo {
         width: 64px;
         height: 78px;
@@ -231,7 +246,7 @@
         gap: 10px;
     }
 
-    .sign_form{
+    .sign_form {
         gap: 24px;
         margin-top: 0;
     }
@@ -248,7 +263,7 @@
         margin-top: 20px;
     }
 
-    .terms{
+    .terms {
         margin-top: -44px !important;
     }
 
@@ -343,12 +358,11 @@
         width: 170px;
     }
 
-    footer{
-    position: static;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding-bottom: 25px;
+    footer {
+        position: static;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding-bottom: 25px;
     }
 }
-
