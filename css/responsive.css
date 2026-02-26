@@ -53,11 +53,14 @@
 
 @media (max-width:1100px) {
 
-    .summary-main,
     .add-task-main,
     .board-main,
     .help-main {
         padding-left: 150px;
+    }
+
+    .summary-main {
+        padding-left: 120px
     }
 
     .contacts-main {
