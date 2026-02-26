@@ -26,10 +26,11 @@ function renderTeamMemberDropdown() {
  */
 function getTeamMemberItemTemplate(contact, index) {
 	const checked = addTaskState.selectedContactIds.includes(contact.id) ? "checked" : "";
+	const selectedClass = addTaskState.selectedContactIds.includes(contact.id) ? "is-selected" : "";
 	const color = contact.color || addTaskState.palette[index % addTaskState.palette.length];
 	const initials = getInitials(contact.name);
 	return `
-		<div class="dropdown-item" onclick="toggleTeamMember('${contact.id}')">
+		<div class="dropdown-item ${selectedClass}" onclick="toggleTeamMember(event, '${contact.id}')">
 			${getTeamMemberItemLabelTemplate(contact.name, color, initials)}
 			${getTeamMemberItemCheckboxTemplate(contact.id, checked)}
 		</div>
@@ -52,7 +53,7 @@ function getTeamMemberItemLabelTemplate(name, color, initials) {
  * @param {string} checked
  */
 function getTeamMemberItemCheckboxTemplate(contactId, checked) {
-	return `<input type="checkbox" ${checked} onclick="event.stopPropagation()" onchange="toggleTeamMember('${contactId}')">`;
+	return `<input class="team-member-checkbox" type="checkbox" ${checked} onclick="event.stopPropagation()" onchange="toggleTeamMember(event, '${contactId}')">`;
 }
 
 /**

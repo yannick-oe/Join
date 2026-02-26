@@ -121,6 +121,7 @@ function getBoardTaskCardMeta(task) {
  */
 function buildBoardCardProgressHtml(progress) {
 	if (!progress.total) return "";
+	if (progress.done >= progress.total) return "";
 	return getBoardCardProgressTemplate(progress);
 }
 

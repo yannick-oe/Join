@@ -256,6 +256,12 @@ body {
     filter: brightness(0) saturate(100%) invert(61%) sepia(74%) saturate(1710%) hue-rotate(165deg) brightness(91%) contrast(89%);
 }
 
+@media (max-width: 1140px) {
+    .contact-detail-actions {
+        display: none;
+    }
+}
+
 .contact-detail-block-title {
     margin-top: 28px;
     margin-bottom: 10px;

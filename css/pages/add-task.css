@@ -11,7 +11,9 @@ body {
     height: 100vh;
     padding-left: 230px;
     background: #f6f7f8;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
 }
 
 .add-task-content {
@@ -233,11 +235,68 @@ body {
     background: #f1f1f1;
 }
 
+.dropdown-item.is-selected {
+    background: #2a3647;
+    color: #ffffff;
+}
+
+.dropdown-item.is-selected:hover {
+    background: #091931;
+}
+
+.dropdown-item.is-selected .team-member-avatar {
+    box-shadow: 0 0 0 2px #ffffff;
+}
+
 .dropdown-item label {
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
+}
+
+.team-member-checkbox {
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    border: 2px solid #2a3647;
+    border-radius: 6px;
+    appearance: none;
+    background: #ffffff;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 100ms ease, box-shadow 100ms ease, background-color 100ms ease;
+}
+
+.team-member-checkbox:hover {
+    border-color: #29abe2;
+    box-shadow: 0 0 0 2px rgba(41, 171, 226, 0.18);
+}
+
+.team-member-checkbox:checked {
+    background: #2a3647;
+    border-color: #ffffff;
+}
+
+.team-member-checkbox:checked::after {
+    content: "✓";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 17px;
+    line-height: 1;
+}
+
+.dropdown-item.is-selected .team-member-checkbox {
+    border-color: #ffffff;
+    background: transparent;
+}
+
+.dropdown-item.is-selected .team-member-checkbox:hover {
+    border-color: #29abe2;
 }
 
 .team-member-avatar {
@@ -296,6 +355,19 @@ body {
 
 .subtask-list {
     margin-top: 8px;
+    max-height: 116px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 4px;
+}
+
+.subtask-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.subtask-list::-webkit-scrollbar-thumb {
+    background: #d1d1d1;
+    border-radius: 999px;
 }
 
 .subtask-row {

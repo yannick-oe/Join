@@ -90,14 +90,17 @@ function setPriorityButtonState(elementId, isSelected) {
 // #region Team members
 /**
  * Toggles selected state for one contact.
+ * @param {Event} event
  * @param {string} contactId
  */
-function toggleTeamMember(contactId) {
+function toggleTeamMember(event, contactId) {
+	if (event) event.stopPropagation();
 	const selected = addTaskState.selectedContactIds;
 	const exists = selected.includes(contactId);
 	addTaskState.selectedContactIds = exists ? selected.filter((id) => id !== contactId) : [...selected, contactId];
 	renderTeamMemberDropdown();
 	renderTeamMemberBadges();
+	if (typeof setDropdownVisible === "function") setDropdownVisible("teamMemberDropdown", "teamMemberToggle", true);
 }
 // #endregion
 
@@ -194,8 +197,7 @@ async function submitTaskForm(event) {
 	addTaskState.tasks.push(buildTaskPayload());
 	await persistTasks();
 	clearTaskForm();
-	showTaskSuccessToast();
-	setSubmitButtonDisabled(false);
+	window.location.href = "./board.html";
 }
 
 /**
