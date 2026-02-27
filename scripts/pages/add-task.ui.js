@@ -16,23 +16,37 @@ function toggleTeamMemberDropdown() {
 function renderTeamMemberDropdown() {
 	const panel = document.getElementById("teamMemberDropdown");
 	if (!panel) return;
-	panel.innerHTML = addTaskState.contacts.map((contact, i) => getTeamMemberItemTemplate(contact, i)).join("");
+	panel.innerHTML = addTaskState.contacts.map((contact, i) => buildTeamMemberItemHtml(contact, i)).join("");
 }
 
 /**
- * Builds one team member dropdown row.
+ * Builds one team member dropdown row html.
  * @param {{id:string,name:string,color?:string}} contact
  * @param {number} index
  */
-function getTeamMemberItemTemplate(contact, index) {
+function buildTeamMemberItemHtml(contact, index) {
 	const checked = addTaskState.selectedContactIds.includes(contact.id) ? "checked" : "";
 	const selectedClass = addTaskState.selectedContactIds.includes(contact.id) ? "is-selected" : "";
 	const color = contact.color || addTaskState.palette[index % addTaskState.palette.length];
 	const initials = getInitials(contact.name);
+	const rowViewModel = {
+		contactId: contact.id,
+		selectedClass,
+		labelHtml: getTeamMemberItemLabelTemplate(contact.name, color, initials),
+		checkboxHtml: getTeamMemberItemCheckboxTemplate(contact.id, checked),
+	};
+	return getTeamMemberItemTemplate(rowViewModel);
+}
+
+/**
+ * Builds one team member dropdown row template.
+ * @param {{contactId:string,selectedClass:string,labelHtml:string,checkboxHtml:string}} viewModel
+ */
+function getTeamMemberItemTemplate(viewModel) {
 	return `
-		<div class="dropdown-item ${selectedClass}" onclick="toggleTeamMember(event, '${contact.id}')">
-			${getTeamMemberItemLabelTemplate(contact.name, color, initials)}
-			${getTeamMemberItemCheckboxTemplate(contact.id, checked)}
+		<div class="dropdown-item ${viewModel.selectedClass}" onclick="toggleTeamMember(event, '${viewModel.contactId}')">
+			${viewModel.labelHtml}
+			${viewModel.checkboxHtml}
 		</div>
 	`;
 }
@@ -69,20 +83,29 @@ function renderTeamMemberBadges() {
 	const overflowCount = typeof getAssigneeOverflowCount === "function"
 		? getAssigneeOverflowCount(addTaskState.selectedContactIds, maxVisibleBadges)
 		: Math.max(0, addTaskState.selectedContactIds.length - maxVisibleBadges);
-	const visibleBadgesHtml = visibleIds.map((id) => getTeamMemberBadgeTemplate(id)).join("");
+	const visibleBadgesHtml = visibleIds.map((id) => buildTeamMemberBadgeHtml(id)).join("");
 	const overflowBadgeHtml = overflowCount > 0 ? getTeamMemberOverflowBadgeTemplate(overflowCount) : "";
 	shell.innerHTML = visibleBadgesHtml + overflowBadgeHtml;
 }
 
 /**
- * Builds one selected team member badge.
+ * Builds one selected team member badge html.
  * @param {string} contactId
  */
-function getTeamMemberBadgeTemplate(contactId) {
+function buildTeamMemberBadgeHtml(contactId) {
 	const contact = addTaskState.contacts.find((item) => item.id === contactId);
 	if (!contact) return "";
 	const color = contact.color || addTaskState.palette[0];
-	return `<span class="badge-avatar" style="background:${color}">${getInitials(contact.name)}</span>`;
+	const badgeViewModel = { color, initials: getInitials(contact.name) };
+	return getTeamMemberBadgeTemplate(badgeViewModel);
+}
+
+/**
+ * Builds one selected team member badge template.
+ * @param {{color:string,initials:string}} viewModel
+ */
+function getTeamMemberBadgeTemplate(viewModel) {
+	return `<span class="badge-avatar" style="background:${viewModel.color}">${viewModel.initials}</span>`;
 }
 
 /**
@@ -141,7 +164,16 @@ function handleSubtaskInput() {
 function renderSubtasks() {
 	const list = document.getElementById("subtaskList");
 	if (!list) return;
-	list.innerHTML = addTaskState.subtasks.map((item) => getSubtaskTemplate(item)).join("");
+	list.innerHTML = addTaskState.subtasks.map((item) => buildSubtaskRowHtml(item)).join("");
+}
+
+/**
+ * Builds one subtask row html.
+ * @param {{id:string,text:string}} subtask
+ */
+function buildSubtaskRowHtml(subtask) {
+	if (addTaskState.subtaskEditId === subtask.id) return getEditableSubtaskTemplate(subtask);
+	return getSubtaskTemplate(subtask);
 }
 
 /**
@@ -149,7 +181,6 @@ function renderSubtasks() {
  * @param {{id:string,text:string}} subtask
  */
 function getSubtaskTemplate(subtask) {
-	if (addTaskState.subtaskEditId === subtask.id) return getEditableSubtaskTemplate(subtask);
 	return `
 		<div class="subtask-row">
 			<div class="subtask-row-left">• <span>${escapeHtml(subtask.text)}</span></div>

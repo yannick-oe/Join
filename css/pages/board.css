@@ -301,6 +301,8 @@ body {
 	font-size: 20px;
 	line-height: 1.2;
 	color: #2a3647;
+	overflow-wrap: anywhere;
+	word-break: break-word;
 }
 
 .board-card-description {
