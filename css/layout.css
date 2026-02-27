@@ -3,11 +3,12 @@ aside {
 	position: fixed;
 	width: 230px;
 	height: 100vh;
+	display: flex;
+	flex-direction: column;
 	font-weight: 400;
 	top: 0;
 	left: 0;
-	overflow-y: auto;
-	overflow-x: hidden;
+	overflow: hidden;
 }
 
 header {
@@ -27,14 +28,15 @@ header {
 	align-items: center;
 	color: #cdcdcd;
 	font-size: 16px;
-	padding-bottom: 80px;
 }
 
 .sidebar-bottom {
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	padding-top: 180px;
+	margin-top: auto;
+	padding-top: 0;
+	padding-bottom: 28px;
 }
 
 .sidebar-bottom table {
@@ -88,7 +90,6 @@ header {
 
 .menu a:hover {
 	background-color: rgba(255, 255, 255, 0.1);
-	transform: translateX(3px);
 }
 
 .menu td a,

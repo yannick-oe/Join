@@ -376,10 +376,6 @@
         display: flex;
     }
 
-    label {
-        margin-bottom: 20px;
-    }
-
     .board-search {
         width: 100%
     }
@@ -426,6 +422,13 @@
 
     .summary-second-line>section {
         flex: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .priority-row {
+        display: flex;
+        flex-direction: column;
     }
 }
 
@@ -715,7 +718,7 @@
     }
 
     .board-task-card {
-        max-width: 252px;
+        width: 252px;
     }
 
     .board-card-move-shell {
@@ -733,6 +736,7 @@
 
     .contacts-left {
         width: 100%;
+        border-right: none;
     }
 
     .contacts-list {

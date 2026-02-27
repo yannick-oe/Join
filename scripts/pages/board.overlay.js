@@ -128,6 +128,7 @@ async function deleteBoardTask(taskId) {
 	await persistBoardTasks();
 	renderBoardColumns();
 	closeBoardTaskDetailOverlay();
+	showBoardTaskToast("Task deleted");
 }
 
 /**
@@ -339,7 +340,11 @@ function closeBoardAddTaskOverlayOnBackdrop(event) {
 /**
  * Shows board save toast.
  */
-function showBoardTaskToast() {
+function showBoardTaskToast(message = "Task added to board") {
+	const toast = document.getElementById("boardTaskToast");
+	if (!toast) return;
+	const textElement = toast.querySelector(".success-toast-text");
+	if (textElement) textElement.innerText = message;
 	setBoardElementVisible("boardTaskToast", true);
 	setTimeout(() => setBoardElementVisible("boardTaskToast", false), 2500);
 }

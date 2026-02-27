@@ -5,16 +5,19 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 300;
+	z-index: 999;
 	padding: 24px;
 	box-sizing: border-box;
+	overflow-y: auto;
+	overscroll-behavior: contain;
 }
 
 .board-task-detail-panel {
 	width: 100%;
 	max-width: 520px;
-	max-height: 90vh;
-	overflow: auto;
+	max-height: calc(100vh - 48px);
+	overflow-y: auto;
+	overflow-x: hidden;
 	border-radius: 24px;
 	background: #ffffff;
 	padding: 28px;
@@ -50,6 +53,12 @@
 	margin: 0 0 20px;
 	font-size: 20px;
 	color: #2a3647;
+	overflow-wrap: anywhere;
+	word-break: break-word;
+	max-height: min(170px, 24vh);
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 4px;
 }
 
 .board-task-detail-row {
@@ -89,7 +98,28 @@
 .board-task-detail-subtasks {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 4px;
+	max-height: min(170px, 24vh);
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 4px;
+}
+
+.board-task-detail-assignees::-webkit-scrollbar,
+.board-task-detail-subtasks::-webkit-scrollbar,
+.board-task-detail-description::-webkit-scrollbar,
+.board-task-detail-panel::-webkit-scrollbar,
+.board-add-task-panel::-webkit-scrollbar {
+	width: 7px;
+}
+
+.board-task-detail-assignees::-webkit-scrollbar-thumb,
+.board-task-detail-subtasks::-webkit-scrollbar-thumb,
+.board-task-detail-description::-webkit-scrollbar-thumb,
+.board-task-detail-panel::-webkit-scrollbar-thumb,
+.board-add-task-panel::-webkit-scrollbar-thumb {
+	background: #d1d1d1;
+	border-radius: 999px;
 }
 
 .board-task-detail-person {
@@ -120,6 +150,11 @@
 	display: flex;
 	justify-content: flex-end;
 	gap: 8px;
+	position: sticky;
+	bottom: 0;
+	background: #ffffff;
+	z-index: 4;
+	padding-bottom: calc(10px + env(safe-area-inset-bottom));
 }
 
 .board-task-detail-actions .link-button {
@@ -128,6 +163,7 @@
 	gap: 8px;
 	padding-left: 0;
 	border-radius: 0;
+	font-size: 16px;
 }
 
 .board-task-detail-actions .link-button img {
@@ -159,8 +195,9 @@
 .board-add-task-panel {
 	width: 100%;
 	max-width: 1120px;
-	max-height: 92vh;
-	overflow: auto;
+	max-height: calc(100vh - 48px);
+	overflow-y: auto;
+	overflow-x: hidden;
 	border-radius: 30px;
 	background: #f6f7f8;
 	padding: 34px 48px 26px;
@@ -182,30 +219,37 @@
 
 @media (max-width: 1040px) {
 	.board-overlay {
-		padding: 0;
-		align-items: stretch;
-		justify-content: stretch;
+		padding: 12px;
+		align-items: flex-start;
+		justify-content: center;
 		background: rgba(0, 0, 0, 0.18);
 	}
 
-	.board-task-detail-panel,
-	.board-add-task-panel {
+	.board-task-detail-panel {
 		max-width: none;
 		width: 100%;
 		height: 100%;
 		max-height: 100%;
 		border-radius: 0;
-		overflow: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
 		animation: board-overlay-slide-in 200ms ease-out;
 	}
 
 	.board-task-detail-panel {
-		padding: 24px 20px 112px;
+		padding: 24px 20px 0;
 	}
 
 	.board-add-task-panel {
-		padding: 50px 20px 112px;
+		width: 100%;
+		height: auto;
+		max-height: calc(100vh - 24px);
+		border-radius: 20px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		padding: 36px 20px 20px;
 		background: #f6f7f8;
+		animation: board-overlay-slide-in 200ms ease-out;
 	}
 
 	.board-task-detail-title {
@@ -220,11 +264,13 @@
 	}
 
 	.board-task-detail-actions {
-		position: sticky;
-		bottom: 0;
-		background: #ffffff;
-		padding: 14px 0 10px;
-		z-index: 3;
+		padding-top: 14px;
+	}
+}
+
+@media (max-height: 820px) {
+	.board-task-detail-actions {
+		padding-bottom: calc(10px + env(safe-area-inset-bottom));
 	}
 }
 

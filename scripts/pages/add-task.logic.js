@@ -196,6 +196,7 @@ async function submitTaskForm(event) {
 	setSubmitButtonDisabled(true);
 	addTaskState.tasks.push(buildTaskPayload());
 	await persistTasks();
+	sessionStorage.setItem("joinShowBoardTaskToast", "1");
 	clearTaskForm();
 	window.location.href = "./board.html";
 }
@@ -338,5 +339,32 @@ function getDemoContacts() {
 		{ id: "c_demo_4", name: "Benedikt Ziegler", color: "#6E52FF" },
 		{ id: "c_demo_5", name: "David Eisenberg", color: "#FC71FF" },
 	];
+}
+
+/**
+ * Returns the max amount of visible assignee badges before +N badge.
+ */
+function getAssigneeBadgeVisibleLimit() {
+	return 4;
+}
+
+/**
+ * Returns visible assignee ids up to max badge limit.
+ * @param {string[]} contactIds
+ * @param {number} maxVisible
+ */
+function getVisibleAssigneeIds(contactIds, maxVisible = getAssigneeBadgeVisibleLimit()) {
+	const safeIds = Array.isArray(contactIds) ? contactIds : [];
+	return safeIds.slice(0, Math.max(0, maxVisible));
+}
+
+/**
+ * Returns amount of hidden assignee badges.
+ * @param {string[]} contactIds
+ * @param {number} maxVisible
+ */
+function getAssigneeOverflowCount(contactIds, maxVisible = getAssigneeBadgeVisibleLimit()) {
+	const safeIds = Array.isArray(contactIds) ? contactIds : [];
+	return Math.max(0, safeIds.length - Math.max(0, maxVisible));
 }
 // #endregion

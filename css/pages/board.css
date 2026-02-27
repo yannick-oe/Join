@@ -66,13 +66,13 @@ body {
 }
 
 .board-search-icon {
-	width: 32px;
+	width: 36px;
 	text-align: center;
-	font-size: 20px;
+	font-size: 36px;
 	color: #2a3647;
 	border-left: 1px solid #d1d1d1;
 	margin-left: 10px;
-	padding-left: 10px;
+	padding-left: 12px;
 }
 
 .board-add-task {

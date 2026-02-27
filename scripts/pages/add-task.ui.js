@@ -62,7 +62,16 @@ function getTeamMemberItemCheckboxTemplate(contactId, checked) {
 function renderTeamMemberBadges() {
 	const shell = document.getElementById("teamMemberBadges");
 	if (!shell) return;
-	shell.innerHTML = addTaskState.selectedContactIds.map((id) => getTeamMemberBadgeTemplate(id)).join("");
+	const maxVisibleBadges = typeof getAssigneeBadgeVisibleLimit === "function" ? getAssigneeBadgeVisibleLimit() : 4;
+	const visibleIds = typeof getVisibleAssigneeIds === "function"
+		? getVisibleAssigneeIds(addTaskState.selectedContactIds, maxVisibleBadges)
+		: addTaskState.selectedContactIds.slice(0, maxVisibleBadges);
+	const overflowCount = typeof getAssigneeOverflowCount === "function"
+		? getAssigneeOverflowCount(addTaskState.selectedContactIds, maxVisibleBadges)
+		: Math.max(0, addTaskState.selectedContactIds.length - maxVisibleBadges);
+	const visibleBadgesHtml = visibleIds.map((id) => getTeamMemberBadgeTemplate(id)).join("");
+	const overflowBadgeHtml = overflowCount > 0 ? getTeamMemberOverflowBadgeTemplate(overflowCount) : "";
+	shell.innerHTML = visibleBadgesHtml + overflowBadgeHtml;
 }
 
 /**
@@ -74,6 +83,14 @@ function getTeamMemberBadgeTemplate(contactId) {
 	if (!contact) return "";
 	const color = contact.color || addTaskState.palette[0];
 	return `<span class="badge-avatar" style="background:${color}">${getInitials(contact.name)}</span>`;
+}
+
+/**
+ * Builds overflow badge template for hidden assignees.
+ * @param {number} count
+ */
+function getTeamMemberOverflowBadgeTemplate(count) {
+	return `<span class="badge-avatar team-member-plus">+${count}</span>`;
 }
 // #endregion
 

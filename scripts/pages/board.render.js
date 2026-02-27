@@ -7,6 +7,16 @@ async function initBoardPage() {
 	await loadBoardData();
 	bindBoardGlobalEvents();
 	renderBoardColumns();
+	showBoardToastFromAddTaskRedirect();
+}
+
+/**
+ * Shows board toast once after redirect from add-task page.
+ */
+function showBoardToastFromAddTaskRedirect() {
+	if (sessionStorage.getItem("joinShowBoardTaskToast") !== "1") return;
+	sessionStorage.removeItem("joinShowBoardTaskToast");
+	if (typeof showBoardTaskToast === "function") showBoardTaskToast();
 }
 
 /**
@@ -121,6 +131,7 @@ function getBoardTaskCardMeta(task) {
  */
 function buildBoardCardProgressHtml(progress) {
 	if (!progress.total) return "";
+	if (!progress.done) return "";
 	if (progress.done >= progress.total) return "";
 	return getBoardCardProgressTemplate(progress);
 }
@@ -131,9 +142,9 @@ function buildBoardCardProgressHtml(progress) {
  */
 function buildBoardTeamMembersHtml(task) {
 	const teamMemberIds = boardGetTaskTeamMemberIds(task);
-	const maxVisibleMembers = 4;
+	const maxVisibleMembers = typeof getAssigneeBadgeVisibleLimit === "function" ? getAssigneeBadgeVisibleLimit() : 4;
 	const badgeHtml = buildBoardVisibleTeamMemberBadges(teamMemberIds, maxVisibleMembers);
-	const overflowHtml = buildBoardTeamMemberOverflow(teamMemberIds.length, maxVisibleMembers);
+	const overflowHtml = buildBoardTeamMemberOverflow(teamMemberIds, maxVisibleMembers);
 	return badgeHtml + overflowHtml;
 }
 
@@ -143,7 +154,9 @@ function buildBoardTeamMembersHtml(task) {
  * @param {number} maxVisibleMembers
  */
 function buildBoardVisibleTeamMemberBadges(teamMemberIds, maxVisibleMembers) {
-	const visibleIds = teamMemberIds.slice(0, maxVisibleMembers);
+	const visibleIds = typeof getVisibleAssigneeIds === "function"
+		? getVisibleAssigneeIds(teamMemberIds, maxVisibleMembers)
+		: teamMemberIds.slice(0, maxVisibleMembers);
 	return visibleIds.map((memberId) => getBoardTeamMemberBadgeHtml(memberId)).join("");
 }
 
@@ -160,11 +173,13 @@ function getBoardTeamMemberBadgeHtml(memberId) {
 
 /**
  * Builds overflow badge html.
- * @param {number} totalMembers
+ * @param {Array} teamMemberIds
  * @param {number} maxVisibleMembers
  */
-function buildBoardTeamMemberOverflow(totalMembers, maxVisibleMembers) {
-	const overflowCount = totalMembers - maxVisibleMembers;
+function buildBoardTeamMemberOverflow(teamMemberIds, maxVisibleMembers) {
+	const overflowCount = typeof getAssigneeOverflowCount === "function"
+		? getAssigneeOverflowCount(teamMemberIds, maxVisibleMembers)
+		: teamMemberIds.length - maxVisibleMembers;
 	if (overflowCount <= 0) return "";
 	return getBoardTeamMemberOverflowTemplate({ count: overflowCount });
 }

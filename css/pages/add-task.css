@@ -314,7 +314,7 @@ body {
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 4px;
 }
 
 .badge-avatar {
@@ -326,6 +326,10 @@ body {
     justify-content: center;
     color: #ffffff;
     font-size: 12px;
+}
+
+.badge-avatar.team-member-plus {
+    background: #2a3647;
 }
 
 .subtask-input-shell {
