@@ -308,20 +308,54 @@ function openBoardPage() {
  * Shows mobile greeting intro before summary cards.
  */
 function runSummaryMobileIntro() {
-	if (!window.matchMedia("(max-width: 1180px)").matches) return;
+	if (!shouldShowSummaryMobileIntro()) return;
+	const introContent = getSummaryMobileIntroContent();
+	if (!introContent) return;
+	const intro = createSummaryMobileIntroElement(introContent);
+	document.body.appendChild(intro);
+	scheduleSummaryMobileIntroRemoval(intro);
+}
+
+/**
+ * Returns whether mobile intro should be displayed.
+ */
+function shouldShowSummaryMobileIntro() {
+	return window.matchMedia("(max-width: 1180px)").matches;
+}
+
+/**
+ * Returns intro title and name for current session user.
+ */
+function getSummaryMobileIntroContent() {
 	const sessionUser = getSessionUser();
-	if (!sessionUser) return;
+	if (!sessionUser) return null;
 	const greeting = getTimeBasedGreeting();
 	const isGuest = sessionUser.role === "guest";
-	const introTitle = isGuest ? `${greeting}!` : `${greeting},`;
-	const introName = isGuest ? "" : String(sessionUser.name || "");
+	return {
+		title: isGuest ? `${greeting}!` : `${greeting},`,
+		name: isGuest ? "" : String(sessionUser.name || ""),
+	};
+}
+
+/**
+ * Creates mobile intro element from content.
+ * @param {{title:string,name:string}} content
+ */
+function createSummaryMobileIntroElement(content) {
 	const intro = document.createElement("section");
 	intro.className = "summary-mobile-intro";
 	intro.innerHTML = `
-		<p class="summary-mobile-intro-title">${introTitle}</p>
-		${introName ? `<p class="summary-mobile-intro-name">${introName}</p>` : ""}
+		<p class="summary-mobile-intro-title">${content.title}</p>
+		${content.name ? `<p class="summary-mobile-intro-name">${content.name}</p>` : ""}
 	`;
-	document.body.appendChild(intro);
+	return intro;
+}
+
+/**
+ * Schedules fade-out and cleanup for mobile intro.
+ * @param {HTMLElement} intro
+ */
+function scheduleSummaryMobileIntroRemoval(intro) {
 	setTimeout(() => intro.classList.add("is-hidden"), 1300);
 	setTimeout(() => intro.remove(), 1650);
 }

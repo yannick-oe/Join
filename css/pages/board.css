@@ -106,7 +106,6 @@ body {
 .board-column {
 	display: flex;
 	flex-direction: column;
-	min-width: 0;
 	height: calc(100vh - 290px);
 }
 
@@ -226,12 +225,6 @@ body {
 .board-card-move-toggle img {
 	width: 20px;
 	height: 20px;
-}
-
-@media (max-width: 768px) {
-	.board-card-move-shell {
-		display: block;
-	}
 }
 
 .board-task-move-menu {

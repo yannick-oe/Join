@@ -1,0 +1,132 @@
+/* Mobile (425px bis 320px) */
+
+@media (max-width: 425px) {
+    .summary-first-line {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .sumary-main-layout {
+        padding: 0 12px;
+    }
+
+    .board-content,
+    .add-task-content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .task-footer-actions {
+        flex-direction: column;
+    }
+
+    .task-clear-button,
+    .task-create-button {
+        width: 100%;
+    }
+
+    .task-form-footer {
+        bottom: auto;
+    }
+
+    .size {
+        width: 140px;
+    }
+
+    .gap15 {
+        gap: 0;
+    }
+
+    .summary-second-line {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .summary-second-line>section {
+        flex: 0;
+    }
+
+    .sumary-third-line {
+        width: 285px;
+    }
+
+    .gap20 {
+        gap: 10px;
+    }
+
+    .box-size {
+        width: 90px;
+    }
+
+    .board-task-detail-title {
+        font-size: 36px;
+    }
+
+    .header_right {
+        bottom: 108px;
+        gap: 10px;
+    }
+
+    .login,
+    .sign_up {
+        width: calc(100vw - 24px);
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .login .field,
+    .sign_up .field {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .login .input_icon,
+    .login .input_icon_button,
+    .sign_up .input_icon,
+    .sign_up .input_icon_button {
+        right: 14px;
+    }
+
+    .Sign_up_btn .btn {
+        width: 170px;
+    }
+
+    footer {
+        position: static;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding-bottom: 25px;
+    }
+}
+
+@media (max-width: 400px) {
+    .task-footer-actions {
+        flex-direction: column;
+    }
+
+    .task-form-footer {
+        justify-content: center;
+    }
+
+    .priority-button {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 360px) {
+    .priority-row {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .board-content,
+    .add-task-content {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

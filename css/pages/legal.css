@@ -1,5 +1,6 @@
 .main-privacy {
-    background-color: #f6f7f8;;
+    background-color: #f6f7f8;
+    ;
     padding-left: 350px;
     padding-top: 100px;
     min-height: 100vh;
@@ -22,7 +23,8 @@ h1 {
 }
 
 .legal-main {
-    background-color: #f6f7f8;;
+    background-color: #f6f7f8;
+    ;
     padding-left: 350px;
     padding-top: 100px;
     min-height: 100vh;
@@ -48,4 +50,16 @@ h1 {
 
 .font-size20 {
     font-size: 20px;
+}
+
+.external-view .block {
+    display: none !important;
+}
+
+.external-view .privacy-wrapper {
+    width: 90% !important;
+}
+
+.external-view .content-limit {
+    width: 90% !important;
 }

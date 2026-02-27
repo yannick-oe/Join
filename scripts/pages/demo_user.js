@@ -1,52 +1,48 @@
 const DEMO_EMAIL = "mustermann@gmail.com";
-const DEMO_PASS  = "123456";
+const DEMO_PASS = "123456";
 const SESSION_KEY = "joinSession";
-
 
 /**
  * Retrieves required login elements from the DOM.
  */
-function getLoginInputs(){
+function getLoginInputs() {
   return {
     emailInput: document.getElementById("email"),
-    passwordInput:  document.getElementById("password"),
-    messageElement:   document.getElementById("loginMessage"),
+    passwordInput: document.getElementById("password"),
+    messageElement: document.getElementById("loginMessage"),
     buttonGroupElement: document.getElementById("btnGroup")
   };
 }
 
-
 /**
  * Clears login input fields.
  */
-function clearLoginFields(emailInput, passwordInput){
-  if(emailInput) emailInput.value = "";
-  if(passwordInput)  passwordInput.value  = "";
+function clearLoginFields(emailInput, passwordInput) {
+  if (emailInput) emailInput.value = "";
+  if (passwordInput) passwordInput.value = "";
 }
-
 
 /**
  * Inserts demo display values into the login form.
  * Does NOT expose real demo credentials in UI.
  */
-function fillDemoFields(emailInput, passwordInput){
-  if(!emailInput || !passwordInput) return false;
+function fillDemoFields(emailInput, passwordInput) {
+  if (!emailInput || !passwordInput) return false;
 
   emailInput.setAttribute("name", "demo_email");
   passwordInput.setAttribute("name", "demo_password");
 
   emailInput.value = "Guest";
-  passwordInput.value  = "******";
+  passwordInput.value = "******";
 
   return true;
 }
-
 
 /**
  * Stores demo user session in localStorage.
  * Session is local-only and not server-based.
  */
-function saveDemoSession(){
+function saveDemoSession() {
   localStorage.setItem(SESSION_KEY, JSON.stringify({
     email: DEMO_EMAIL,
     role: "demo",
@@ -54,25 +50,23 @@ function saveDemoSession(){
   }));
 }
 
-
 /**
  * Displays success message and adjusts layout state.
  */
-function showSuccess(messageElement, buttonGroupElement){
-  if(messageElement){
+function showSuccess(messageElement, buttonGroupElement) {
+  if (messageElement) {
     messageElement.textContent = "Login successful.";
     messageElement.className = "success";
   }
-  if(buttonGroupElement){
+  if (buttonGroupElement) {
     buttonGroupElement.classList.add("success_active");
   }
 }
 
-
 /**
  * Redirects user to summary page after delay.
  */
-function redirectToSummary(){
+function redirectToSummary() {
   setTimeout(() => {
     window.location.href = "../pages/summary.html";
   }, 800);
@@ -81,8 +75,8 @@ function redirectToSummary(){
 /**
  * Synchronizes optional global demo password variable.
  */
-function syncDemoPasswordVar(){
-  if(typeof realPassword === "undefined") return;
+function syncDemoPasswordVar() {
+  if (typeof realPassword === "undefined") return;
   realPassword = DEMO_PASS;
 }
 
@@ -91,12 +85,11 @@ function syncDemoPasswordVar(){
  * @param {HTMLElement|null} messageElement
  * @param {HTMLElement|null} buttonGroupElement
  */
-function finalizeDemoLogin(messageElement, buttonGroupElement){
+function finalizeDemoLogin(messageElement, buttonGroupElement) {
   saveDemoSession();
   showSuccess(messageElement, buttonGroupElement);
   redirectToSummary();
 }
-
 
 /**
  * Main demo login handler.
@@ -109,30 +102,28 @@ function finalizeDemoLogin(messageElement, buttonGroupElement){
  *
  * @param {Event} [event]
  */
-function demoLogin(event){
-  if(event) event.preventDefault();
+function demoLogin(event) {
+  if (event) event.preventDefault();
 
   const loginElements = getLoginInputs();
-  if(!fillDemoFields(loginElements.emailInput, loginElements.passwordInput)) return false;
+  if (!fillDemoFields(loginElements.emailInput, loginElements.passwordInput)) return false;
   syncDemoPasswordVar();
   finalizeDemoLogin(loginElements.messageElement, loginElements.buttonGroupElement);
 
   return true;
 }
 
-
 /**
  * Resets login form state on page load.
  * Restores original input names and clears values.
  */
-window.onload = function(){
+window.onload = function () {
   const loginElements = getLoginInputs();
 
-  if(loginElements.emailInput) loginElements.emailInput.setAttribute("name", "email");
-  if(loginElements.passwordInput)  loginElements.passwordInput.setAttribute("name", "passwort");
+  if (loginElements.emailInput) loginElements.emailInput.setAttribute("name", "email");
+  if (loginElements.passwordInput) loginElements.passwordInput.setAttribute("name", "passwort");
 
   clearLoginFields(loginElements.emailInput, loginElements.passwordInput);
 };
-
 
 window.demoLogin = demoLogin;

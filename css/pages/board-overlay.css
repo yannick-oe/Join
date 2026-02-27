@@ -173,7 +173,7 @@
 	transition: filter 120ms ease;
 }
 
-.board-task-detail-actions .link-button + .link-button {
+.board-task-detail-actions .link-button+.link-button {
 	border-left: 1px solid #d1d1d1;
 	padding-left: 12px;
 }
@@ -215,63 +215,6 @@
 
 .board-add-task-panel .add-task-title {
 	margin-bottom: 24px;
-}
-
-@media (max-width: 1040px) {
-	.board-overlay {
-		padding: 12px;
-		align-items: flex-start;
-		justify-content: center;
-		background: rgba(0, 0, 0, 0.18);
-	}
-
-	.board-task-detail-panel {
-		max-width: none;
-		width: 100%;
-		height: 100%;
-		max-height: 100%;
-		border-radius: 0;
-		overflow-y: auto;
-		overflow-x: hidden;
-		animation: board-overlay-slide-in 200ms ease-out;
-	}
-
-	.board-task-detail-panel {
-		padding: 24px 20px 0;
-	}
-
-	.board-add-task-panel {
-		width: 100%;
-		height: auto;
-		max-height: calc(100vh - 24px);
-		border-radius: 20px;
-		overflow-y: auto;
-		overflow-x: hidden;
-		padding: 36px 20px 20px;
-		background: #f6f7f8;
-		animation: board-overlay-slide-in 200ms ease-out;
-	}
-
-	.board-task-detail-title {
-		font-size: 40px;
-	}
-
-	.board-task-detail-description,
-	.board-task-detail-row,
-	.board-task-detail-person p,
-	.board-task-detail-subtask-item {
-		font-size: 18px;
-	}
-
-	.board-task-detail-actions {
-		padding-top: 14px;
-	}
-}
-
-@media (max-height: 820px) {
-	.board-task-detail-actions {
-		padding-bottom: calc(10px + env(safe-area-inset-bottom));
-	}
 }
 
 @keyframes board-overlay-slide-in {

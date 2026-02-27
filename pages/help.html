@@ -13,14 +13,13 @@
     <link rel="stylesheet" href="../css/components.css" />
     <link rel="stylesheet" href="../css/pages/help.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
-    <link rel="stylesheet" href="../css/responsive-second.css">
 
 
     <script src="../scripts/pages/header.js" defer></script>
 </head>
 
 <body onload="initProtectedPageAuth()" onclick="closeMenu()">
-       <header>
+    <header>
         <div class="responsive-header-line">
             <p class="header-line">Kanban Project Management Tool</p>
             <div class="button-icon"></div>
@@ -30,16 +29,17 @@
                 <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
             </a>
             <div class="dropdown">
-                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()"></button>
-                    <div id="myDropdown" class="dropdown-content d_none">
-                        <a href="./help.html" class="show-responsive text-align-center">Help</a>
-                        <a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
-                        <a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
-                        <a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
-                    </div>
-                    </div>
+                <button id="myBtn" class="header-user-circle dropbtn"
+                    onclick="openMenu(); event.stopPropagation()"></button>
+                <div id="myDropdown" class="dropdown-content d_none">
+                    <a href="./help.html" class="show-responsive text-align-center">Help</a>
+                    <a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
+                    <a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
+                    <a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </header>
     <aside>
@@ -101,7 +101,8 @@
         <div class="help-content content-limit">
             <div class="help-top-row">
                 <h1 class="help-title">Help</h1>
-                <button class="help-back-button" type="button" onclick="goBackOrFallback('./summary.html')" aria-label="Go back"><img src="../assets/icon/arrow_left.svg" alt="Arrow-icon"></button>
+                <button class="help-back-button" type="button" onclick="goBackOrFallback('./summary.html')"
+                    aria-label="Go back"><img src="../assets/icon/arrow_left.svg" alt="Arrow-icon"></button>
             </div>
 
             <p>
@@ -182,8 +183,8 @@
                     </p>
                     <br>
                     <p>
-                        Remember that using <span class="join">Join</span> effectively requires consistent 
-                        updates from you and your team to ensure the board reflects the current state of your 
+                        Remember that using <span class="join">Join</span> effectively requires consistent
+                        updates from you and your team to ensure the board reflects the current state of your
                         project.
                     </p>
                     <br>
@@ -196,31 +197,30 @@
             <br>
             <br>
             <h2>Enjoy using Join!</h2>
-            
+
         </div>
     </main>
 
-    <footer >
-            <section class="responsive-footer">
-                <a href="./summary.html">
-                    <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
-                    <span class="responsive-menu">Summary</span>
-                </a>
-                <a href="./add-task.html">
-                    <img src="../assets/icon/edit_square.svg" class="responsive-task-icon" alt="Task-Icon" />
-                    <span class="responsive-menu">Add Task</span>
-                </a>
-                <a href="./board.html">
-                    <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
-                    <span class="responsive-menu">Board</span>
-                </a>
-                 <a href="./contacts.html">
-                    <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon"
-                        alt="Contacts-Icon" />
-                    <span class="responsive-menu">Contacts</span>
-                </a>
-            </section>
-        </footer>
+    <footer>
+        <section class="responsive-footer">
+            <a href="./summary.html">
+                <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
+                <span class="responsive-menu">Summary</span>
+            </a>
+            <a href="./add-task.html">
+                <img src="../assets/icon/edit_square.svg" class="responsive-task-icon" alt="Task-Icon" />
+                <span class="responsive-menu">Add Task</span>
+            </a>
+            <a href="./board.html">
+                <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
+                <span class="responsive-menu">Board</span>
+            </a>
+            <a href="./contacts.html">
+                <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon" alt="Contacts-Icon" />
+                <span class="responsive-menu">Contacts</span>
+            </a>
+        </section>
+    </footer>
 </body>
 
 </html>

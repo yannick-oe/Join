@@ -5,25 +5,47 @@
  * @param {{id:string,categoryClass:string,categoryLabel:string,title:string,description:string,progressHtml:string,avatarsHtml:string,priorityIcon:string,priorityAlt:string}} viewModel
  */
 function getBoardTaskCardTemplate(viewModel) {
+	const topRow = getBoardTaskCardTopRowTemplate(viewModel);
+	const footer = getBoardTaskCardFooterTemplate(viewModel);
 	return `
 		<article class="board-task-card" data-task-id="${viewModel.id}" draggable="${viewModel.draggableValue}" ondragstart="startTaskDrag(event, '${viewModel.id}')" ondragend="endTaskDrag()" onclick="openBoardTaskDetail('${viewModel.id}')">
-			<div class="board-card-top-row">
-				<p class="board-card-category ${viewModel.categoryClass}">${viewModel.categoryLabel}</p>
-				<div class="board-card-move-shell" onclick="event.stopPropagation()">
-					<button class="board-card-move-toggle" type="button" aria-label="Move task" onclick="toggleBoardTaskMoveMenu(event, '${viewModel.id}')">
-						<img src="../assets/icon/swap_horiz.svg?v=1" alt="" aria-hidden="true" />
-					</button>
-					${viewModel.moveMenuHtml}
-				</div>
-			</div>
+			${topRow}
 			<h3 class="board-card-title">${viewModel.title}</h3>
 			<p class="board-card-description">${viewModel.description}</p>
 			${viewModel.progressHtml}
-			<div class="board-card-footer">
-				<div class="board-team-members">${viewModel.avatarsHtml}</div>
-				<img class="board-card-priority" src="${viewModel.priorityIcon}" alt="${viewModel.priorityAlt}" />
-			</div>
+			${footer}
 		</article>
+	`;
+}
+
+/**
+ * Returns board task card top row template.
+ * @param {{id:string,categoryClass:string,categoryLabel:string,moveMenuHtml:string}} viewModel
+ */
+function getBoardTaskCardTopRowTemplate(viewModel) {
+	return `
+		<div class="board-card-top-row">
+			<p class="board-card-category ${viewModel.categoryClass}">${viewModel.categoryLabel}</p>
+			<div class="board-card-move-shell" onclick="event.stopPropagation()">
+				<button class="board-card-move-toggle" type="button" aria-label="Move task" onclick="toggleBoardTaskMoveMenu(event, '${viewModel.id}')">
+					<img src="../assets/icon/swap_horiz.svg?v=1" alt="" aria-hidden="true" />
+				</button>
+				${viewModel.moveMenuHtml}
+			</div>
+		</div>
+	`;
+}
+
+/**
+ * Returns board task card footer template.
+ * @param {{avatarsHtml:string,priorityIcon:string,priorityAlt:string}} viewModel
+ */
+function getBoardTaskCardFooterTemplate(viewModel) {
+	return `
+		<div class="board-card-footer">
+			<div class="board-team-members">${viewModel.avatarsHtml}</div>
+			<img class="board-card-priority" src="${viewModel.priorityIcon}" alt="${viewModel.priorityAlt}" />
+		</div>
 	`;
 }
 

@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="../css/pages/add-task.css" />
     <link rel="stylesheet" href="../css/pages/add-task-toast.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
-    <link rel="stylesheet" href="../css/responsive-second.css">
 
     <script src="../scripts/storage.js" defer></script>
     <script src="../scripts/pages/add-task.ui.js" defer></script>
@@ -23,7 +22,7 @@
 </head>
 
 <body onload="initAddTaskPage()" onclick="closeMenu()">
-      <header>
+    <header>
         <div class="responsive-header-line">
             <p class="header-line">Kanban Project Management Tool</p>
             <div class="button-icon"></div>
@@ -33,15 +32,16 @@
                 <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
             </a>
             <div class="dropdown">
-                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()">JJ</button>
-                  <div id="myDropdown" class="dropdown-content d_none">
-                         <a href="./help.html" class="show-responsive text-align-center">Help</a>
-                        <a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
-                        <a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
-                        <a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
-                    </div>
-                   </div>
+                <button id="myBtn" class="header-user-circle dropbtn"
+                    onclick="openMenu(); event.stopPropagation()">JJ</button>
+                <div id="myDropdown" class="dropdown-content d_none">
+                    <a href="./help.html" class="show-responsive text-align-center">Help</a>
+                    <a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
+                    <a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
+                    <a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
+                </div>
             </div>
+        </div>
         </div>
     </header>
 
@@ -107,7 +107,8 @@
             <form class="task-form" onsubmit="submitTaskForm(event)" novalidate>
                 <div class="task-form-grid">
                     <section class="task-form-left">
-                        <label class="task-label" for="taskTitle">Title<span id="taskTitleRequiredStar" class="required-star">*</span></label>
+                        <label class="task-label" for="taskTitle">Title<span id="taskTitleRequiredStar"
+                                class="required-star">*</span></label>
                         <input id="taskTitle" class="task-input" type="text" placeholder="Enter a title"
                             oninput="handleTitleInput()" />
                         <p id="taskTitleError" class="task-error hidden">This field is required</p>
@@ -116,7 +117,8 @@
                         <textarea id="taskDescription" class="task-textarea"
                             placeholder="Enter a Description"></textarea>
 
-                        <label class="task-label" for="taskDate">Due date<span id="taskDateRequiredStar" class="required-star">*</span></label>
+                        <label class="task-label" for="taskDate">Due date<span id="taskDateRequiredStar"
+                                class="required-star">*</span></label>
                         <input id="taskDate" class="task-input" type="date" oninput="handleDateInput()" />
                         <p id="taskDateError" class="task-error hidden">This field is required</p>
                     </section>
@@ -125,11 +127,14 @@
                         <label class="task-label">Priority</label>
                         <div class="priority-row">
                             <button id="priorityUrgent" class="priority-button" type="button"
-                                onclick="setPriority('urgent')">Urgent <img class="priority-icon" src="../assets/icon/high-prio.svg" alt=""></button>
+                                onclick="setPriority('urgent')">Urgent <img class="priority-icon"
+                                    src="../assets/icon/high-prio.svg" alt=""></button>
                             <button id="priorityMedium" class="priority-button is-selected" type="button"
-                                onclick="setPriority('medium')">Medium <img class="priority-icon" src="../assets/icon/medium-prio.svg" alt=""></button>
+                                onclick="setPriority('medium')">Medium <img class="priority-icon"
+                                    src="../assets/icon/medium-prio.svg" alt=""></button>
                             <button id="priorityLow" class="priority-button" type="button"
-                                onclick="setPriority('low')">Low <img class="priority-icon" src="../assets/icon/low-prio.svg" alt=""></button>
+                                onclick="setPriority('low')">Low <img class="priority-icon"
+                                    src="../assets/icon/low-prio.svg" alt=""></button>
                         </div>
 
                         <label class="task-label" for="teamMemberToggle">Assigned to</label>
@@ -140,7 +145,8 @@
                             <div id="teamMemberBadges" class="team-member-badges"></div>
                         </div>
 
-                        <label class="task-label" for="categoryToggle">Category<span id="taskCategoryRequiredStar" class="required-star">*</span></label>
+                        <label class="task-label" for="categoryToggle">Category<span id="taskCategoryRequiredStar"
+                                class="required-star">*</span></label>
                         <div class="dropdown-shell">
                             <button id="categoryToggle" class="task-input task-dropdown-toggle" type="button"
                                 onclick="toggleCategoryDropdown()">Select task category</button>
@@ -163,7 +169,7 @@
                 </div>
 
                 <div class="task-form-footer">
-                    
+
                     <div class="task-footer-actions">
                         <button class="button-ghost task-clear-button" type="button" onclick="clearTaskForm()">Clear
                             ×</button>
@@ -178,27 +184,26 @@
         </div>
     </main>
 
-    <footer >
-            <section class="responsive-footer">
-                <a href="./summary.html">
-                    <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
-                    <span class="responsive-menu">Summary</span>
-                </a>
-                <a href="./add-task.html" class="is-active">
-                    <img src="../assets/icon/edit_square.svg" class="responsive-task-icon" alt="Task-Icon" />
-                    <span class="responsive-menu">Add Task</span>
-                </a>
-                <a href="./board.html">
-                    <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
-                    <span class="responsive-menu">Board</span>
-                </a>
-                 <a href="./contacts.html">
-                    <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon"
-                        alt="Contacts-Icon" />
-                    <span class="responsive-menu">Contacts</span>
-                </a>
-            </section>
-        </footer>
+    <footer>
+        <section class="responsive-footer">
+            <a href="./summary.html">
+                <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
+                <span class="responsive-menu">Summary</span>
+            </a>
+            <a href="./add-task.html" class="is-active">
+                <img src="../assets/icon/edit_square.svg" class="responsive-task-icon" alt="Task-Icon" />
+                <span class="responsive-menu">Add Task</span>
+            </a>
+            <a href="./board.html">
+                <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
+                <span class="responsive-menu">Board</span>
+            </a>
+            <a href="./contacts.html">
+                <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon" alt="Contacts-Icon" />
+                <span class="responsive-menu">Contacts</span>
+            </a>
+        </section>
+    </footer>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 .summary-main {
     padding-left: 230px;
     background-color: #f6f7f8;
-    min-height: calc(100vh - 100px); 
+    min-height: calc(100vh - 100px);
 }
 
 .sumary-main-layout {
@@ -196,11 +196,11 @@ h2 {
     color: #ffffff;
 }
 
-.box-size:hover, 
-.sumary-third-line:hover, 
+.box-size:hover,
+.sumary-third-line:hover,
 .sumary-second:hover {
     transform: scale(1.04);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     background-color: #091931;
     color: white;
     cursor: pointer;

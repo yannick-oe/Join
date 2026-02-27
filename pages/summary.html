@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="../css/components.css" />
     <link rel="stylesheet" href="../css/pages/summary.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
-    <link rel="stylesheet" href="../css/responsive-second.css">
     <script src="../scripts/storage.js" defer></script>
     <script src="../scripts/pages/header.js"></script>
     <script src="../scripts/pages/summary.js" defer></script>
@@ -30,16 +29,17 @@
                 <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
             </a>
             <div class="dropdown">
-                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()"></button>
-                    <div id="myDropdown" class="dropdown-content d_none">
-                        <a href="./help.html" class="show-responsive text-align-center">Help</a>
-                        <a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
-                        <a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
-                        <a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
-                    </div>
-                    </div>
+                <button id="myBtn" class="header-user-circle dropbtn"
+                    onclick="openMenu(); event.stopPropagation()"></button>
+                <div id="myDropdown" class="dropdown-content d_none">
+                    <a href="./help.html" class="show-responsive text-align-center">Help</a>
+                    <a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
+                    <a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
+                    <a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </header>
 
@@ -105,7 +105,7 @@
                 <div class="seperator"></div>
                 <p class="font-size summary-first">Key Metrics at a Glance</p>
                 <div class="seperator-repsonsive">
-                <div class="seperator-two"></div>
+                    <div class="seperator-two"></div>
                 </div>
             </section>
 
@@ -178,7 +178,7 @@
         </section>
     </main>
 
-    <footer >
+    <footer>
         <section class="responsive-footer">
             <a href="./summary.html" class="is-active">
                 <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
@@ -192,14 +192,13 @@
                 <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
                 <span class="responsive-menu">Board</span>
             </a>
-                <a href="./contacts.html">
-                <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon"
-                    alt="Contacts-Icon" />
+            <a href="./contacts.html">
+                <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon" alt="Contacts-Icon" />
                 <span class="responsive-menu">Contacts</span>
             </a>
         </section>
     </footer>
-        
+
 
 </body>
 

@@ -16,7 +16,6 @@
 	<link rel="stylesheet" href="../css/pages/board.css" />
 	<link rel="stylesheet" href="../css/pages/board-overlay.css" />
 	<link rel="stylesheet" href="../css/responsive.css" />
-	<link rel="stylesheet" href="../css/responsive-second.css">
 
 	<script src="../scripts/storage.js" defer></script>
 	<script src="../scripts/pages/add-task.ui.js" defer></script>
@@ -25,34 +24,36 @@
 	<script src="../scripts/pages/board.demo.js" defer></script>
 	<script src="../scripts/pages/board.data.js" defer></script>
 	<script src="../scripts/pages/board.templates.js" defer></script>
+	<script src="../scripts/pages/board.interactions.js" defer></script>
 	<script src="../scripts/pages/board.render.js" defer></script>
 	<script src="../scripts/pages/board.overlay.js" defer></script>
 	<script src="../scripts/pages/header.js"></script>
 </head>
 
 <body onload="initBoardPage()" onclick="closeMenu()">
-      <header>
-        <div class="responsive-header-line">
-            <p class="header-line">Kanban Project Management Tool</p>
+	<header>
+		<div class="responsive-header-line">
+			<p class="header-line">Kanban Project Management Tool</p>
 			<div class="button-icon"></div>
-        </div>
-        <div class="header-right">
-            <a href="./help.html">
-                <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
-            </a>
-            <div class="dropdown">
-				<button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()"></button>
-                    <div id="myDropdown" class="dropdown-content d_none">
-						 <a href="./help.html" class="show-responsive text-align-center">Help</a>
-                        <a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
-                        <a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
-                        <a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
-                    </div>
-                	</div>
-                </div>
-            </div>
-        </div>
-    </header>
+		</div>
+		<div class="header-right">
+			<a href="./help.html">
+				<img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
+			</a>
+			<div class="dropdown">
+				<button id="myBtn" class="header-user-circle dropbtn"
+					onclick="openMenu(); event.stopPropagation()"></button>
+				<div id="myDropdown" class="dropdown-content d_none">
+					<a href="./help.html" class="show-responsive text-align-center">Help</a>
+					<a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
+					<a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
+					<a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+	</header>
 
 	<aside>
 		<div>
@@ -115,16 +116,19 @@
 				<h1 class="board-title">Board</h1>
 				<div class="board-actions">
 					<label class="board-search desktop-search" for="boardSearchInputDesktop">
-						<input id="boardSearchInputDesktop" type="text" placeholder="Find Task" oninput="handleBoardSearchInput(this.value, 'desktop')" />
+						<input id="boardSearchInputDesktop" type="text" placeholder="Find Task"
+							oninput="handleBoardSearchInput(this.value, 'desktop')" />
 						<span class="board-search-icon">⌕</span>
 					</label>
-					<button id="boardAddTaskButton" class="button-primary board-add-task" type="button" onclick="openBoardAddTaskOverlay('todo')">Add task <span>＋</span></button>
+					<button id="boardAddTaskButton" class="button-primary board-add-task" type="button"
+						onclick="openBoardAddTaskOverlay('todo')">Add task <span>＋</span></button>
 				</div>
 			</div>
 
 			<div>
 				<label class="board-search responsive-search" for="boardSearchInputMobile">
-					<input id="boardSearchInputMobile" type="text" placeholder="Find Task" oninput="handleBoardSearchInput(this.value, 'mobile')" />
+					<input id="boardSearchInputMobile" type="text" placeholder="Find Task"
+						oninput="handleBoardSearchInput(this.value, 'mobile')" />
 					<span class="board-search-icon">⌕</span>
 				</label>
 			</div>
@@ -133,62 +137,71 @@
 				<article class="board-column">
 					<div class="board-column-header">
 						<h2>To do</h2>
-						<button type="button" class="board-add-column-card" aria-label="Add task to to-do" onclick="openBoardAddTaskOverlay('todo')">+</button>
+						<button type="button" class="board-add-column-card" aria-label="Add task to to-do"
+							onclick="openBoardAddTaskOverlay('todo')">+</button>
 					</div>
-					<div id="boardColumnTodo" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'todo')" ondragover="allowTaskDrop(event, 'todo')"></div>
+					<div id="boardColumnTodo" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'todo')"
+						ondragover="allowTaskDrop(event, 'todo')"></div>
 				</article>
 
 				<article class="board-column">
 					<div class="board-column-header">
 						<h2>In progress</h2>
-						<button type="button" class="board-add-column-card" aria-label="Add task to in-progress" onclick="openBoardAddTaskOverlay('in-progress')">+</button>
+						<button type="button" class="board-add-column-card" aria-label="Add task to in-progress"
+							onclick="openBoardAddTaskOverlay('in-progress')">+</button>
 					</div>
-					<div id="boardColumnInProgress" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'in-progress')" ondragover="allowTaskDrop(event, 'in-progress')"></div>
+					<div id="boardColumnInProgress" class="board-column-drop-zone"
+						ondrop="dropTaskToStatus(event, 'in-progress')"
+						ondragover="allowTaskDrop(event, 'in-progress')"></div>
 				</article>
 
 				<article class="board-column">
 					<div class="board-column-header">
 						<h2>Await feedback</h2>
-						<button type="button" class="board-add-column-card" aria-label="Add task to await feedback" onclick="openBoardAddTaskOverlay('await-feedback')">+</button>
+						<button type="button" class="board-add-column-card" aria-label="Add task to await feedback"
+							onclick="openBoardAddTaskOverlay('await-feedback')">+</button>
 					</div>
-					<div id="boardColumnAwaitFeedback" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'await-feedback')" ondragover="allowTaskDrop(event, 'await-feedback')"></div>
+					<div id="boardColumnAwaitFeedback" class="board-column-drop-zone"
+						ondrop="dropTaskToStatus(event, 'await-feedback')"
+						ondragover="allowTaskDrop(event, 'await-feedback')"></div>
 				</article>
 
 				<article class="board-column">
 					<div class="board-column-header">
 						<h2>Done</h2>
 					</div>
-					<div id="boardColumnDone" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'done')" ondragover="allowTaskDrop(event, 'done')"></div>
+					<div id="boardColumnDone" class="board-column-drop-zone" ondrop="dropTaskToStatus(event, 'done')"
+						ondragover="allowTaskDrop(event, 'done')"></div>
 				</article>
 			</section>
 		</section>
 	</main>
 
-	 <footer >
-        <section class="responsive-footer">
-            <a href="./summary.html">
-                <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
-                <span class="responsive-menu">Summary</span>
-            </a>
-            <a href="./add-task.html">
-                <img src="../assets/icon/edit_square.svg" class="responsive-task-icon" alt="Task-Icon" />
-                <span class="responsive-menu">Add Task</span>
-            </a>
-            <a href="./board.html" class="is-active">
-                <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
-                <span class="responsive-menu">Board</span>
-            </a>
-                <a href="./contacts.html">
-                <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon"
-                    alt="Contacts-Icon" />
-                <span class="responsive-menu">Contacts</span>
-            </a>
-        </section>
-    </footer>
+	<footer>
+		<section class="responsive-footer">
+			<a href="./summary.html">
+				<img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
+				<span class="responsive-menu">Summary</span>
+			</a>
+			<a href="./add-task.html">
+				<img src="../assets/icon/edit_square.svg" class="responsive-task-icon" alt="Task-Icon" />
+				<span class="responsive-menu">Add Task</span>
+			</a>
+			<a href="./board.html" class="is-active">
+				<img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
+				<span class="responsive-menu">Board</span>
+			</a>
+			<a href="./contacts.html">
+				<img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon" alt="Contacts-Icon" />
+				<span class="responsive-menu">Contacts</span>
+			</a>
+		</section>
+	</footer>
 
-	
 
-	<div id="boardTaskDetailOverlay" class="board-overlay hidden" onclick="closeBoardTaskDetailOverlayOnBackdrop(event)">
+
+	<div id="boardTaskDetailOverlay" class="board-overlay hidden"
+		onclick="closeBoardTaskDetailOverlayOnBackdrop(event)">
 		<div class="board-task-detail-panel" id="boardTaskDetailPanel"></div>
 	</div>
 

@@ -14,17 +14,18 @@
     <link rel="stylesheet" href="../css/pages/contacts.css" />
     <link rel="stylesheet" href="../css/pages/contacts-overlay.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
-    <link rel="stylesheet" href="../css/responsive-second.css">
 
     <script src="../scripts/storage.js" defer></script>
     <script src="../scripts/pages/contacts.dom.js" defer></script>
+    <script src="../scripts/pages/contacts.helpers.js" defer></script>
+    <script src="../scripts/pages/contacts.templates.js" defer></script>
     <script src="../scripts/pages/contacts.ui.js" defer></script>
     <script src="../scripts/pages/contacts.logic.js" defer></script>
     <script src="../scripts/pages/header.js"></script>
 </head>
 
 <body onload="initContacts()" onclick="closeMenu()">
-      <header>
+    <header>
         <div class="responsive-header-line">
             <p class="header-line">Kanban Project Management Tool</p>
             <div class="button-icon"></div>
@@ -34,16 +35,17 @@
                 <img class="header-help-icon" src="../assets/icon/help.svg" alt="Help-Icon" />
             </a>
             <div class="dropdown">
-                <button id="myBtn" class="header-user-circle dropbtn" onclick="openMenu(); event.stopPropagation()"></button>
-                    <div id="myDropdown" class="dropdown-content d_none">
-                         <a href="./help.html" class="show-responsive text-align-center">Help</a>
-                        <a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
-                        <a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
-                        <a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
-                    </div>
-                    </div>
+                <button id="myBtn" class="header-user-circle dropbtn"
+                    onclick="openMenu(); event.stopPropagation()"></button>
+                <div id="myDropdown" class="dropdown-content d_none">
+                    <a href="./help.html" class="show-responsive text-align-center">Help</a>
+                    <a href="./legal-notice.html" class="text-align-center">Legal Notice</a>
+                    <a href="./privacy-policy.html" class="text-align-center">Privacy Policy</a>
+                    <a href="/index.html" onclick="return logOutUser(event)" class="text-align-center">Log out</a>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </header>
 
@@ -129,7 +131,8 @@
             <div class="overlay-panel" onclick="event.stopPropagation()">
                 <div class="overlay-left">
                     <div class="overlay-close-wrapper">
-                        <button class="responsive-button-overlaycontact" type="button" onclick="closeContactOverlay()">X</button>
+                        <button class="responsive-button-overlaycontact" type="button"
+                            onclick="closeContactOverlay()">X</button>
                     </div>
                     <img class="overlay-logo" src="../assets/icon/Join logo vector.svg" alt="Join" />
                     <h2 class="overlay-left-title" id="overlayTitle">Add contact</h2>
@@ -137,7 +140,7 @@
                     <div class="overlay-left-line"></div>
                 </div>
 
-                  <button class="overlay-close-button" type="button" onclick="closeContactOverlay()">×</button>
+                <button class="overlay-close-button" type="button" onclick="closeContactOverlay()">×</button>
 
 
                 <div class="overlay-right">
@@ -202,7 +205,8 @@
                 <h3>Delete contact?</h3>
                 <p>Are you sure you want to delete this contact?</p>
                 <div class="contacts-delete-confirm-actions">
-                    <button class="button-ghost" type="button" onclick="closeDeleteContactConfirm(false)">Cancel</button>
+                    <button class="button-ghost" type="button"
+                        onclick="closeDeleteContactConfirm(false)">Cancel</button>
                     <button class="button-primary" type="button" onclick="confirmDeleteContactAction()">Delete</button>
                 </div>
             </div>
@@ -215,7 +219,7 @@
         </button>
     </section>
 
-    <footer >
+    <footer>
         <section class="responsive-footer">
             <a href="./summary.html">
                 <img src="../assets/icon/Icons.svg" class="responsive-task-icon" alt="Summary-Icon" />
@@ -229,9 +233,8 @@
                 <img src="../assets/icon/vectors.svg" class="responsive-task-icon" alt="Board-Icon" />
                 <span class="responsive-menu">Board</span>
             </a>
-                <a href="./contacts.html" class="is-active">
-                <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon"
-                    alt="Contacts-Icon" />
+            <a href="./contacts.html" class="is-active">
+                <img src="../assets/icon/perm_contact_calendar.svg" class="responsive-task-icon" alt="Contacts-Icon" />
                 <span class="responsive-menu">Contacts</span>
             </a>
         </section>
